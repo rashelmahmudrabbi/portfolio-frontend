@@ -3,11 +3,11 @@
 Static site built with **Bootstrap 5** (plain HTML/CSS/JS, no build step,
 no framework, no npm install required). All content — profile info,
 education, publications, projects, gallery, blog posts, etc. — is fetched
-at page-load time from the Django backend API, so the site can be updated
-entirely through Django's admin panel without touching this code.
+at page-load time from the backend API, so the site can be updated
+entirely through its built-in admin panel without touching this code.
 
 **Live site:** `https://rashelmahmudrabbi.github.io`
-**Backend API:** `https://portfolio-backend-oz0v.onrender.com/api`
+**Backend API:** `https://<your-project>.vercel.app/api` (see `portfolio-backend/README.md`)
 
 ---
 
@@ -64,12 +64,11 @@ breaking the whole page.
 Edit `assets/js/config.js`:
 
 ```js
-const API_BASE = 'https://portfolio-backend-oz0v.onrender.com/api';
+const API_BASE = 'https://<your-project>.vercel.app/api';
 ```
 
 For local testing against a backend running on your own machine
-(`python manage.py runserver` in the `portfolio-backend` folder), change
-this to:
+(`npm run dev` in the `portfolio-backend` folder), change this to:
 
 ```js
 const API_BASE = 'http://localhost:8000/api';
@@ -83,7 +82,10 @@ const API_BASE = 'http://localhost:8000/api';
 
 ## 2. Deployment (GitHub Pages)
 
-This frontend is deployed via **GitHub Pages** directly from this repo.
+This frontend is deployed via **GitHub Pages** directly from this repo,
+independently of the backend — the backend runs on Vercel (see
+`portfolio-backend/README.md`); this folder only needs `API_BASE` pointed
+at it.
 
 1. Push changes to the `main` branch.
 2. GitHub Pages rebuilds automatically — check the **Actions** tab in the
@@ -108,8 +110,8 @@ new version is live. If changes don't appear to take effect:
 
 ## 3. Editing content
 
-Go to `https://portfolio-backend-oz0v.onrender.com/admin`, log in with the
-Django superuser account, and edit any section (profile, education,
+Go to `https://<your-project>.vercel.app/admin`, log in with the admin
+credentials set on the backend, and edit any section (profile, education,
 publications, projects, gallery, blog, etc.). Changes appear on the live
 site as soon as you reload the page — no frontend redeploy needed, since
 content is fetched fresh from the API on every load.
@@ -124,8 +126,8 @@ simple). To add a new photo (e.g. a new gallery event or certificate):
 1. Drop the image file into `media/...` in this repo (e.g.
    `media/gallery/MyEvent/photo1.jpg`) and push to GitHub — Pages will
    redeploy automatically.
-2. In Django admin, set the item's image field to that relative path, e.g.
-   `media/gallery/MyEvent/photo1.jpg`.
+2. In the admin panel, set the item's image field to that relative path,
+   e.g. `media/gallery/MyEvent/photo1.jpg`.
 
 Alternatively, paste any external image URL directly into the image field
 in admin instead of uploading a local file.
@@ -144,7 +146,7 @@ in admin instead of uploading a local file.
 - **Page stuck on "Loading..."** — open DevTools → Network tab and check
   the status of the request to the backend. `(failed)` or
   `ERR_CONNECTION_REFUSED` usually means `API_BASE` still points at
-  `localhost` instead of the deployed Render URL. A `404` means the path
+  `localhost` instead of the deployed Vercel URL. A `404` means the path
   in `api.js` doesn't match the backend's actual route — compare against
   the API reference table in the backend README.
 - **"Tracking Prevention blocked access to storage for ..." in the
