@@ -4,18 +4,26 @@
 // this whole script.
 
 // ─── Core fetch helper ───────────────────────────────────────────────────
-// Fetches JSON from the backend and fails soft (returns an empty array/object
-// + logs a warning) so a single missing/misconfigured backend never breaks
-// the whole page.
-async function fetchJSON(path, fallback) {
+// Fetches static JSON from the data.json file generated from the backend.
+let cachedData = null;
+
+async function fetchAllData() {
+  if (cachedData) return cachedData;
   try {
-    const res = await fetch(API_BASE + path);
+    const res = await fetch(DATA_URL);
     if (!res.ok) throw new Error('Request failed: ' + res.status);
-    return await res.json();
+    cachedData = await res.json();
+    return cachedData;
   } catch (err) {
-    console.warn('Could not load ' + path + ' from backend:', err.message);
-    return fallback;
+    console.warn('Could not load static data:', err.message);
+    return {};
   }
+}
+
+async function fetchJSON(path, fallback) {
+  const data = await fetchAllData();
+  const key = path.replace(/^\//, ''); // e.g. '/settings' -> 'settings'
+  return data[key] || fallback;
 }
 
 // ─── HTML escaping helper ─────────────────────────────────────────────────

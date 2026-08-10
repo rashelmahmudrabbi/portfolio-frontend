@@ -1,0 +1,431 @@
+{
+  "settings": {
+    "name": "Rashel Mahmud Rabbi",
+    "title": "Graduate Researcher – Computer Vision & AI",
+    "email": "raselmahud6757@gmail.com",
+    "phone": "+8801613-000855",
+    "location": "Bangladesh",
+    "avatar": "media/profile/Prof._Passport_size_image.jpg",
+    "objective": "Aspiring AI researcher and deep learning engineer passionate about computer vision, medical image analysis, and explainable AI. Focused on developing intelligent healthcare solutions through innovative research in CNNs, Transformers, and hybrid deep learning architectures. Experienced in dataset curation, model development, and academic writing with a strong publication record. Committed to advancing AI research for real-world impact in healthcare and remote sensing.",
+    "stat_publications": 3,
+    "stat_projects": 7,
+    "stat_awards": 2,
+    "stat_certifications": 2,
+    "social_github": "https://github.com/rashelmahmudrabbi",
+    "social_linkedin": "https://www.linkedin.com/in/rashelmahmudrabbi",
+    "social_researchgate": "https://www.researchgate.net/profile/rashel-mahmud-rabbi",
+    "social_scholar": "https://scholar.google.com/citations?hl=en&user=agrATD8AAAAJ",
+    "social_orcid": "https://orcid.org/0009-0004-6070-4496",
+    "skills_languages": "Python, C/C++, Java",
+    "skills_frameworks": "PyTorch, TensorFlow, OpenCV, Scikit-learn, FastAI, Django",
+    "skills_tools": "Git, Jupyter Notebook, Google Colab, LaTeX, VS Code",
+    "skills_research_methods": "LIME / SHAP, Statistical Analysis, Dataset Curation, Academic Writing",
+    "father_name": "Md. Ahsan Habib",
+    "mother_name": "Mst. Rina Parvin",
+    "dob": "13 January 2003",
+    "religion": "Islam",
+    "nid": "8712333650",
+    "marital_status": "Single",
+    "blood_group": "O (+ve)",
+    "nationality": "Bangladeshi",
+    "address": "Barigram, Hat-Gangopara, Bagmara, Rajshahi, Bangladesh",
+    "teaching_philosophy": "I believe effective teaching in AI and Computer Science bridges theory and hands-on practice. My goal is to cultivate critical thinking and research curiosity — helping students not just implement models, but understand why they work, where they fail, and how to push the boundaries of existing knowledge.",
+    "teaching_mentoring_text": "I'm happy to help undergraduate and graduate students with research questions, project guidance, or academic writing in AI and Computer Vision.",
+    "footer_text": "I certify that all information in this portfolio is accurate and true.",
+    "cv_last_updated": "2025",
+    "cv_download_url": ""
+  },
+  "researchInterests": [
+    {
+      "icon": "bi-eye",
+      "topic": "Computer Vision",
+      "description": "Image classification, object detection, segmentation"
+    },
+    {
+      "icon": "bi-heart-pulse",
+      "topic": "Medical Image Analysis",
+      "description": "AI-driven diagnostics, histology, radiology imaging"
+    },
+    {
+      "icon": "bi-diagram-3",
+      "topic": "Deep Learning",
+      "description": "CNN, Transformer, LSTM architectures"
+    },
+    {
+      "icon": "bi-lightbulb",
+      "topic": "Explainable AI",
+      "description": "LIME, SHAP, model interpretability"
+    },
+    {
+      "icon": "bi-globe",
+      "topic": "Remote Sensing",
+      "description": "Satellite image processing and analysis"
+    },
+    {
+      "icon": "bi-chat-text",
+      "topic": "Natural Language Processing",
+      "description": "Text classification, information extraction"
+    }
+  ],
+  "spokenLanguages": [
+    {
+      "name": "Bangla",
+      "level": "Mother Tongue"
+    },
+    {
+      "name": "English",
+      "level": "Fluent"
+    },
+    {
+      "name": "Hindi",
+      "level": "Fluent"
+    }
+  ],
+  "teachingRoles": [
+    {
+      "title": "Club President",
+      "description": "As President of NBIU Computer Society, organized tech talks, seminars, and research orientation sessions."
+    },
+    {
+      "title": "Workshop Facilitator",
+      "description": "Led hands-on workshops in Deep Learning and Computer Vision for fellow students and academic clubs."
+    }
+  ],
+  "teachingAreas": [
+    {
+      "topic": "Computer Vision",
+      "description": "image classification, detection, segmentation"
+    },
+    {
+      "topic": "Deep Learning",
+      "description": "CNNs, LSTMs, Transformers, training pipelines"
+    },
+    {
+      "topic": "Medical Image Analysis",
+      "description": "histology, radiology, AI diagnostics"
+    },
+    {
+      "topic": "Explainable AI",
+      "description": "LIME, SHAP, interpretability frameworks"
+    },
+    {
+      "topic": "Remote Sensing",
+      "description": "satellite imagery, land-use classification"
+    },
+    {
+      "topic": "Python for Research",
+      "description": "PyTorch, TensorFlow, OpenCV, Pandas"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Sc in CSE",
+      "major": "Computer Science & Engineering",
+      "institution": "North Bengal International University",
+      "year": "2025",
+      "grade": "3.87/4.00"
+    },
+    {
+      "degree": "HSC",
+      "major": "Science",
+      "institution": "Mymensingh - 01",
+      "year": "2020",
+      "grade": "5.00/5.00"
+    },
+    {
+      "degree": "SSC",
+      "major": "Science",
+      "institution": "Rajshahi",
+      "year": "2018",
+      "grade": "5.00/5.00"
+    },
+    {
+      "degree": "JSC",
+      "major": "–",
+      "institution": "Rajshahi",
+      "year": "2016",
+      "grade": "4.65/5.00"
+    },
+    {
+      "degree": "PSC",
+      "major": "–",
+      "institution": "Bagmara, Rajshahi",
+      "year": "2012",
+      "grade": "4.25/5.00"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Graduate Researcher – Computer Vision / Medical Imaging",
+      "org": "North Bengal International University",
+      "period": "2023 – 2025",
+      "bullets": "Developed deep learning models for satellite and medical image classification\nWorked with CNN, LSTM, and Transformer-based architectures\nApplied Explainable AI techniques (LIME)\nExperienced in dataset preprocessing, model optimization, and evaluation"
+    }
+  ],
+  "publications": [
+    {
+      "type": "conference",
+      "status": "published",
+      "title": "An Explainable Approach to Land-Use Classification Using CNN-LSTM and LIME",
+      "authors": "Md Ashik Ahmmed; Rashel Mahmud Rabbi; Md Shafiuzzaman; Tithi Podder; Most. Tasnina Jaman; Afsana Tasnim",
+      "venue": "2025 International Conference on Quantum Photonics, Artificial Intelligence, and Networking (QPAIN), Rangpur, Bangladesh",
+      "year": "2025",
+      "abstract": "The evolution of landscapes has opened the opportunity to utilize previously unused land for various purposes, such as agriculture and urban development. This approach promotes sustainable land management and addresses economic and societal needs. By repurposing land effectively, growth and sustainability in communities can be fostered. This study introduces a hybrid CNN-LSTM model for classifying satellite images in the EuroSAT dataset, encompassing land use categories. The Convolutional Neural Network (CNN)efficiently extracts spatial features, while the Long Short-Term Memory (LSTM) captures temporal patterns, achieving an impressive accuracy of 98.30%. Preprocessing includes grayscale conversion, contrast enhancement, and spatial-temporal augmentations to optimize data quality. Explainable AI, implemented via Local Interpretable Model-agnostic Explanations (LIME), provides insights into influential features guiding predictions and enhances interpretability.",
+      "doi_link": "https://ieeexplore.ieee.org/document/11172239",
+      "pdf_link": "https://drive.google.com/file/d/1bRxEvEslm9k4yLljqfe7U8iZJb9wUWYS/view?usp=sharing"
+    },
+    {
+      "type": "journal",
+      "status": "published",
+      "title": "Enhancing Multi-Class Satellite Image Classification with MRCL-ELM: A Hybrid Explainable Deep Learning Approach",
+      "authors": "Md Ashik Ahmmed, Rashel Mahmud Rabbi, Md Shafiuzzaman, Md. Faysal Ahamed, Md Nahiduzzaman & Muhammad E.H. Chowdhury",
+      "venue": "Neural Computing and Applications",
+      "year": "2026",
+      "abstract": "Satellite image classification has many important applications that play a crucial role in the areas of urban planning, agriculture, as well as environmental monitoring. Nevertheless, the high accuracy and interpretability of deep learning models with such complex datasets is still a big challenge. To solve this, a new hybrid deep-learning architecture, MRCL-ELM is proposed to improve the performance of satellite image classification. The model uses EfficientNetB0 as its building block in terms of ability to learn rich features in an efficient manner with optimization of the network depth and size to minimize memory and processing requirements. It combines the Multi-Residual Convolutional (MRC) networks to learn spatial features robustly with the aid of multiple residual paths, in each block, in MRC, to enhance the learning of features and gradient flow. It uses a Long Short-Term Memory (LSTM) time series modeling layer, and an Extreme Learning Machine (ELM) to quickly and non-iteratively classify data and is therefore lightweight, accurate, and more scalable than other common deep learning architectures. To enhance the interpretability of the proposed model, Local Interpretable Model-agnostic Explanations (LIME) explains individual predictions by testing small variations in the input, whereas SHapley Additive exPlanations (SHAP) provides feature importance scores throughout the model, along with improving model interpretability and trust. The proposed model provides the highest possible results, with 98.33% accuracy on the EuroSAT dataset and 98.10% accuracy on the UC Merced Land Use dataset, being higher than the use of existing Convolutional Neural Networks (CNN) and transformer-based techniques. The training using fixed random seeds and 5-fold cross-validation is used to ensure robustness. Lastly, MRCL-ELM was implemented as a real-time web-based application and tested with real-life Google Maps imagery, and thus needs real-time, precise, and interpretable satellite image classification for the end-users.",
+      "doi_link": "https://link.springer.com/article/10.1007/s00521-026-12192-y",
+      "pdf_link": "https://drive.google.com/file/d/1B8MU_tQevLZyDqzm3KHu28c4sDnOmFRZ/view?usp=drive_link"
+    },
+    {
+      "type": "thesis",
+      "status": "completed",
+      "title": "HYBSWINEFF: Hybrid CNN-Transformer Fusion for Binary and Multi-Stage Blood Cell Cancer Classification",
+      "authors": "Rashel Mahmud Rabbi",
+      "venue": "B.Sc. Thesis, Department of CSE, North Bengal International University",
+      "year": "2025",
+      "abstract": "Early detection and subtyping of acute lymphoblastic leukemia (ALL) from peripheral blood smears are vital for timely treatment but remain limited by manual microscopy. To address this, HybSwinEff, a lightweight hybrid Convolutional Neural Network (CNN)-Transformer architecture, is proposed for automated, interpretable, and multistage ALL classification. The model employs a hierarchical pipeline: first distinguishing benign from malignant cells, then conditionally subtyping malignant cases into Early Pre-B, Pre-B, and Pro-B stages based on morphological features. HybSwinEff combines a pretrained EfficientNetV2-RW-T backbone for local texture extraction with a Swin Transformer Tiny for global context modeling. Features are mean-pooled, projected to a 128-dimensional space, concatenated, and fused through a Residual Fusion Block (RFB) before dual MLP heads for binary and conditional staging tasks. Trained on the Blood Cell Cancer (ALL) and Acute Lymphoblastic Leukemia (ALL) datasets using PyTorch and TIMM pretrained weights, with stratified train-val-test splits, three random seeds (including 42), 5-fold cross validation, label smoothing, balanced class weighting, and heavy augmentations, the model achieves exceptional results: 99.69% binary accuracy and 100% staging accuracy on Blood Cell Cancer, and 100% across all metrics on Acute Lymphoblastic Leukemia, outperforming prior state-of-the-art models. Furthermore, LIME visualizations confirm that HybSwinEff focuses on clinically meaningful regions, accurately highlighting malignant blast morphology and typical benign lymphocyte structures, thereby improving interpretability and trust in its diagnostic decisions. With 40.54M parameters, HybSwinEff offers 18% parameter efficiency over similar hybrids and real-time inference (~3.40 ms/image) on GPUs.",
+      "doi_link": "",
+      "pdf_link": "https://drive.google.com/file/d/10IeYdPdJPAQw3afi7ItVoYfZRQgBWlhm/view?usp=drive_link"
+    }
+  ],
+  "projects": [
+    {
+      "category": "thesis",
+      "title": "HYBSWINEFF: Hybrid CNN-Transformer Fusion for Binary and Multi-Stage Blood Cell Cancer Classification",
+      "description": "Created a hybrid CNN-Transformer model that performs binary and multi-stage leukemia classification of peripheral blood smear images. Incorporates Swin Transformer with CNN feature fusion and explainable AI methods (Grad-CAM, LIME) to make predictions interpretable for clinical use.",
+      "tech": "PyTorch, Swin Transformer, CNN, Grad-CAM, LIME, OpenCV",
+      "year": "2025",
+      "github_link": "https://github.com/rashelmahmudrabbi/HybSwinEff",
+      "paper_link": "",
+      "featured": true
+    },
+    {
+      "category": "research",
+      "title": "MRCL-ELM – Multi-Class Satellite Image Classifier",
+      "description": "Novel hybrid deep learning approach for satellite image classification achieving 98.33% accuracy on EuroSAT and 98.10% on UC Merced. Integrates LIME and SHAP for explainability; deployed as a real-time web application. Submitted to a Q1 journal.",
+      "tech": "PyTorch, LIME, SHAP, Flask, EuroSAT",
+      "year": "2024",
+      "github_link": "https://github.com/rashelmahmudrabbi/MRCL-ELM",
+      "paper_link": "",
+      "featured": false
+    },
+    {
+      "category": "research",
+      "title": "SatelliteNet – CNN-LSTM Land-Use Classifier",
+      "description": "Hybrid CNN-LSTM network for land-use classification on EuroSAT achieving 98.30% accuracy. Generates LIME-based explainability visualisations. Published and presented at IEEE QPAIN 2025.",
+      "tech": "TensorFlow, Keras, LIME, NumPy, Google Colab",
+      "year": "2024",
+      "github_link": "https://github.com/rashelmahmudrabbi/CNN-LSTM",
+      "paper_link": "",
+      "featured": false
+    },
+    {
+      "category": "research",
+      "title": "NeuroFusion – Brain Tumor Detection",
+      "description": "Hybrid CNN-Transformer framework for brain tumor detection from MRI images. Combines MobileNetV3 with channel attention and Transformer encoder architectures, using advanced augmentation and optimisation to enhance generalisation.",
+      "tech": "PyTorch, MobileNetV3, Transformer, OpenCV, scikit-learn",
+      "year": "2026",
+      "github_link": "https://github.com/rashelmahmudrabbi",
+      "paper_link": "",
+      "featured": false
+    },
+    {
+      "category": "development",
+      "title": "Academic Portfolio Website",
+      "description": "Rashel Mahmud Rabbi – Personal Portfolio is a modern, responsive portfolio website showcasing my academic background, research contributions, technical expertise, and software development projects. The platform highlights my work in Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, Medical Image Analysis, Explainable AI (XAI), and Full-Stack Web Development, while providing easy access to my publications, certifications, achievements, resume, and contact information. Designed with a clean, interactive, and user-friendly interface, the portfolio reflects my passion for research-driven innovation and modern web technologies. It serves as a centralized platform for recruiters, researchers, collaborators, and academic institutions to explore my professional journey, research portfolio, and development experience. The website is built with a scalable architecture, allowing continuous updates to projects, publications, blogs, and achievements as my career evolves.",
+      "tech": "Node.js, Express, Neon Postgres, HTML/CSS/JS",
+      "year": "2025",
+      "github_link": "https://github.com/rashelmahmudrabbi/rashelmahmudrabbi.github.io",
+      "paper_link": "https://rashelmahmudrabbi.github.io/",
+      "featured": false
+    },
+    {
+      "category": "development",
+      "title": "RentalHub – E-commerce Web App",
+      "description": "Rental Hub is a modern, responsive web application designed to simplify the process of finding and listing rental properties. The platform enables users to browse available apartments, houses, and rooms through an intuitive interface with detailed property information, pricing, location, and amenities. Property owners can showcase their listings with images and essential details, while prospective tenants can efficiently search and compare rental options based on their preferences. Built with a clean and user-friendly design, Rental Hub focuses on delivering a seamless property discovery experience across desktop and mobile devices. The project demonstrates modern frontend development practices, responsive UI design, and an organized component-based architecture, making it a scalable foundation for future enhancements such as user authentication, real-time messaging, online booking, and secure payment integration.",
+      "tech": "Django, Tailwind CSS, SQLite, REST API",
+      "year": "2024",
+      "github_link": "https://github.com/rashelmahmudrabbi/rental-hub",
+      "paper_link": "https://rashelmahmudrabbi.github.io/rental-hub/",
+      "featured": false
+    },
+    {
+      "category": "development",
+      "title": "OUR RAJSHAHI – Regional Info Platform",
+      "description": "Our Rajshahi is a responsive tourism and cultural information platform developed to showcase the rich heritage, history, attractions, education, and lifestyle of Rajshahi, Bangladesh. The website serves as a comprehensive digital guide, enabling visitors to explore famous tourist destinations, historical landmarks, local traditions, educational institutions, cuisine, and essential travel information through an intuitive and visually engaging interface. Designed with a clean, modern, and mobile-friendly layout, the platform enhances user experience by providing well-organized content, interactive navigation, and appealing visual elements. This project demonstrates frontend web development skills, responsive UI/UX design, and effective content organization, while serving as a scalable foundation for future enhancements such as an administrative dashboard, dynamic content management system (CMS), user reviews, event management, multilingual support, and interactive maps.",
+      "tech": "Django, Bootstrap, SQLite, Google AdSense",
+      "year": "2023",
+      "github_link": "https://github.com/rashelmahmudrabbi/our-rajshahi",
+      "paper_link": "https://rashelmahmudrabbi.github.io/our-rajshahi/",
+      "featured": false
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Data Science Math Skills",
+      "issuer": "Coursera",
+      "year": "2024",
+      "image": "media/certifications/images/Coursera__Data_Science_Math_Skills_7HHNEO5MT8WO_pages-to-jpg-0001.jpg",
+      "verify_link": "https://www.coursera.org/account/accomplishments/verify/7HHNEO5MT8WO",
+      "pdf_link": "media/certifications/pdfs/Coursera__Data_Science_Math_Skills_7HHNEO5MT8WO.pdf"
+    },
+    {
+      "title": "Python Basics",
+      "issuer": "Coursera",
+      "year": "2025",
+      "image": "media/certifications/images/Coursera_Python_Basics_KJ1TIFBGN6W3_pages-to-jpg-0001.jpg",
+      "verify_link": "https://coursera.org/verify/KJ1TIFBGN6W3",
+      "pdf_link": "media/certifications/pdfs/Coursera_Python_Basics_KJ1TIFBGN6W3.pdf"
+    }
+  ],
+  "awards": [
+    {
+      "title": "2nd Runner-Up, IEEE ProCon App Idea Competition",
+      "org": "IEEE",
+      "year": "2025",
+      "image": "media/awards/Idea_with_Poster_Presentation.jpg"
+    },
+    {
+      "title": "1st Position, Research Olympiad – Rajshahi Regional",
+      "org": "Rajshahi University Research Society (RURS)",
+      "year": "2024",
+      "image": "media/awards/Research_Olympiad.jpg"
+    }
+  ],
+  "activities": [
+    {
+      "text": "President, Computer Society – NBIU"
+    },
+    {
+      "text": "Participation in research seminars and higher study camps"
+    },
+    {
+      "text": "Active involvement in tech competitions and academic events"
+    }
+  ],
+  "gallery": [
+    {
+      "title": "IEEE ProCon App Idea Competition",
+      "year": "2025",
+      "photos": [
+        {
+          "src": "media/gallery/ProCON/Group Photo.jpg",
+          "caption": "Group Photo"
+        },
+        {
+          "src": "media/gallery/ProCON/Award Ceremony.jpg",
+          "caption": "Award Ceremony"
+        }
+      ]
+    },
+    {
+      "title": "Research Olympiad – Rajshahi Regional",
+      "year": "2024",
+      "photos": [
+        {
+          "src": "media/gallery/Research-Olympiad/Stage Award.jpg",
+          "caption": "Stage Award"
+        },
+        {
+          "src": "media/gallery/Research-Olympiad/Cover.jpg",
+          "caption": "Cover"
+        }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "name": "CSE-22",
+      "institution": "NBIU, Rajshahi",
+      "period": "2023 – 2024",
+      "role": "Teaching Assistant"
+    }
+  ],
+  "blog": [
+    {
+      "title": "Why Explainability Matters in Medical AI — and How LIME Helps",
+      "slug": "explainability-medical-ai-lime",
+      "date": "March 2025",
+      "read_time": "8 min read",
+      "category": "Explainable AI",
+      "excerpt": "When an AI model tells a doctor a lesion is malignant, \"trust me\" isn't good enough. I explore how LIME bridges the gap between black-box accuracy and clinical trust in skin lesion classification.",
+      "content": "",
+      "featured": true
+    },
+    {
+      "title": "Transfer Learning on Satellite Imagery: Lessons from EuroSAT",
+      "slug": "transfer-learning-eurosat",
+      "date": "Jan 2025",
+      "read_time": "6 min read",
+      "category": "Computer Vision",
+      "excerpt": "What I learned training ResNet-50 on the EuroSAT dataset — from data augmentation strategies to achieving 96.4% accuracy on 10 land-use categories.",
+      "content": "",
+      "featured": false
+    },
+    {
+      "title": "LSTM for ECG Signal Analysis: A Practical Guide",
+      "slug": "lstm-ecg-signal-analysis",
+      "date": "Nov 2024",
+      "read_time": "5 min read",
+      "category": "Deep Learning",
+      "excerpt": "A walkthrough of building an LSTM-based arrhythmia detector from scratch using the MIT-BIH dataset, including preprocessing ECG signals with the Wfdb library.",
+      "content": "",
+      "featured": false
+    },
+    {
+      "title": "How I Won 1st at the Research Olympiad — and What I Learned",
+      "slug": "research-olympiad-win",
+      "date": "Sep 2024",
+      "read_time": "4 min read",
+      "category": "Academic Life",
+      "excerpt": "My experience presenting at the Rajshahi Regional Research Olympiad, the feedback I received, and how it shaped my thinking on communicating research to non-technical audiences.",
+      "content": "",
+      "featured": false
+    },
+    {
+      "title": "My 2024 Deep Learning Paper Reading List",
+      "slug": "2024-paper-reading-list",
+      "date": "Jul 2024",
+      "read_time": "7 min read",
+      "category": "Resources",
+      "excerpt": "A curated list of the 10 most impactful papers I read this year in Computer Vision and Medical AI, with short summaries and why each one matters.",
+      "content": "",
+      "featured": false
+    }
+  ],
+  "references": [
+    {
+      "name": "Md. Emdadul Haque",
+      "role": "Lecturer & Head, Department of CSE",
+      "org": "North Bengal International University",
+      "note": "",
+      "phone": "+8801773-897585",
+      "email": "haque.emdadul.one5@gmail.com"
+    },
+    {
+      "name": "Md. Shafiuzzaman",
+      "role": "Lecturer, Department of CSE",
+      "org": "North Bengal International University",
+      "note": "Research Supervisor",
+      "phone": "+8801780-165924",
+      "email": "shafiuzzaman.ruet@gmail.com"
+    },
+    {
+      "name": "Saifur Rahman",
+      "role": "Lecturer, Department of CSE",
+      "org": "North Bengal International University",
+      "note": "Thesis External Examiner",
+      "phone": "+8801738-663624",
+      "email": "saifur.naim30@gmail.com"
+    }
+  ]
+}
