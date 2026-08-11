@@ -20,6 +20,16 @@
   document.title = `Curriculum Vitae – ${p.name || 'Portfolio'}`;
   document.getElementById('cvLastUpdated').textContent = settings.cvLastUpdated || new Date().getFullYear();
 
+  const downloadBtn = document.getElementById('cvDownloadBtn');
+  if (downloadBtn) {
+    let finalUrl = settings.cvDownloadUrl || downloadBtn.href;
+    const gDriveMatch = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (gDriveMatch) {
+      finalUrl = `https://drive.google.com/uc?export=download&id=${gDriveMatch[1]}`;
+    }
+    downloadBtn.href = finalUrl;
+  }
+
   function skillGroup(label, items) {
     if (!items || !items.length) return '';
     return `<div class="skill-group"><div class="skill-group-label">${escapeHtml(label)}</div>${items
