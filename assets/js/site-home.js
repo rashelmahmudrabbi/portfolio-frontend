@@ -109,14 +109,7 @@
           ${p.phone ? `<a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ''))}"><i class="bi bi-telephone-fill"></i>${escapeHtml(p.phone)}</a>` : ''}
           ${p.location ? `<a href="#"><i class="bi bi-geo-alt-fill"></i>${escapeHtml(p.location)}</a>` : ''}
         </div>
-        <div class="hero-cta d-flex flex-wrap gap-2 mb-3">
-          <a class="btn-cta btn-cta-primary" href="${escapeHtml(cvUrl)}" target="_blank">
-            <i class="bi bi-download"></i> Download CV
-          </a>
-          ${p.email ? `<a class="btn-cta btn-cta-outline" href="mailto:${escapeHtml(p.email)}">
-            <i class="bi bi-envelope"></i> Email Me
-          </a>` : ''}
-        </div>
+
         <div class="hero-socials d-flex flex-wrap gap-2 mb-3">
           ${socials.github ? `<a class="btn btn-sm" href="${escapeHtml(socials.github)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
           ${socials.linkedin ? `<a class="btn btn-sm" href="${escapeHtml(socials.linkedin)}" target="_blank"><i class="bi bi-linkedin me-1"></i>LinkedIn</a>` : ''}
