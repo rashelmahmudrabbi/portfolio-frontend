@@ -1,32 +1,90 @@
+// ─── Homepage renderer ───────────────────────────────────────────────────
+// Uses the combined /api/portfolio endpoint (via api.js getPortfolio) for a
+// single round-trip, with stale-while-revalidate caching. Each section has
+// an individual retry mechanism so one failed section doesn't blank out the
+// rest of the page.
 (async function () {
-  const [settings, education, experience, publications, projects, certifications, awards, activities, gallery] =
-    await Promise.all([
-      fetchJSON('/settings', {}),
-      fetchJSON('/education', []),
-      fetchJSON('/experience', []),
-      fetchJSON('/publications', []),
-      fetchJSON('/projects', []),
-      fetchJSON('/certifications', []),
-      fetchJSON('/awards', []),
-      fetchJSON('/activities', []),
-      fetchJSON('/gallery', []),
-    ]);
+  'use strict';
 
-  renderHero(settings);
-  renderObjective(settings);
-  renderResearchInterests(settings);
-  renderExperience(experience);
-  renderEducation(education);
-  renderPublications(publications);
-  renderProjects(projects);
-  renderCertifications(certifications);
-  renderSkills(settings);
-  renderAwardsAndActivities(awards, activities);
-  renderGallery(gallery);
-  renderPersonalInfo(settings);
-  // References are loaded separately since they're not in `settings`
-  fetchJSON('/references', []).then(renderReferences);
-  renderFooter(settings);
+  // ── 1. Load portfolio data ─────────────────────────────────────────────
+  const result = await getPortfolio();
+  const d = result.data;
+  const loadError = result.error;
+
+  // Extract sub-objects (safe even if d is sparse)
+  const settings     = d.settings || {};
+  const education    = d.education || [];
+  const experience   = d.experience || [];
+  const publications = d.publications || [];
+  const projects     = d.projects || [];
+  const certifications = d.certifications || [];
+  const awards       = d.awards || [];
+  const activities   = d.activities || [];
+  const gallery      = d.gallery || [];
+  const references   = d.references || [];
+
+  // ── 2. Render every section ────────────────────────────────────────────
+  // Each render call is wrapped so one failure doesn't block the others.
+  safeRender('Hero',              () => renderHero(settings));
+  safeRender('Objective',         () => renderObjective(settings));
+  safeRender('Research Interests',() => renderResearchInterests(settings));
+  safeRender('Experience',        () => renderExperience(experience));
+  safeRender('Education',         () => renderEducation(education));
+  safeRender('Publications',      () => renderPublications(publications));
+  safeRender('Projects',          () => renderProjects(projects));
+  safeRender('Certifications',    () => renderCertifications(certifications));
+  safeRender('Skills',            () => renderSkills(settings));
+  safeRender('Awards',            () => renderAwardsAndActivities(awards, activities));
+  safeRender('Gallery',           () => renderGallery(gallery));
+  safeRender('Personal Info',     () => renderPersonalInfo(settings));
+  safeRender('References',        () => renderReferences(references));
+  safeRender('Footer',            () => renderFooter(settings));
+
+  // If the initial load had an error and returned empty data, show
+  // error states in sections that got no content:
+  if (loadError) {
+    showSectionErrors(d);
+  }
+
+  // ── Helper: safe render wrapper ────────────────────────────────────────
+  function safeRender(label, fn) {
+    try { fn(); } catch (e) { console.error(`Error rendering ${label}:`, e); }
+  }
+
+  // ── Show error states for empty sections when load failed ──────────────
+  function showSectionErrors(data) {
+    const checks = [
+      { cond: !data.settings || !data.settings.profile, elId: 'heroContainer', name: 'profile', retry: 'retryAll' },
+      { cond: !data.settings || !data.settings.profile, elId: 'objectiveText', name: 'career summary', retry: 'retryAll' },
+      { cond: !data.education || !data.education.length, elId: 'educationTableBody', name: 'education', retry: 'retryAll', isTable: true },
+      { cond: !data.experience || !data.experience.length, elId: 'experienceTimeline', name: 'work experience', retry: 'retryAll' },
+      { cond: !data.publications || !data.publications.length, elId: 'pubList', name: 'publications', retry: 'retryAll' },
+      { cond: !data.certifications || !data.certifications.length, elId: 'certificationsList', name: 'certifications', retry: 'retryAll' },
+      { cond: !data.awards || !data.awards.length, elId: 'awardsList', name: 'awards', retry: 'retryAll' },
+      { cond: !data.gallery || !data.gallery.length, elId: 'galleryGrid', name: 'gallery', retry: 'retryAll' },
+      { cond: !data.references || !data.references.length, elId: 'referencesList', name: 'references', retry: 'retryAll' },
+    ];
+    checks.forEach(c => {
+      if (c.cond) {
+        const el = document.getElementById(c.elId);
+        if (el) {
+          if (c.isTable) {
+            el.innerHTML = `<tr><td colspan="5">${errorStateHtml(c.name, c.retry)}</td></tr>`;
+          } else {
+            el.innerHTML = errorStateHtml(c.name, c.retry);
+          }
+        }
+      }
+    });
+  }
+
+  // Global retry function — clear cache and reload
+  window.retryAll = function() {
+    try { sessionStorage.removeItem('portfolio_cache'); } catch(e) {}
+    window.location.reload();
+  };
+
+  // ── RENDER FUNCTIONS ───────────────────────────────────────────────────
 
   function renderHero(settings) {
     const p = settings.profile || {};
@@ -36,9 +94,12 @@
     const brand = document.getElementById('navBrand');
     if (brand && p.name) brand.textContent = p.name;
 
+    const cvUrl = settings.cvDownloadUrl || 'cv/index.html';
+
     document.getElementById('heroContainer').innerHTML = `
       <div class="col-md-auto text-center text-md-start">
-        <img src="${p.avatar ? p.avatar : ''}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"/>
+        <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
+             onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
       </div>
       <div class="col-md">
         <p class="hero-title">${escapeHtml(p.title || '')}</p>
@@ -47,6 +108,14 @@
           ${p.email ? `<a href="mailto:${escapeHtml(p.email)}"><i class="bi bi-envelope-fill"></i>${escapeHtml(p.email)}</a>` : ''}
           ${p.phone ? `<a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ''))}"><i class="bi bi-telephone-fill"></i>${escapeHtml(p.phone)}</a>` : ''}
           ${p.location ? `<a href="#"><i class="bi bi-geo-alt-fill"></i>${escapeHtml(p.location)}</a>` : ''}
+        </div>
+        <div class="hero-cta d-flex flex-wrap gap-2 mb-3">
+          <a class="btn-cta btn-cta-primary" href="${escapeHtml(cvUrl)}" target="_blank">
+            <i class="bi bi-download"></i> Download CV
+          </a>
+          ${p.email ? `<a class="btn-cta btn-cta-outline" href="mailto:${escapeHtml(p.email)}">
+            <i class="bi bi-envelope"></i> Email Me
+          </a>` : ''}
         </div>
         <div class="hero-socials d-flex flex-wrap gap-2 mb-3">
           ${socials.github ? `<a class="btn btn-sm" href="${escapeHtml(socials.github)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
@@ -62,10 +131,16 @@
           <div class="hero-stat"><div class="hero-stat-num">${stats.certifications ?? 0}</div><div class="hero-stat-label">Certifications</div></div>
         </div>
       </div>`;
+
+    // Fix broken hero avatar
+    addImageFallbacks(document.getElementById('heroContainer'), getInitialsPlaceholder(p.name));
   }
 
   function renderObjective(settings) {
-    document.getElementById('objectiveText').textContent = (settings.profile && settings.profile.objective) || '';
+    const text = (settings.profile && settings.profile.objective) || '';
+    if (text) {
+      document.getElementById('objectiveText').textContent = text;
+    }
   }
 
   function renderResearchInterests(settings) {
@@ -105,22 +180,41 @@
 
   function renderEducation(education) {
     const el = document.getElementById('educationTableBody');
-    el.innerHTML = education
-      .map(
-        (e) => `
-      <tr>
-        <td><strong>${escapeHtml(e.degree || '')}</strong></td>
-        <td>${escapeHtml(e.major || '')}</td>
-        <td>${escapeHtml(e.institution || '')}</td>
-        <td>${escapeHtml(e.year || '')}</td>
-        <td><span class="grade-badge">${escapeHtml(e.grade || '')}</span></td>
-      </tr>`
-      )
-      .join('') || '<tr><td colspan="5" class="text-center text-muted">No education entries yet.</td></tr>';
+    const thead = document.getElementById('educationThead');
+
+    if (education.length) {
+      // Show the thead now that we have data
+      if (thead) thead.classList.remove('edu-thead-hidden');
+
+      el.innerHTML = education
+        .map(
+          (e) => `
+        <tr>
+          <td><strong>${escapeHtml(e.degree || '')}</strong></td>
+          <td>${escapeHtml(e.major || '')}</td>
+          <td>${escapeHtml(e.institution || '')}</td>
+          <td>${escapeHtml(e.year || '')}</td>
+          <td><span class="grade-badge">${escapeHtml(e.grade || '')}</span></td>
+        </tr>`
+        )
+        .join('');
+    } else {
+      el.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No education entries yet.</td></tr>';
+    }
   }
 
   function pubBadgeClass(type) {
     return { conference: 'badge-conference', journal: 'badge-conference', thesis: 'badge-conference' }[type] || 'badge-conference';
+  }
+
+  // Helper to bold the owner's name in the authors list
+  function formatAuthors(authorsStr, nameToBold) {
+    let escAuth = escapeHtml(authorsStr || '');
+    if (nameToBold) {
+      const regex = new RegExp('(' + escapeHtml(nameToBold).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
+      escAuth = escAuth.replace(regex, '<strong>$1</strong>');
+    }
+    return escAuth;
   }
 
   function renderPublications(publications) {
@@ -137,9 +231,12 @@
             <span class="pub-type-badge ${pubBadgeClass(pub.type)}">${escapeHtml(pub.type || '')}</span>
             <span class="pub-status status-published">● ${escapeHtml(pub.status || '')}</span>
           </div>
-          <div class="pub-title">${escapeHtml(pub.title || '')}</div>
-          <div class="pub-authors">${escapeHtml(pub.authors || '')}</div>
-          <div class="pub-venue">${escapeHtml(pub.venue || '')} · ${escapeHtml(pub.year || '')}</div>
+          <div class="pub-ieee" style="margin-bottom:.5rem;">
+            <span class="pub-authors">${formatAuthors(pub.authors, document.title.split(' –')[0])},</span>
+            <span class="pub-title">"${escapeHtml(pub.title || '')},"</span>
+            <span class="pub-venue">${escapeHtml(pub.venue || '')},</span>
+            <span class="pub-year">${escapeHtml(pub.year || '--')}</span>.
+          </div>
           <div class="pub-links">
             ${pub.doiLink ? `<a href="${escapeHtml(pub.doiLink)}" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>DOI / IEEE</a>` : ''}
             ${pub.pdfLink ? `<a href="${escapeHtml(pub.pdfLink)}" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
@@ -202,6 +299,8 @@
       <div class="col-lg-6">
         <div class="cert-card">
           <img src="${escapeHtml(c.image || '')}" class="cert-thumb" alt="${escapeHtml(c.title || '')}"
+               loading="lazy"
+               onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
                onclick="showImageModal(this.src,'${escapeHtml((c.title || '') + ' – ' + (c.issuer || ''))}')"/>
           <div>
             <div class="cert-title">${escapeHtml(c.title || '')}</div>
@@ -215,6 +314,9 @@
       </div>`
       )
       .join('') || '<div class="col-12 text-muted text-center">No certifications yet.</div>';
+
+    // Fix any broken cert images
+    addImageFallbacks(el, getGenericPlaceholder());
   }
 
   function skillGroupHtml(label, icon, items) {
@@ -250,13 +352,16 @@
   }
 
   function renderAwardsAndActivities(awards, activities) {
-    document.getElementById('awardsList').innerHTML =
+    const awardsEl = document.getElementById('awardsList');
+    awardsEl.innerHTML =
       awards
         .map(
           (a) => `
       <div class="award-item">
         <div class="award-icon"><i class="bi bi-trophy-fill"></i></div>
-        ${a.image ? `<img src="${escapeHtml(a.image)}" class="award-thumb" alt="${escapeHtml(a.title || '')}" onclick="showImageModal(this.src,'${escapeHtml(a.title || '')}')"/>` : ''}
+        ${a.image ? `<img src="${escapeHtml(a.image)}" class="award-thumb" alt="${escapeHtml(a.title || '')}" loading="lazy"
+             onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
+             onclick="showImageModal(this.src,'${escapeHtml(a.title || '')}')"/>` : ''}
         <div>
           <div class="award-title">${escapeHtml(a.title || '')}</div>
           <div class="award-meta">${escapeHtml(a.org || '')} · ${escapeHtml(a.year || '')}</div>
@@ -264,6 +369,9 @@
       </div>`
         )
         .join('') || '<p class="text-muted">No awards yet.</p>';
+
+    // Fix broken award images
+    addImageFallbacks(awardsEl, getGenericPlaceholder());
 
     document.getElementById('activitiesList').innerHTML = activities
       .map((a) => `<div class="activity-item"><i class="bi bi-chevron-right"></i>${escapeHtml(a.text || '')}</div>`)
@@ -277,7 +385,8 @@
       .map(
         (ev, idx) => `
       <div class="gallery-item" onclick="openLightbox(${idx})">
-        <img src="${escapeHtml((ev.photos && ev.photos[0] && ev.photos[0].src) || '')}" alt="${escapeHtml(ev.title || '')}" loading="lazy"/>
+        <img src="${escapeHtml((ev.photos && ev.photos[0] && ev.photos[0].src) || '')}" alt="${escapeHtml(ev.title || '')}" loading="lazy"
+             onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"/>
         <span class="gallery-photo-badge"><i class="bi bi-images"></i> ${(ev.photos || []).length}</span>
         <div class="gallery-overlay">
           <div class="gallery-caption">${escapeHtml(ev.title || '')}</div>
@@ -289,6 +398,9 @@
       </div>`
       )
       .join('') || '<div class="text-muted text-center">No gallery events yet.</div>';
+
+    // Fix broken gallery images
+    addImageFallbacks(el, getGenericPlaceholder());
   }
 
   function renderPersonalInfo(settings) {

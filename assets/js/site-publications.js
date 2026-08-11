@@ -1,5 +1,11 @@
 (async function () {
-  const publications = await fetchJSON('/publications', []);
+  'use strict';
+  
+  const result = await getPortfolio();
+  const d = result.data || {};
+  const publications = d.publications || [];
+  const settings = d.settings || {};
+  const ownerName = (settings.profile && settings.profile.name) || '';
 
   const typeBadge = { conference: 'badge-conference', journal: 'badge-journal', thesis: 'badge-thesis' };
   const typeLabel = { conference: 'Conference Paper', journal: 'Journal Article', thesis: 'Thesis' };
@@ -21,7 +27,7 @@
   renderStats();
   renderFilterBar();
   renderList();
-  renderFooter();
+  renderFooter(settings);
 
   function renderStats() {
     const total = publications.length;
@@ -52,6 +58,17 @@
     );
   }
 
+  // Helper to bold the owner's name in the authors list
+  function formatAuthors(authorsStr, nameToBold) {
+    let escAuth = escapeHtml(authorsStr || '');
+    if (nameToBold) {
+      // Create a case-insensitive regex for the owner's name
+      const regex = new RegExp('(' + escapeHtml(nameToBold).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
+      escAuth = escAuth.replace(regex, '<strong>$1</strong>');
+    }
+    return escAuth;
+  }
+
   function pubCardHtml(pub, number) {
     const tBadge = typeBadge[pub.type] || 'badge-conference';
     const tLabel = typeLabel[pub.type] || pub.type;
@@ -67,9 +84,12 @@
           <span class="badge-status ${sBadge}">${escapeHtml(sLabel)}</span>
         </div>
       </div>
-      <div class="pub-title">${escapeHtml(pub.title || '')}</div>
-      <div class="pub-authors">${escapeHtml(pub.authors || '')}</div>
-      <div class="pub-venue">${escapeHtml(pub.venue || '')} &nbsp;·&nbsp; <span class="pub-year">${escapeHtml(pub.year || '--')}</span></div>
+      <div class="pub-ieee">
+        <span class="pub-authors">${formatAuthors(pub.authors, ownerName)},</span>
+        <span class="pub-title">"${escapeHtml(pub.title || '')},"</span>
+        <span class="pub-venue">${escapeHtml(pub.venue || '')},</span>
+        <span class="pub-year">${escapeHtml(pub.year || '--')}</span>.
+      </div>
       ${
         pub.abstract
           ? `<div class="pub-abstract-toggle" onclick="this.classList.toggle('open')">
@@ -116,8 +136,7 @@
     container.innerHTML = html;
   }
 
-  async function renderFooter() {
-    const settings = await fetchJSON('/settings', {});
+  function renderFooter(settings) {
     const p = settings.profile || {};
     document.getElementById('footerYear').textContent = new Date().getFullYear();
     if (p.name) document.getElementById('footerName').textContent = p.name;
