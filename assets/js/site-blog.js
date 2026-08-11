@@ -1,5 +1,9 @@
 (async function () {
-  const [posts, settings] = await Promise.all([fetchJSON('/blog', []), fetchJSON('/settings', {})]);
+  'use strict';
+  const result = await getPortfolio();
+  const d = result.data || {};
+  const settings = d.settings || {};
+  const posts = d.blog || [];
   const p = settings.profile || {};
 
   const iconMap = {

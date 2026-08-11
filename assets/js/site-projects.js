@@ -1,5 +1,10 @@
 (async function () {
-  const projects = await fetchJSON('/projects', []);
+  'use strict';
+  
+  const result = await getPortfolio();
+  const d = result.data || {};
+  const projects = d.projects || [];
+  const settings = d.settings || {};
 
   const research = projects.filter((p) => p.category === 'research' || p.category === 'thesis');
   const dev = projects.filter((p) => p.category === 'development');
@@ -10,7 +15,7 @@
 
   renderFilterBar();
   renderProjectsContainer();
-  renderFooter();
+  renderFooter(settings);
 
   function renderFilterBar() {
     const el = document.getElementById('filterBarButtons');
@@ -123,8 +128,7 @@
     el.innerHTML = html;
   }
 
-  async function renderFooter() {
-    const settings = await fetchJSON('/settings', {});
+  function renderFooter(settings) {
     const p = settings.profile || {};
     document.getElementById('footerYear').textContent = new Date().getFullYear();
     if (p.name) document.getElementById('footerName').textContent = p.name;

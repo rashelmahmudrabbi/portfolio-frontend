@@ -1,5 +1,9 @@
 (async function () {
-  const [settings, courses] = await Promise.all([fetchJSON('/settings', {}), fetchJSON('/courses', [])]);
+  'use strict';
+  const result = await getPortfolio();
+  const d = result.data || {};
+  const settings = d.settings || {};
+  const courses = d.courses || [];
   const t = settings.teaching || {};
   const p = settings.profile || {};
 

@@ -1,16 +1,16 @@
 (async function () {
-  const [settings, education, experience, publications, projects, certifications, awards, activities, references] =
-    await Promise.all([
-      fetchJSON('/settings', {}),
-      fetchJSON('/education', []),
-      fetchJSON('/experience', []),
-      fetchJSON('/publications', []),
-      fetchJSON('/projects', []),
-      fetchJSON('/certifications', []),
-      fetchJSON('/awards', []),
-      fetchJSON('/activities', []),
-      fetchJSON('/references', []),
-    ]);
+  'use strict';
+  const result = await getPortfolio();
+  const d = result.data || {};
+  const settings = d.settings || {};
+  const education = d.education || [];
+  const experience = d.experience || [];
+  const publications = d.publications || [];
+  const projects = d.projects || [];
+  const certifications = d.certifications || [];
+  const awards = d.awards || [];
+  const activities = d.activities || [];
+  const references = d.references || [];
 
   const p = settings.profile || {};
   const socials = p.socials || {};
