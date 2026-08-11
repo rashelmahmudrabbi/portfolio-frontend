@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rashelmahmudrabbi.github.io/portfolio-frontend/sitemap.xml
+Sitemap: https://rashelmahmudrabbi.github.io/sitemap.xml
