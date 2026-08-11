@@ -22,12 +22,7 @@
 
   const downloadBtn = document.getElementById('cvDownloadBtn');
   if (downloadBtn) {
-    let finalUrl = settings.cvDownloadUrl || downloadBtn.href;
-    const gDriveMatch = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (gDriveMatch) {
-      finalUrl = `https://drive.google.com/uc?export=download&id=${gDriveMatch[1]}`;
-    }
-    downloadBtn.href = finalUrl;
+    downloadBtn.href = API_BASE + '/cv/download';
   }
 
   function skillGroup(label, items) {
