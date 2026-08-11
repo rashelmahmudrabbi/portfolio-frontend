@@ -6,7 +6,7 @@
 // ─── Constants ───────────────────────────────────────────────────────────
 const FETCH_TIMEOUT_MS = 8000;
 const CACHE_KEY = 'portfolio_cache';
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL_MS = 0; // Cache disabled to show updates immediately
 
 // ─── HTML escaping helper ─────────────────────────────────────────────────
 function escapeHtml(str) {
