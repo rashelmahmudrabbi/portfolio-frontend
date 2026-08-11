@@ -240,26 +240,6 @@
     .skeleton-card { min-height: 100px; }
     .skeleton-avatar { width: 150px; height: 150px; }
 
-    /* ── HERO CTA BUTTONS ── */
-    .hero-cta .btn-cta {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .55rem 1.4rem; border-radius: 25px; font-size: .88rem;
-      font-weight: 600; text-decoration: none; transition: all .25s;
-      border: 2px solid var(--gold);
-    }
-    .hero-cta .btn-cta-primary {
-      background: var(--gold); color: var(--navy);
-    }
-    .hero-cta .btn-cta-primary:hover {
-      background: var(--gold-lt); border-color: var(--gold-lt);
-      box-shadow: 0 4px 20px rgba(200,149,42,.4);
-    }
-    .hero-cta .btn-cta-outline {
-      background: transparent; color: #fff;
-    }
-    .hero-cta .btn-cta-outline:hover {
-      background: rgba(255,255,255,.12); border-color: var(--gold-lt); color: var(--gold-lt);
-    }
 
     /* ── ERROR STATE ── */
     .section-error {
@@ -305,8 +285,6 @@
       .cert-thumb { width: 100%; height: auto; max-height: 140px; }
       .personal-grid .info-row { flex-direction: column; gap: .15rem; }
       .info-label { min-width: unset; }
-      .hero-cta { flex-direction: column; gap: .5rem !important; }
-      .hero-cta .btn-cta { width: 100%; justify-content: center; }
       .hero-stats { justify-content: center; }
       .edu-table thead th { font-size: .7rem; padding: .7rem .5rem; }
       .edu-table tbody td { font-size: .8rem; padding: .6rem .5rem; }
@@ -724,8 +702,8 @@
     if (e.target === this) closeLightbox();
   });
 </script>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/api.js"></script>
-<script src="assets/js/site-home.js"></script>
+<script src="assets/js/config.js?v=2"></script>
+<script src="assets/js/api.js?v=2"></script>
+<script src="assets/js/site-home.js?v=2"></script>
 </body>
 </html>
