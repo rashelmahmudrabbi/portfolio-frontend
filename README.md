@@ -64,7 +64,7 @@ breaking the whole page.
 Edit `assets/js/config.js`:
 
 ```js
-const API_BASE = 'https://portfolio-backend-u.vercel.app/api';
+const API_BASE = 'https://<your-project>.vercel.app/api';
 ```
 
 For local testing against a backend running on your own machine
@@ -110,7 +110,7 @@ new version is live. If changes don't appear to take effect:
 
 ## 3. Editing content
 
-Go to `https://portfolio-backend-u.vercel.app/admin`, log in with the admin
+Go to `https://<your-project>.vercel.app/admin`, log in with the admin
 credentials set on the backend, and edit any section (profile, education,
 publications, projects, gallery, blog, etc.). Changes appear on the live
 site as soon as you reload the page — no frontend redeploy needed, since
