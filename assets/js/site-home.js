@@ -97,11 +97,11 @@
     const cvUrl = settings.cvDownloadUrl || 'cv/index.html';
 
     document.getElementById('heroContainer').innerHTML = `
-      <div class="col-md-auto text-center text-md-start">
+      <div class="col-12 col-md-4 text-center text-md-end pe-md-4">
         <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
              onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
       </div>
-      <div class="col-md">
+      <div class="col-12 col-md-8 text-center text-md-start ps-md-4">
         <p class="hero-title">${escapeHtml(p.title || '')}</p>
         <h1 class="hero-name">${escapeHtml(p.name || '')}</h1>
         <div class="hero-contact mt-3 mb-3">
