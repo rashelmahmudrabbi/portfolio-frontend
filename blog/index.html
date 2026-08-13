@@ -62,14 +62,18 @@
     .coming-soon p{font-size:.88rem;color:var(--text-mid);margin:0;}
 
     /* NEWSLETTER */
-    .newsletter-card{background:var(--navy);border-radius:14px;padding:2rem;text-align:center;margin-top:2rem;}
+    .newsletter-card{background:var(--navy-deep);border-radius:14px;padding:2rem;text-align:center;margin-top:2rem;}
+    [data-theme="dark"] .newsletter-card{background:var(--surface);border:1px solid var(--line);}
     .newsletter-card h4{font-family:'Crimson Pro',serif;color:var(--gold-lt);margin-bottom:.5rem;}
     .newsletter-card p{color:rgba(255,255,255,.7);font-size:.88rem;margin-bottom:1rem;}
+    [data-theme="dark"] .newsletter-card p{color:var(--ink-soft);}
     .newsletter-input{display:flex;gap:.5rem;}
     .newsletter-input input{flex:1;border:none;border-radius:25px;padding:.5rem 1rem;font-size:.85rem;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);}
+    [data-theme="dark"] .newsletter-input input{background:var(--surface-2);color:var(--ink);border-color:var(--line);}
     .newsletter-input input::placeholder{color:rgba(255,255,255,.5);}
-    .newsletter-input button{background:var(--gold);border:none;color:var(--navy);font-weight:700;font-size:.82rem;padding:.5rem 1.2rem;border-radius:25px;transition:background .2s;white-space:nowrap;}
-    .newsletter-input button:hover{background:var(--gold-lt);}
+    .newsletter-input button{background:var(--gold);border:none;color:#ffffff;font-weight:700;font-size:.82rem;padding:.5rem 1.2rem;border-radius:25px;transition:background .2s;white-space:nowrap;}
+    .newsletter-input button:hover{background:var(--gold-soft);}
+    [data-theme="dark"] .newsletter-input button{color:#0B1F3A;}
 
     @media(max-width:900px){
       .blog-grid{grid-template-columns:1fr;}

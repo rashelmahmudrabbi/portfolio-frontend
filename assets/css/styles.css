@@ -411,16 +411,24 @@ h1, h2, h3, h4, h5 {
 
 /* OBJECTIVE / CAREER SUMMARY */
 .objective-card {
-  background: var(--navy);
-  border-left: 5px solid var(--gold);
+  background: var(--navy-deep);
+  border-left: 4px solid var(--gold);
   color: #e8e8f0;
   padding: 2rem 2.2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1.02rem;
   line-height: 1.8;
   text-align: justify;
   text-justify: inter-word;
   box-shadow: 0 4px 20px rgba(11, 30, 61, .12);
+}
+
+[data-theme="dark"] .objective-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  color: var(--ink-soft);
+  box-shadow: var(--shadow);
 }
 
 /* RESEARCH INTERESTS */
@@ -1650,11 +1658,17 @@ h1, h2, h3, h4, h5 {
 
 /* FOOTER */
 footer {
-  background: var(--navy);
-  color: rgba(255, 255, 255, .55);
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, .65);
   text-align: center;
   padding: 1.8rem 0;
   font-size: .82rem;
+}
+
+[data-theme="dark"] footer {
+  background: #0D1522;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
 }
 
 footer a {
@@ -1670,21 +1684,26 @@ footer a {
   width: 42px;
   height: 42px;
   background: var(--gold);
-  color: var(--navy);
+  color: #ffffff;
   border: none;
   border-radius: 50%;
   font-size: 1.1rem;
   display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(200, 149, 42, .4);
+  box-shadow: 0 4px 16px rgba(47, 111, 237, .4);
   cursor: pointer;
   z-index: 999;
-  transition: background .2s;
+  transition: all .2s;
 }
 
 #scrollTop:hover {
-  background: var(--gold-lt);
+  background: var(--gold-soft);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] #scrollTop {
+  color: #0B1F3A;
 }
 
 /* THEME TOGGLE SWITCH */
