@@ -131,13 +131,23 @@
     const dotsHtml = items.map((_, i) => `<span class="s-dot ${i === 0 ? 'active' : ''}" onclick="switchSpotlight(${i})"></span>`).join('');
     const cardsHtml = items.map((item, i) => `
       <div class="spotlight-card ${i === 0 ? 'active' : ''}" data-slide="${i}">
-        <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
-          <i class="bi bi-stars me-1"></i> ${escapeHtml(item.badge || 'Spotlight')}
+        <div class="spotlight-top-row">
+          <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
+            <i class="bi bi-stars me-1"></i> ${escapeHtml(item.badge || 'Spotlight Highlight')}
+          </div>
+          ${item.tag ? `<span class="spotlight-tag">${escapeHtml(item.tag)}</span>` : ''}
         </div>
-        <h4 class="spotlight-title">${escapeHtml(item.title || '')}</h4>
-        <p class="spotlight-desc">${escapeHtml(item.description || '')}</p>
+        
+        <div class="spotlight-body">
+          ${item.image ? `<img src="${escapeHtml(item.image)}" class="spotlight-thumb" alt="${escapeHtml(item.title || '')}" onerror="this.style.display='none'"/>` : ''}
+          <div class="spotlight-content">
+            <h4 class="spotlight-title" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Featured Highlight')}</h4>
+            <p class="spotlight-desc">${escapeHtml(item.description || 'Explore the research breakthroughs, methodologies, and open-source models.')}</p>
+          </div>
+        </div>
+
         <div class="spotlight-footer">
-          <span class="spotlight-tag">${escapeHtml(item.tag || '')}</span>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);"><i class="bi bi-clock-history me-1"></i> Featured</span>
           ${item.linkUrl ? `<a href="${escapeHtml(item.linkUrl)}" class="spotlight-link">${escapeHtml(item.linkLabel || 'Explore')} <i class="bi bi-arrow-right"></i></a>` : ''}
         </div>
       </div>
