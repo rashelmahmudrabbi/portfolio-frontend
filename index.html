@@ -473,8 +473,13 @@
   // CV Viewer Modal Opener (loads clean iframe without duplicating nav header)
   function openCvViewer() {
     const modalEl = document.getElementById('cvViewerModal');
+    const iframe = document.getElementById('cvIframe');
+    if (iframe) {
+      // Ensure the iframe correctly points to the cv embed page
+      iframe.src = 'cv/index.html?embed=1';
+    }
     if (modalEl) {
-      const modal = new bootstrap.Modal(modalEl);
+      const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
       modal.show();
     }
   }

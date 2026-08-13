@@ -82,15 +82,19 @@
     .pdf-note i{color:var(--gold);margin-right:.4rem;}
 
     /* EMBED MODE (when displayed inside modal popup) */
-    body.is-embedded .navbar,
-    body.is-embedded .page-hero,
-    body.is-embedded footer,
-    body.is-embedded #scrollTop {
+    html.is-embedded,
+    body.is-embedded {
+      background: var(--bg) !important;
+    }
+    .is-embedded .navbar,
+    .is-embedded .page-hero,
+    .is-embedded footer,
+    .is-embedded #scrollTop {
       display: none !important;
     }
-    body.is-embedded .cv-wrapper {
-      margin-top: 1.5rem;
-      padding-top: 0;
+    .is-embedded .cv-wrapper {
+      margin-top: 1rem !important;
+      padding-top: 0 !important;
     }
 
     @media(max-width:768px){
@@ -105,9 +109,12 @@
   </style>
   <script>
     // Detect if embedded in modal or query param ?embed=1
-    if (window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1') {
+    try {
+      if (window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1') {
+        document.documentElement.classList.add('is-embedded');
+      }
+    } catch (e) {
       document.documentElement.classList.add('is-embedded');
-      document.addEventListener('DOMContentLoaded', () => document.body.classList.add('is-embedded'));
     }
   </script>
 </head>
