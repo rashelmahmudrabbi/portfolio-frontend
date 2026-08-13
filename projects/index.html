@@ -8,92 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/styles.css"/>
   <style>
-    :root{
-      --bg:#F7F9FC;
-      --bg-alt:#EEF3F8;
-      --surface:#FFFFFF;
-      --surface-2:#F3F6FA;
-      --ink:#0F172A;
-      --ink-soft:#475569;
-      --ink-faint:#7C8A9A;
-      --navy:#173B67;
-      --navy-deep:#0B1F3A;
-      --gold:#C8952A;
-      --gold-soft:#D6A848;
-      --gold-tint:#FBF5E9;
-      --sage:#4AA19E;
-      --line:rgba(15,23,42,0.12);
-      --line-soft:rgba(15,23,42,0.06);
-      --shadow:0 12px 32px rgba(15,23,42,0.08);
-
-      --cream:#f6f2ea; --off-white:var(--bg);
-      --text-dark:var(--ink); --text-mid: var(--ink-soft);
-      --border: var(--line); --section-bg:var(--surface);
-      --slate: var(--ink-faint); --slate-lt: var(--surface-2);
-    }
-    [data-theme="dark"]{
-      --bg:#151C28;
-      --bg-alt:#1B2534;
-      --surface:#202C3D;
-      --surface-2:#263449;
-      --ink:#F1F5F9;
-      --ink-soft:#C0CBD8;
-      --ink-faint:#91A0B3;
-      --navy:#9FC5FF;
-      --navy-deep:#10243D;
-      --gold:#78A9FF;
-      --gold-soft:#A9C8FF;
-      --gold-tint:#223754;
-      --sage:#63C7C4;
-      --line:rgba(241,245,249,0.17);
-      --line-soft:rgba(241,245,249,0.10);
-      --shadow:0 24px 70px -30px rgba(0,0,0,0.48);
-    }
-    html{scroll-behavior:smooth;}
-    body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text-dark);font-size:16px;}
-    h1,h2,h3,h4,h5{font-family:'Crimson Pro',serif;}
-
-    /* NAVBAR */
-    .navbar { 
-      background:color-mix(in srgb, var(--navy-deep) 92%, transparent);
-      padding: .2rem 0; position: sticky; top: 0; z-index: 1000; 
-      backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,0.08);
-      transition:background .5s var(--ease), border-color .5s var(--ease);
-    }
-    [data-theme="dark"] .navbar {
-      background:color-mix(in srgb, var(--surface) 92%, transparent);
-      border-bottom:1px solid var(--line-soft);
-    }
-    .navbar-brand { color: var(--gold) !important; font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .5px; }
-    .navbar .nav-link { color: #ffffff !important; font-size: .75rem; font-weight: 500; letter-spacing: 0px; text-transform: uppercase; padding: .2rem .35rem !important; transition: color .2s; }
-    [data-theme="dark"] .navbar .nav-link { color: var(--ink-soft) !important; }
-    .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--gold-lt) !important; }
-    [data-theme="dark"] .navbar .nav-link:hover, [data-theme="dark"] .navbar .nav-link.active { color: var(--ink) !important; }
-    .navbar-toggler { border-color: rgba(255,255,255,.3); }
-
-    /* theme toggle switch */
-    #themeToggle{
-      width:56px; height:28px; border-radius:20px; border:1px solid rgba(255,255,255,0.18);
-      background:rgba(255,255,255,0.06); position:relative; cursor:pointer; flex-shrink:0;
-      transition:background .4s ease, border-color .4s ease;
-      padding: 0; outline: none;
-    }
-    [data-theme="dark"] #themeToggle{ border-color:var(--line); background:var(--surface-2); }
-    #themeToggle .knob{
-      position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%;
-      background:var(--gold); transition:transform .4s ease, background .4s ease;
-      display:flex; align-items:center; justify-content:center; font-size:11px; color:#151C28;
-    }
-    [data-theme="dark"] #themeToggle .knob{ transform:translateX(28px); color: var(--surface); }
-
-    /* Brand mark */
-    .brand-mark {
-      width:34px; height:34px; border-radius:50%;
-      border:1.5px solid var(--gold-soft); display:inline-flex; align-items:center; justify-content:center;
-      font-family:'Crimson Pro',serif; font-size:1rem; color:var(--gold-soft); flex-shrink:0; margin-right:8px;
-    }
-
     .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#1a3a6e 100%);color:#fff;padding:1rem 0 1.2rem;position:relative;overflow:hidden;}
     .page-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
     .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;margin-bottom:.5rem;}
@@ -145,22 +61,6 @@
     .featured-desc{color:var(--text-mid);line-height:1.7;margin-bottom:1rem;}
     .accuracy-badge{display:inline-block;background:rgba(200,149,42,.12);border:1px solid var(--gold);color:var(--navy);font-size:.8rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;margin-right:.5rem;margin-bottom:.4rem;}
 
-    /* THESIS CARD */
-    .thesis-card{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 100%);border-radius:14px;padding:2rem;margin-bottom:2rem;color:#fff;position:relative;overflow:hidden;}
-    .thesis-card::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(200,149,42,.08);pointer-events:none;}
-    .thesis-card::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
-    .thesis-label{font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.6rem;}
-    .thesis-title{font-family:'Crimson Pro',serif;font-size:1.45rem;font-weight:700;color:#fff;margin-bottom:.8rem;line-height:1.35;}
-    .thesis-desc{font-size:.9rem;color:rgba(255,255,255,.78);line-height:1.7;margin-bottom:1.2rem;}
-    .thesis-chip{display:inline-block;background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:.74rem;padding:.22rem .58rem;border-radius:20px;margin:.15rem .15rem .15rem 0;font-weight:500;border:1px solid rgba(255,255,255,.18);}
-    .thesis-link{font-size:.82rem;color:var(--gold-lt);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:.3rem;border:1.5px solid var(--gold);padding:.28rem .75rem;border-radius:20px;transition:all .2s;}
-    .thesis-link:hover{background:var(--gold);color:var(--navy);}
-
-    /* FOOTER */
-    footer{background:var(--navy);color:rgba(255,255,255,.55);text-align:center;padding:1.8rem 0;font-size:.82rem;}
-    footer a{color:var(--gold);text-decoration:none;}
-    #scrollTop{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;background:var(--gold);color:var(--navy);border:none;border-radius:50%;font-size:1.1rem;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(200,149,42,.4);cursor:pointer;z-index:999;}
-    #scrollTop:hover{background:var(--gold-lt);}
     .filterable.hidden{display:none!important;}
   </style>
 </head>
@@ -172,7 +72,7 @@
     <a class="navbar-brand d-flex align-items-center" href="../index.html" id="navBrand">
       <span class="brand-mark">R.</span> Rashel Mahmud Rabbi
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
@@ -218,7 +118,12 @@
 
 <div class="projects-section">
   <div class="container" id="projectsContainer">
-    <div class="text-center text-muted py-5">Loading projects…</div>
+    <div class="row g-4 mb-2">
+      <div class="col-md-6 col-lg-4"><div class="project-card"><div class="project-img skeleton"></div><div class="project-body"><div class="skeleton skeleton-line-lg" style="width:70%;"></div><div class="skeleton skeleton-line" style="width:90%;"></div><div class="skeleton skeleton-line" style="width:60%;"></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="project-card"><div class="project-img skeleton"></div><div class="project-body"><div class="skeleton skeleton-line-lg" style="width:65%;"></div><div class="skeleton skeleton-line" style="width:85%;"></div><div class="skeleton skeleton-line" style="width:55%;"></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="project-card"><div class="project-img skeleton"></div><div class="project-body"><div class="skeleton skeleton-line-lg" style="width:75%;"></div><div class="skeleton skeleton-line" style="width:80%;"></div><div class="skeleton skeleton-line" style="width:50%;"></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="project-card"><div class="project-img skeleton"></div><div class="project-body"><div class="skeleton skeleton-line-lg" style="width:68%;"></div><div class="skeleton skeleton-line" style="width:88%;"></div><div class="skeleton skeleton-line" style="width:58%;"></div></div></div></div>
+    </div>
   </div>
 </div>
 
@@ -233,22 +138,11 @@
   </div>
 </footer>
 
-<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+<button id="scrollTop" aria-label="Scroll to top"><i class="bi bi-arrow-up"></i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/theme.js"></script>
 <script>
-  // Theme toggle
-  function toggleTheme() {
-    const root = document.documentElement;
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    const knob = document.querySelector('#themeToggle .knob');
-    if (knob) knob.textContent = isDark ? '☀' : '☾';
-  }
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('scrollTop').style.display = window.scrollY > 300 ? 'flex' : 'none';
-  });
 
   function filterProjects(filter, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
