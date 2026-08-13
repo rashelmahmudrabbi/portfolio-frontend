@@ -210,16 +210,20 @@ h1, h2, h3, h4, h5 {
 }
 
 .cv-dropdown-menu {
-  min-width: 200px;
+  min-width: 210px;
   padding: .6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
 }
 
 .cv-dropdown-item {
   display: flex;
   align-items: center;
-  gap: .6rem;
-  padding: .55rem .85rem;
-  font-size: .85rem;
+  gap: .75rem;
+  padding: .6rem .85rem;
+  font-size: .88rem;
   font-weight: 600;
   border-radius: 8px;
   color: var(--ink) !important;
@@ -229,18 +233,57 @@ h1, h2, h3, h4, h5 {
 }
 
 .cv-dropdown-item i {
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: var(--gold);
+  flex-shrink: 0;
+}
+
+.cv-dropdown-title {
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.cv-dropdown-sub {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-top: 2px;
 }
 
 .cv-dropdown-item:hover {
   background: var(--gold-tint);
-  color: var(--gold) !important;
+}
+
+.cv-dropdown-item:hover .cv-dropdown-title {
+  color: var(--gold);
+}
+
+[data-theme="dark"] .cv-dropdown-menu {
+  background: #1B2534;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .cv-dropdown-title {
+  color: #F1F5F9;
+}
+
+[data-theme="dark"] .cv-dropdown-sub {
+  color: #94A3B8 !important;
 }
 
 [data-theme="dark"] .cv-dropdown-item:hover {
-  background: var(--surface-2);
-  color: var(--gold) !important;
+  background: rgba(47, 111, 237, 0.18);
+}
+
+[data-theme="dark"] .cv-dropdown-item:hover .cv-dropdown-title {
+  color: #78A9FF;
+}
+
+[data-theme="dark"] .cv-dropdown-item:hover i {
+  color: #78A9FF;
 }
 
 /* CV VIEWER MODAL */
