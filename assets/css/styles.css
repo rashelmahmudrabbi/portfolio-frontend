@@ -680,6 +680,22 @@ h1, h2, h3, h4, h5 {
   box-shadow: var(--shadow);
 }
 
+.about-meta-row .badge {
+  background: var(--surface-2) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+[data-theme="dark"] .about-meta-row .badge {
+  background: #1B2534 !important;
+  color: #F1F5F9 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .about-meta-row {
+  border-bottom-color: var(--line-soft) !important;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 290px 1fr;
