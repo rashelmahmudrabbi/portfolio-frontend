@@ -234,6 +234,12 @@
       return inst;
     }
 
+    function getMajorLabel(e) {
+      const raw = (e.major || '').trim();
+      if (!raw || /^[-–—\s/n/a]+$/i.test(raw) || raw.toLowerCase() === 'null') return '';
+      return raw;
+    }
+
     function formatGpa(g) {
       if (!g) return '';
       let clean = g.replace(/^(c?gpa\s*:?\s*)/i, '').trim();
@@ -246,7 +252,7 @@
 
     function getGradeChip(e) {
       const grade = (e.grade || '').trim();
-      const major = e.major && e.major !== '-' ? e.major.trim() : '';
+      const major = getMajorLabel(e);
       const deg = (e.degree || '').toLowerCase();
 
       let gpaStr = '';
@@ -275,14 +281,15 @@
         (e) => `
       <div class="academic-timeline-item">
         <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-1">
-          <div class="d-flex align-items-center gap-2 flex-wrap">
-            <span class="ti-stage">${escapeHtml(getStageLabel(e))}</span>
-            <span class="ti-dot text-muted">&bull;</span>
-            <span class="ti-institution">${escapeHtml(getInstitutionName(e))}</span>
-          </div>
+          <h4 class="ti-degree mb-0">${escapeHtml(getDegreeTitle(e))}</h4>
           ${getGradeChip(e) ? `<span class="ti-grade-chip">${escapeHtml(getGradeChip(e))}</span>` : ''}
         </div>
-        <div class="ti-degree">${escapeHtml(getDegreeTitle(e))}</div>
+        <div class="ti-meta d-flex align-items-center gap-2 flex-wrap">
+          <span class="ti-stage-badge">${escapeHtml(getStageLabel(e))}</span>
+          <span class="ti-dot text-muted">&bull;</span>
+          <span class="ti-institution">${escapeHtml(getInstitutionName(e))}</span>
+          ${e.year ? `<span class="ti-dot text-muted">&bull;</span><span class="ti-year text-muted">${escapeHtml(e.year)}</span>` : ''}
+        </div>
       </div>`
       )
       .join('');

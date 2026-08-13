@@ -537,89 +537,112 @@ h1, h2, h3, h4, h5 {
 .academic-timeline {
   position: relative;
   padding-left: 36px;
-  max-width: 860px;
+  max-width: 880px;
 }
 
 .academic-timeline::before {
   content: '';
   position: absolute;
-  left: 6px;
-  top: 8px;
-  bottom: 8px;
+  left: 7px;
+  top: 12px;
+  bottom: 12px;
   width: 2px;
   background: var(--line);
 }
 
 .academic-timeline-item {
   position: relative;
-  padding-bottom: 24px;
+  padding: 8px 12px 18px 10px;
+  border-radius: 10px;
+  transition: all .2s var(--ease);
+}
+
+.academic-timeline-item:hover {
+  background: var(--surface-2);
+  transform: translateX(4px);
 }
 
 .academic-timeline-item:last-child {
-  padding-bottom: 0;
+  padding-bottom: 6px;
 }
 
 .academic-timeline-item::before {
   content: '';
   position: absolute;
-  left: -36px;
-  top: 4px;
+  left: -29px;
+  top: 14px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
   background: var(--surface);
-  border: 2.5px solid var(--gold);
+  border: 2.5px solid var(--line-dark, #94A3B8);
   transition: all .3s var(--ease);
   z-index: 2;
 }
 
-.academic-timeline-item:nth-child(2)::before {
-  border-color: var(--sage);
+/* Highlight the latest / highest completed degree */
+.academic-timeline-item:first-child::before {
+  border-color: #2F6FED;
+  background: #2F6FED;
+  box-shadow: 0 0 0 4px rgba(47, 111, 237, 0.2);
 }
 
-.academic-timeline-item:nth-child(3)::before {
-  border-color: var(--navy);
+[data-theme="dark"] .academic-timeline-item:first-child::before {
+  border-color: #78A9FF;
+  background: #78A9FF;
+  box-shadow: 0 0 0 4px rgba(120, 169, 255, 0.2);
 }
 
-[data-theme="dark"] .academic-timeline-item:nth-child(3)::before {
-  border-color: var(--gold-soft);
-}
-
-.academic-timeline-item:nth-child(4)::before {
-  border-color: var(--gold-soft);
-}
-
-.academic-timeline-item:nth-child(5)::before {
-  border-color: var(--ink-faint);
-}
-
-.ti-stage {
-  font-family: 'DM Sans', monospace;
-  font-size: .8rem;
+.ti-degree {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--gold);
-  letter-spacing: .04em;
+  color: var(--navy-deep);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="dark"] .ti-degree {
+  color: var(--ink);
+}
+
+.ti-meta {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  margin-top: 3px;
+}
+
+.ti-stage-badge {
+  font-family: 'DM Sans', monospace;
+  font-size: .72rem;
+  font-weight: 700;
   text-transform: uppercase;
-}
-
-.academic-timeline-item:nth-child(2) .ti-stage {
-  color: var(--sage);
-}
-
-.academic-timeline-item:nth-child(3) .ti-stage {
+  letter-spacing: .05em;
   color: var(--navy);
+  background: rgba(23, 59, 103, 0.07);
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
-[data-theme="dark"] .academic-timeline-item:nth-child(3) .ti-stage {
-  color: var(--gold-soft);
+.academic-timeline-item:first-child .ti-stage-badge {
+  color: #2F6FED;
+  background: rgba(47, 111, 237, 0.1);
 }
 
-.academic-timeline-item:nth-child(4) .ti-stage {
-  color: var(--gold-soft);
+[data-theme="dark"] .ti-stage-badge {
+  color: var(--ink-soft);
+  background: var(--surface);
 }
 
-.academic-timeline-item:nth-child(5) .ti-stage {
-  color: var(--ink-faint);
+[data-theme="dark"] .academic-timeline-item:first-child .ti-stage-badge {
+  color: #78A9FF;
+  background: rgba(120, 169, 255, 0.15);
+}
+
+.ti-institution {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  font-weight: 500;
 }
 
 .ti-dot {
@@ -627,55 +650,52 @@ h1, h2, h3, h4, h5 {
   font-size: .85rem;
 }
 
-.ti-institution {
-  font-size: .88rem;
-  color: var(--text-mid);
-  font-weight: 500;
-}
-
-.ti-degree {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-top: 2px;
-  line-height: 1.3;
-}
-
-[data-theme="dark"] .ti-degree {
-  color: var(--ink);
+.ti-year {
+  font-size: .84rem;
 }
 
 .ti-grade-chip {
   display: inline-flex;
   align-items: center;
   font-family: 'DM Sans', monospace;
-  font-size: .76rem;
+  font-size: .78rem;
   font-weight: 600;
-  color: var(--gold);
-  background: var(--gold-tint);
+  color: #2F6FED;
+  background: rgba(47, 111, 237, 0.08);
   border: 1px solid rgba(47, 111, 237, 0.25);
   padding: 3px 12px;
   border-radius: 20px;
   letter-spacing: .02em;
+  white-space: nowrap;
 }
 
-.academic-timeline-item:nth-child(2) .ti-grade-chip {
-  color: var(--sage);
-  background: rgba(22, 139, 139, 0.08);
-  border-color: rgba(22, 139, 139, 0.25);
+/* Distinct chip colors for graduation standing vs standard GPA */
+.academic-timeline-item:first-child .ti-grade-chip {
+  color: #2F6FED;
+  background: rgba(47, 111, 237, 0.1);
+  border-color: rgba(47, 111, 237, 0.3);
+  font-weight: 700;
 }
 
+.academic-timeline-item:nth-child(2) .ti-grade-chip,
 .academic-timeline-item:nth-child(3) .ti-grade-chip {
-  color: var(--navy);
-  background: rgba(23, 59, 103, 0.08);
-  border-color: rgba(23, 59, 103, 0.25);
+  color: #03543F;
+  background: #DEF7EC;
+  border-color: rgba(3, 84, 63, 0.2);
 }
 
+[data-theme="dark"] .academic-timeline-item:nth-child(2) .ti-grade-chip,
 [data-theme="dark"] .academic-timeline-item:nth-child(3) .ti-grade-chip {
-  color: var(--gold-soft);
-  background: rgba(120, 169, 255, 0.1);
-  border-color: rgba(120, 169, 255, 0.25);
+  color: #31C48D;
+  background: rgba(3, 84, 63, 0.25);
+  border-color: rgba(49, 196, 141, 0.3);
+}
+
+.academic-timeline-item:nth-child(4) .ti-grade-chip,
+.academic-timeline-item:nth-child(5) .ti-grade-chip {
+  color: var(--ink-soft);
+  background: var(--surface-2);
+  border-color: var(--line);
 }
 
 /* EDUCATION TABLE */
