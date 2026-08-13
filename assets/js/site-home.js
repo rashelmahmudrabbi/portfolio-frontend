@@ -267,11 +267,12 @@
 
     const el = document.getElementById('objectiveText');
     if (el) {
-      if (p.objective && p.objective.trim().length > 0) {
+      const narrative = (about.text && about.text.trim().length > 0) ? about.text : (p.objective && p.objective.trim().length > 0 ? p.objective : '');
+      if (narrative.length > 0) {
         // If user entered custom text (supports multiple paragraphs separated by blank lines or direct HTML)
-        const paragraphs = p.objective.includes('<p>')
-          ? p.objective
-          : p.objective
+        const paragraphs = narrative.includes('<p>')
+          ? narrative
+          : narrative
               .split(/\n\s*\n/)
               .map(par => `<p>${par.trim().replace(/\n/g, '<br/>')}</p>`)
               .join('');
