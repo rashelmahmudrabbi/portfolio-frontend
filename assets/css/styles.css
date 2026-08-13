@@ -418,6 +418,8 @@ h1, h2, h3, h4, h5 {
   border-radius: 8px;
   font-size: 1.02rem;
   line-height: 1.8;
+  text-align: justify;
+  text-justify: inter-word;
   box-shadow: 0 4px 20px rgba(11, 30, 61, .12);
 }
 
@@ -531,6 +533,8 @@ h1, h2, h3, h4, h5 {
 .timeline-card ul li {
   margin-bottom: .3rem;
   font-size: .9rem;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* ============ ACADEMIC RECORD TIMELINE ============ */
@@ -1171,7 +1175,9 @@ h1, h2, h3, h4, h5 {
 .project-desc {
   font-size: .88rem;
   color: var(--text-mid);
-  line-height: 1.6;
+  line-height: 1.65;
+  text-align: justify;
+  text-justify: inter-word;
   margin-bottom: .6rem;
   transition: all .3s ease;
 }
