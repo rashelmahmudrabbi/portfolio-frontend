@@ -85,7 +85,7 @@
           <div class="tech-chips">${techChips(p.tech, 'tech-chip')}</div>
           <div class="project-links">
             ${p.githubLink ? `<a class="project-link" href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github"></i> GitHub</a>` : ''}
-            ${p.paperLink ? `<a class="project-link secondary" href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-journal-text"></i> Paper</a>` : ''}
+            ${p.paperLink ? `<a class="project-link secondary" href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Live Project</a>` : ''}
           </div>
         </div>
       </div>

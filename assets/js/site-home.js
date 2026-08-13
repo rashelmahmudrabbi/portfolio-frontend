@@ -307,9 +307,9 @@
         </div>
         <div class="ti-meta d-flex align-items-center gap-2 flex-wrap">
           <span class="ti-stage-badge">${escapeHtml(getStageLabel(e))}</span>
-          <span class="ti-dot text-muted">&bull;</span>
+          <span class="ti-dot">&bull;</span>
           <span class="ti-institution">${escapeHtml(getInstitutionName(e))}</span>
-          ${e.year ? `<span class="ti-dot text-muted">&bull;</span><span class="ti-year text-muted">${escapeHtml(e.year)}</span>` : ''}
+          ${e.year ? `<span class="ti-dot">&bull;</span><span class="ti-year">${escapeHtml(e.year)}</span>` : ''}
         </div>
       </div>`
       )
@@ -383,7 +383,7 @@
             <div class="mb-2">${(p.tech || []).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}</div>
             <div class="project-links">
               ${p.githubLink ? `<a href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
-              ${p.paperLink ? `<a href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-journal-text me-1"></i>Paper</a>` : ''}
+              ${p.paperLink ? `<a href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>Live Project</a>` : ''}
             </div>
             <small class="text-muted mt-2 d-block">${escapeHtml(p.year || '')}</small>
           </div>

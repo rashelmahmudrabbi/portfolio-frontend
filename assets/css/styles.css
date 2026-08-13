@@ -846,13 +846,27 @@ h1, h2, h3, h4, h5 {
   font-weight: 500;
 }
 
+[data-theme="dark"] .ti-institution {
+  color: var(--ink-soft);
+}
+
 .ti-dot {
   color: var(--line);
   font-size: .85rem;
 }
 
+[data-theme="dark"] .ti-dot {
+  color: var(--ink-faint);
+}
+
 .ti-year {
   font-size: .84rem;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+
+[data-theme="dark"] .ti-year {
+  color: #94A3B8;
 }
 
 .ti-grade-chip {
