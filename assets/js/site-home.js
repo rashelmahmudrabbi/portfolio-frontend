@@ -596,11 +596,19 @@
         ${p.email ? `<div class="info-row"><span class="info-label"><i class="bi bi-envelope me-2"></i>Email</span><span class="info-value"><a href="mailto:${escapeHtml(p.email)}" style="color:var(--gold);text-decoration:none;">${escapeHtml(p.email)}</a></span></div>` : ''}
         ${p.phone ? `<div class="info-row"><span class="info-label"><i class="bi bi-telephone me-2"></i>Phone</span><span class="info-value"><a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ''))}" style="color:var(--text-dark);text-decoration:none;">${escapeHtml(p.phone)}</a></span></div>` : ''}
         ${p.location ? `<div class="info-row"><span class="info-label"><i class="bi bi-geo-alt me-2"></i>Location</span><span class="info-value">${escapeHtml(p.location)}</span></div>` : ''}
-        ${info.nationality ? `<div class="info-row"><span class="info-label"><i class="bi bi-flag me-2"></i>Nationality</span><span class="info-value">${escapeHtml(info.nationality)}</span></div>` : ''}`;
+        ${info.fatherName ? `<div class="info-row"><span class="info-label"><i class="bi bi-person me-2"></i>Father's Name</span><span class="info-value">${escapeHtml(info.fatherName)}</span></div>` : ''}
+        ${info.motherName ? `<div class="info-row"><span class="info-label"><i class="bi bi-person-heart me-2"></i>Mother's Name</span><span class="info-value">${escapeHtml(info.motherName)}</span></div>` : ''}
+        ${info.dob ? `<div class="info-row"><span class="info-label"><i class="bi bi-calendar-event me-2"></i>Date of Birth</span><span class="info-value">${escapeHtml(info.dob)}</span></div>` : ''}
+        ${info.religion ? `<div class="info-row"><span class="info-label"><i class="bi bi-moon-stars me-2"></i>Religion</span><span class="info-value">${escapeHtml(info.religion)}</span></div>` : ''}
+        ${info.nid ? `<div class="info-row"><span class="info-label"><i class="bi bi-person-vcard me-2"></i>NID</span><span class="info-value">${escapeHtml(info.nid)}</span></div>` : ''}`;
     }
     if (rightEl) {
       const socials = p.socials || {};
       rightEl.innerHTML = `
+        ${info.maritalStatus ? `<div class="info-row"><span class="info-label"><i class="bi bi-heart me-2"></i>Marital Status</span><span class="info-value">${escapeHtml(info.maritalStatus)}</span></div>` : ''}
+        ${info.bloodGroup ? `<div class="info-row"><span class="info-label"><i class="bi bi-droplet-half me-2"></i>Blood Group</span><span class="info-value">${escapeHtml(info.bloodGroup)}</span></div>` : ''}
+        ${info.nationality ? `<div class="info-row"><span class="info-label"><i class="bi bi-flag me-2"></i>Nationality</span><span class="info-value">${escapeHtml(info.nationality)}</span></div>` : ''}
+        ${info.address ? `<div class="info-row"><span class="info-label"><i class="bi bi-house-door me-2"></i>Address</span><span class="info-value">${escapeHtml(info.address)}</span></div>` : ''}
         ${socials.github ? `<div class="info-row"><span class="info-label"><i class="bi bi-github me-2"></i>GitHub</span><span class="info-value"><a href="${escapeHtml(socials.github)}" target="_blank" style="color:var(--gold);text-decoration:none;">rashelmahmudrabbi</a></span></div>` : ''}
         ${socials.linkedin ? `<div class="info-row"><span class="info-label"><i class="bi bi-linkedin me-2"></i>LinkedIn</span><span class="info-value"><a href="${escapeHtml(socials.linkedin)}" target="_blank" style="color:var(--gold);text-decoration:none;">rashelmahmudrabbi</a></span></div>` : ''}
         ${socials.scholar ? `<div class="info-row"><span class="info-label"><i class="bi bi-mortarboard me-2"></i>Google Scholar</span><span class="info-value"><a href="${escapeHtml(socials.scholar)}" target="_blank" style="color:var(--gold);text-decoration:none;">View Profile</a></span></div>` : ''}
