@@ -9,23 +9,90 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --navy:#0b1e3d; --navy-mid:#10284f; --navy-lt:#1a3a6e;
-      --gold:#b8862a; --gold-lt:#d9a94f;
-      --cream:#f6f2ea; --off-white:#fafaf9;
-      --text-dark:#1a1a2e; --text-mid:#55566b;
-      --border:#e1ddd2; --section-bg:#ffffff;
-      --slate:#5c6b82; --slate-lt:#eef1f5;
+    :root{
+      --bg:#F7F9FC;
+      --bg-alt:#EEF3F8;
+      --surface:#FFFFFF;
+      --surface-2:#F3F6FA;
+      --ink:#0F172A;
+      --ink-soft:#475569;
+      --ink-faint:#7C8A9A;
+      --navy:#173B67;
+      --navy-deep:#0B1F3A;
+      --gold:#C8952A;
+      --gold-soft:#D6A848;
+      --gold-tint:#FBF5E9;
+      --sage:#4AA19E;
+      --line:rgba(15,23,42,0.12);
+      --line-soft:rgba(15,23,42,0.06);
+      --shadow:0 12px 32px rgba(15,23,42,0.08);
+
+      --cream:#f6f2ea; --off-white:var(--bg);
+      --text-dark:var(--ink); --text-mid: var(--ink-soft);
+      --border: var(--line); --section-bg:var(--surface);
+      --slate: var(--ink-faint); --slate-lt: var(--surface-2);
+    }
+    [data-theme="dark"]{
+      --bg:#151C28;
+      --bg-alt:#1B2534;
+      --surface:#202C3D;
+      --surface-2:#263449;
+      --ink:#F1F5F9;
+      --ink-soft:#C0CBD8;
+      --ink-faint:#91A0B3;
+      --navy:#9FC5FF;
+      --navy-deep:#10243D;
+      --gold:#78A9FF;
+      --gold-soft:#A9C8FF;
+      --gold-tint:#223754;
+      --sage:#63C7C4;
+      --line:rgba(241,245,249,0.17);
+      --line-soft:rgba(241,245,249,0.10);
+      --shadow:0 24px 70px -30px rgba(0,0,0,0.48);
     }
     html{scroll-behavior:smooth;}
     body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text-dark);font-size:16px;}
     h1,h2,h3,h4,h5{font-family:'Crimson Pro',serif;}
 
-    .navbar{background:var(--navy);padding:.2rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.35);}
-    .navbar-brand{color:var(--gold)!important;font-family:'Crimson Pro',serif;font-size:1.2rem;font-weight:700;}
+    /* NAVBAR */
+    .navbar { 
+      background:color-mix(in srgb, var(--navy-deep) 92%, transparent);
+      padding: .2rem 0; position: sticky; top: 0; z-index: 1000; 
+      backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,0.08);
+      transition:background .5s var(--ease), border-color .5s var(--ease);
+    }
+    [data-theme="dark"] .navbar {
+      background:color-mix(in srgb, var(--surface) 92%, transparent);
+      border-bottom:1px solid var(--line-soft);
+    }
+    .navbar-brand { color: var(--gold) !important; font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .5px; }
     .navbar .nav-link { color: #ffffff !important; font-size: .75rem; font-weight: 500; letter-spacing: 0px; text-transform: uppercase; padding: .2rem .35rem !important; transition: color .2s; }
-    .navbar .nav-link:hover,.navbar .nav-link.active{color:var(--gold-lt)!important;}
-    .navbar-toggler{border-color:rgba(255,255,255,.3);}
+    [data-theme="dark"] .navbar .nav-link { color: var(--ink-soft) !important; }
+    .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--gold-lt) !important; }
+    [data-theme="dark"] .navbar .nav-link:hover, [data-theme="dark"] .navbar .nav-link.active { color: var(--ink) !important; }
+    .navbar-toggler { border-color: rgba(255,255,255,.3); }
+
+    /* theme toggle switch */
+    #themeToggle{
+      width:56px; height:28px; border-radius:20px; border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.06); position:relative; cursor:pointer; flex-shrink:0;
+      transition:background .4s ease, border-color .4s ease;
+      padding: 0; outline: none;
+    }
+    [data-theme="dark"] #themeToggle{ border-color:var(--line); background:var(--surface-2); }
+    #themeToggle .knob{
+      position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%;
+      background:var(--gold); transition:transform .4s ease, background .4s ease;
+      display:flex; align-items:center; justify-content:center; font-size:11px; color:#151C28;
+    }
+    [data-theme="dark"] #themeToggle .knob{ transform:translateX(28px); color: var(--surface); }
+
+    /* Brand mark */
+    .brand-mark {
+      width:34px; height:34px; border-radius:50%;
+      border:1.5px solid var(--gold-soft); display:inline-flex; align-items:center; justify-content:center;
+      font-family:'Crimson Pro',serif; font-size:1rem; color:var(--gold-soft); flex-shrink:0; margin-right:8px;
+    }
 
     .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#1a3a6e 100%);color:#fff;padding:1rem 0 1.2rem;position:relative;overflow:hidden;}
     .page-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
@@ -112,12 +179,14 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="../index.html" id="navBrand">Rashel Mahmud Rabbi</a>
+    <a class="navbar-brand d-flex align-items-center" href="../index.html" id="navBrand">
+      <span class="brand-mark">R.</span> Rashel Mahmud Rabbi
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto flex-wrap" style="gap:0;">
+      <ul class="navbar-nav ms-auto flex-wrap align-items-center" style="gap:0;">
         <li class="nav-item"><a class="nav-link" href="../index.html#objective">About</a></li>
         <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
         <li class="nav-item"><a class="nav-link" href="../index.html#education">Education</a></li>
@@ -128,8 +197,14 @@
         <li class="nav-item"><a class="nav-link" href="../index.html#gallery">Gallery</a></li>
         <li class="nav-item"><a class="nav-link" href="../teaching/index.html">Teaching <i class="bi bi-box-arrow-up-right"></i></a></li>
         <li class="nav-item"><a class="nav-link active" href="../blog/index.html">Blog <i class="bi bi-box-arrow-up-right"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="../cv/index.html">CV <i class="bi bi-box-arrow-up-right"></i></a></li>
-
+        <li class="nav-item me-3"><a class="nav-link" href="../cv/index.html">CV <i class="bi bi-box-arrow-up-right"></i></a></li>
+        
+        <li class="nav-item d-none d-lg-block me-3">
+          <button id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()"><span class="knob">☀</span></button>
+        </li>
+        <li class="nav-item d-none d-lg-block">
+          <a href="../cv/index.html" class="btn btn-outline-light btn-sm" style="border-radius:25px; padding:.35rem 1rem;">Download CV</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -235,7 +310,18 @@
 
 <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.addEventListener('scroll',()=>{document.getElementById('scrollTop').style.display=window.scrollY>300?'flex':'none';});</script>
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    const knob = document.querySelector('#themeToggle .knob');
+    if (knob) knob.textContent = isDark ? '☀' : '☾';
+  }
+
+  // Scroll top
+  window.addEventListener('scroll',()=>{document.getElementById('scrollTop').style.display=window.scrollY>300?'flex':'none';});</script>
 <script>
   async function handleSubscribe(e) {
     e.preventDefault();
