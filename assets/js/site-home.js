@@ -159,7 +159,7 @@
           <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
                onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
           <div class="hero-status-pill">
-            <span class="status-pulse-dot"></span> Open to research
+            <span class="status-pulse-dot"></span> ${escapeHtml(p.heroStatusText || 'Open to research')}
           </div>
         </div>
       </div>
