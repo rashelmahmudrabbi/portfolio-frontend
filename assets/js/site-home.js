@@ -146,11 +146,19 @@
     el.innerHTML = list
       .map(
         (ri) => `
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="interest-card">
-          <div class="interest-icon"><i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i></div>
-          <div class="interest-topic">${escapeHtml(ri.topic || '')}</div>
-          <div class="interest-desc">${escapeHtml(ri.desc || '')}</div>
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="cert">
+          <div class="cert-inner">
+            <div class="cert-face cert-front">
+              <div class="badge" style="font-size: 1.8rem;"><i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i></div>
+              <h3>${escapeHtml(ri.topic || '')}</h3>
+              <div class="hint">Hover to learn more</div>
+            </div>
+            <div class="cert-face cert-back" style="padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+              <h4 style="color:var(--gold-soft); font-family:'DM Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">${escapeHtml(ri.topic || '')}</h4>
+              <div style="font-size:0.85rem; line-height:1.4; opacity:0.9; font-weight:400;">${escapeHtml(ri.desc || '')}</div>
+            </div>
+          </div>
         </div>
       </div>`
       )
