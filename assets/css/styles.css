@@ -351,13 +351,45 @@ h1, h2, h3, h4, h5 {
   border-bottom: 1px solid var(--line-soft);
 }
 
+.hero-avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+
 .hero-avatar {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 4px solid var(--gold);
   object-fit: cover;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, .25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .35);
+  display: block;
+}
+
+.hero-status-pill {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 31, 58, 0.92);
+  border: 1px solid rgba(47, 111, 237, 0.5);
+  color: #A7F3D0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.22rem 0.75rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .hero-status-pill {
+  background: rgba(21, 28, 40, 0.95);
+  border-color: rgba(120, 169, 255, 0.4);
+  color: #6EE7B7;
 }
 
 .hero-name {
@@ -387,20 +419,31 @@ h1, h2, h3, h4, h5 {
   color: var(--gold);
 }
 
+.hero-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hero-contact span,
 .hero-contact a {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   font-size: .88rem;
-  margin-right: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
   transition: color .2s;
 }
 
+[data-theme="dark"] .hero-contact span,
 [data-theme="dark"] .hero-contact a {
   color: var(--ink-soft);
 }
 
 .hero-contact a:hover {
-  color: #ffffff;
+  color: var(--gold-soft);
 }
 
 [data-theme="dark"] .hero-contact a:hover {
@@ -622,6 +665,21 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ============ ABOUT / RESEARCH SNAPSHOT SECTION ============ */
+.about-card-unified {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 4px 24px rgba(11, 31, 58, 0.03);
+  transition: all .3s var(--ease);
+}
+
+[data-theme="dark"] .about-card-unified {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 290px 1fr;

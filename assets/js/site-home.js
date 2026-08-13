@@ -98,17 +98,23 @@
     window.__cvDownloadUrl = cvUrl;
 
     document.getElementById('heroContainer').innerHTML = `
-      <div class="col-12 col-md-4 text-center text-md-end pe-md-4">
-        <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
-             onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
+      <div class="col-12 col-md-auto text-center text-md-start">
+        <div class="hero-avatar-wrap">
+          <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
+               onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
+          <div class="hero-status-pill">
+            <span class="status-pulse-dot"></span> Open to research
+          </div>
+        </div>
       </div>
-      <div class="col-12 col-md-8 text-center text-md-start ps-md-4">
-        <p class="hero-title">${escapeHtml(p.title || '')}</p>
+      <div class="col-12 col-md ps-md-4">
+        <p class="hero-title">${escapeHtml(p.title || 'Graduate Researcher – Computer Vision & AI')}</p>
         <h1 class="hero-name">${escapeHtml(p.name || '')}</h1>
-        <div class="hero-contact mt-3 mb-3">
+        
+        <div class="hero-contact mt-2 mb-3">
+          ${p.location ? `<span><i class="bi bi-geo-alt-fill"></i>${escapeHtml(p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh')}</span>` : ''}
           ${p.email ? `<a href="mailto:${escapeHtml(p.email)}"><i class="bi bi-envelope-fill"></i>${escapeHtml(p.email)}</a>` : ''}
           ${p.phone ? `<a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ''))}"><i class="bi bi-telephone-fill"></i>${escapeHtml(p.phone)}</a>` : ''}
-          ${p.location ? `<a href="#"><i class="bi bi-geo-alt-fill"></i>${escapeHtml(p.location)}</a>` : ''}
         </div>
 
         <div class="hero-socials d-flex flex-wrap gap-2 mb-3">
