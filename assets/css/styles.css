@@ -2157,13 +2157,29 @@ h1, h2, h3, h4, h5 {
   margin-top: .2rem;
 }
 
-/* PERSONAL */
+/* PERSONAL & CONTACT CARDS */
+.personal-grid {
+  background: var(--section-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  height: 100%;
+  transition: all 0.25s ease;
+}
+
+.personal-grid:hover {
+  border-color: var(--gold-soft);
+  box-shadow: var(--shadow);
+}
+
 .personal-grid .info-row {
   display: flex;
-  gap: .7rem;
-  padding: .65rem 0;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .personal-grid .info-row:last-child {
@@ -2171,16 +2187,30 @@ h1, h2, h3, h4, h5 {
 }
 
 .info-label {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-mid);
-  min-width: 130px;
-  font-size: .82rem;
+  min-width: 145px;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: .4px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.info-label i {
+  color: var(--gold);
+  font-size: 1rem;
 }
 
 .info-value {
-  color: var(--text-dark);
+  color: var(--navy);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+[data-theme="dark"] .info-value {
+  color: var(--ink);
 }
 
 /* REFERENCES */

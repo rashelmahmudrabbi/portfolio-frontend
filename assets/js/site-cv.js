@@ -248,11 +248,6 @@
 
     ${languagesHtml ? `<div class="cv-section"><div class="cv-section-title"><i class="bi bi-translate"></i>Languages</div><div class="d-flex gap-3 flex-wrap">${languagesHtml}</div></div>` : ''}
 
-    <div class="cv-section">
-      <div class="cv-section-title"><i class="bi bi-person-check"></i>References</div>
-      <div class="two-col">${referencesHtml}</div>
-    </div>
-
     ${info.fatherName || info.motherName || info.dob || info.religion || info.nationality || info.nid || info.bloodGroup || info.maritalStatus || info.address ? `
     <div class="cv-section">
       <div class="cv-section-title"><i class="bi bi-card-heading"></i>Personal Information</div>
@@ -272,6 +267,11 @@
         </div>
       </div>
     </div>` : ''}
+
+    <div class="cv-section">
+      <div class="cv-section-title"><i class="bi bi-person-check"></i>References</div>
+      <div class="two-col">${referencesHtml}</div>
+    </div>
   `;
 
   document.getElementById('footerYear').textContent = new Date().getFullYear();
