@@ -94,7 +94,8 @@
     const brand = document.getElementById('navBrand');
     if (brand && p.name) brand.textContent = p.name;
 
-    const cvUrl = settings.cvDownloadUrl || 'cv/index.html';
+    const cvUrl = settings.cvDownloadUrl || (typeof API_BASE !== 'undefined' ? API_BASE + '/cv/download' : 'cv/index.html');
+    window.__cvDownloadUrl = cvUrl;
 
     document.getElementById('heroContainer').innerHTML = `
       <div class="col-12 col-md-4 text-center text-md-end pe-md-4">
