@@ -225,6 +225,12 @@
     const locPill = document.getElementById('aboutLocPill');
     if (locPill) locPill.textContent = p.location && p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh';
 
+    const pill1El = document.getElementById('aboutPill1');
+    if (pill1El && about.pill1) pill1El.textContent = about.pill1;
+
+    const pill2El = document.getElementById('aboutPill2');
+    if (pill2El && about.pill2) pill2El.textContent = about.pill2;
+
     const statusPill = document.getElementById('aboutStatusPill');
     if (statusPill && about.statusText) statusPill.textContent = about.statusText;
 
