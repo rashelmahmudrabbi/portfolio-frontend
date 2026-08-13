@@ -56,7 +56,7 @@
     const checks = [
       { cond: !data.settings || !data.settings.profile, elId: 'heroContainer', name: 'profile', retry: 'retryAll' },
       { cond: !data.settings || !data.settings.profile, elId: 'objectiveText', name: 'career summary', retry: 'retryAll' },
-      { cond: !data.education || !data.education.length, elId: 'educationTableBody', name: 'education', retry: 'retryAll', isTable: true },
+      { cond: !data.education || !data.education.length, elId: 'educationTimeline', name: 'education', retry: 'retryAll' },
       { cond: !data.experience || !data.experience.length, elId: 'experienceTimeline', name: 'work experience', retry: 'retryAll' },
       { cond: !data.publications || !data.publications.length, elId: 'pubList', name: 'publications', retry: 'retryAll' },
       { cond: !data.certifications || !data.certifications.length, elId: 'certificationsList', name: 'certifications', retry: 'retryAll' },
@@ -181,28 +181,87 @@
   }
 
   function renderEducation(education) {
-    const el = document.getElementById('educationTableBody');
-    const thead = document.getElementById('educationThead');
+    const el = document.getElementById('educationTimeline');
+    if (!el) return;
 
-    if (education.length) {
-      // Show the thead now that we have data
-      if (thead) thead.classList.remove('edu-thead-hidden');
-
-      el.innerHTML = education
-        .map(
-          (e) => `
-        <tr>
-          <td><strong>${escapeHtml(e.degree || '')}</strong></td>
-          <td>${escapeHtml(e.major || '')}</td>
-          <td>${escapeHtml(e.institution || '')}</td>
-          <td>${escapeHtml(e.year || '')}</td>
-          <td><span class="grade-badge">${escapeHtml(e.grade || '')}</span></td>
-        </tr>`
-        )
-        .join('');
-    } else {
-      el.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No education entries yet.</td></tr>';
+    if (!education.length) {
+      el.innerHTML = '<p class="text-muted">No education records found.</p>';
+      return;
     }
+
+    function getStageLabel(e) {
+      const deg = (e.degree || '').toLowerCase();
+      if (deg.includes('b.sc') || deg.includes('bsc') || deg.includes('bachelor') || deg.includes('undergrad')) return 'Undergraduate';
+      if (deg.includes('hsc') || deg.includes('higher secondary')) return 'Higher Secondary';
+      if (deg.includes('ssc') || deg.includes('secondary school')) return 'Secondary';
+      if (deg.includes('jsc') || deg.includes('junior')) return 'Junior Secondary';
+      if (deg.includes('psc') || deg.includes('primary')) return 'Primary';
+      return e.year ? `Class of ${e.year}` : 'Academic Stage';
+    }
+
+    function getDegreeTitle(e) {
+      const deg = e.degree || '';
+      const major = e.major && e.major !== '-' ? e.major : '';
+      if (deg.toLowerCase().includes('b.sc') || deg.toLowerCase().includes('bsc')) {
+        return major ? `B.Sc. in ${major}` : deg;
+      }
+      if (deg.toUpperCase() === 'HSC') {
+        return 'Higher Secondary Certificate (HSC)';
+      }
+      if (deg.toUpperCase() === 'SSC') {
+        return 'Secondary School Certificate (SSC)';
+      }
+      if (deg.toUpperCase() === 'JSC') {
+        return 'Junior School Certificate (JSC)';
+      }
+      if (deg.toUpperCase() === 'PSC') {
+        return 'Primary School Certificate (PSC)';
+      }
+      return major ? `${deg} – ${major}` : deg;
+    }
+
+    function getInstitutionName(e) {
+      const inst = e.institution || '';
+      if (inst.toLowerCase().includes('north bengal') && !inst.includes('NBIU')) {
+        return 'North Bengal International University (NBIU)';
+      }
+      if (inst.toLowerCase() === 'mymensingh') {
+        return 'Notre Dame College, Mymensingh';
+      }
+      if (inst.toLowerCase() === 'rajshahi') {
+        return 'Hat Gangopara, Bagmara, Rajshahi';
+      }
+      return inst;
+    }
+
+    function getGradeChip(e) {
+      const grade = e.grade || '';
+      const major = e.major && e.major !== '-' ? e.major : '';
+      const deg = (e.degree || '').toLowerCase();
+
+      if (deg.includes('b.sc') || deg.includes('bsc')) {
+        return `CGPA ${grade.replace(/cgpa/i, '').trim()} · 1st in Department`;
+      }
+      if (deg.includes('hsc') || deg.includes('ssc')) {
+        return major ? `${major} Group` : (grade ? `GPA ${grade}` : '');
+      }
+      if (grade) {
+        return `GPA ${grade}`;
+      }
+      return major || '';
+    }
+
+    el.innerHTML = education
+      .map(
+        (e) => `
+      <div class="academic-timeline-item">
+        <div class="ti-stage">${escapeHtml(getStageLabel(e))}</div>
+        <div class="ti-degree">${escapeHtml(getDegreeTitle(e))}</div>
+        <div class="ti-institution">${escapeHtml(getInstitutionName(e))}</div>
+        ${getGradeChip(e) ? `<span class="ti-grade-chip">${escapeHtml(getGradeChip(e))}</span>` : ''}
+      </div>`
+      )
+      .join('');
   }
 
   function pubBadgeClass(type) {

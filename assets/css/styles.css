@@ -533,6 +533,146 @@ h1, h2, h3, h4, h5 {
   font-size: .9rem;
 }
 
+/* ============ ACADEMIC RECORD TIMELINE ============ */
+.academic-timeline {
+  position: relative;
+  padding-left: 42px;
+  max-width: 820px;
+}
+
+.academic-timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+
+.academic-timeline-item {
+  position: relative;
+  padding-bottom: 48px;
+}
+
+.academic-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.academic-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -42px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2.5px solid var(--gold);
+  transition: all .3s var(--ease);
+  z-index: 2;
+}
+
+.academic-timeline-item:nth-child(2)::before {
+  border-color: var(--sage);
+}
+
+.academic-timeline-item:nth-child(3)::before {
+  border-color: var(--navy);
+}
+
+[data-theme="dark"] .academic-timeline-item:nth-child(3)::before {
+  border-color: var(--gold-soft);
+}
+
+.academic-timeline-item:nth-child(4)::before {
+  border-color: var(--gold-soft);
+}
+
+.academic-timeline-item:nth-child(5)::before {
+  border-color: var(--ink-faint);
+}
+
+.ti-stage {
+  font-family: 'DM Sans', monospace;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 6px;
+  letter-spacing: .04em;
+}
+
+.academic-timeline-item:nth-child(2) .ti-stage {
+  color: var(--sage);
+}
+
+.academic-timeline-item:nth-child(3) .ti-stage {
+  color: var(--navy);
+}
+
+[data-theme="dark"] .academic-timeline-item:nth-child(3) .ti-stage {
+  color: var(--gold-soft);
+}
+
+.academic-timeline-item:nth-child(4) .ti-stage {
+  color: var(--gold-soft);
+}
+
+.academic-timeline-item:nth-child(5) .ti-stage {
+  color: var(--ink-faint);
+}
+
+.ti-degree {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .ti-degree {
+  color: var(--ink);
+}
+
+.ti-institution {
+  font-size: .95rem;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+}
+
+.ti-grade-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'DM Sans', monospace;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--gold);
+  background: var(--gold-tint);
+  border: 1px solid rgba(47, 111, 237, 0.25);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: .02em;
+}
+
+.academic-timeline-item:nth-child(2) .ti-grade-chip {
+  color: var(--sage);
+  background: rgba(22, 139, 139, 0.08);
+  border-color: rgba(22, 139, 139, 0.25);
+}
+
+.academic-timeline-item:nth-child(3) .ti-grade-chip {
+  color: var(--navy);
+  background: rgba(23, 59, 103, 0.08);
+  border-color: rgba(23, 59, 103, 0.25);
+}
+
+[data-theme="dark"] .academic-timeline-item:nth-child(3) .ti-grade-chip {
+  color: var(--gold-soft);
+  background: rgba(120, 169, 255, 0.1);
+  border-color: rgba(120, 169, 255, 0.25);
+}
+
 /* EDUCATION TABLE */
 .edu-table {
   background: var(--surface);
