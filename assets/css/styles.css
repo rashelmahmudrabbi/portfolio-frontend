@@ -536,8 +536,8 @@ h1, h2, h3, h4, h5 {
 /* ============ ACADEMIC RECORD TIMELINE ============ */
 .academic-timeline {
   position: relative;
-  padding-left: 42px;
-  max-width: 820px;
+  padding-left: 36px;
+  max-width: 860px;
 }
 
 .academic-timeline::before {
@@ -552,7 +552,7 @@ h1, h2, h3, h4, h5 {
 
 .academic-timeline-item {
   position: relative;
-  padding-bottom: 48px;
+  padding-bottom: 24px;
 }
 
 .academic-timeline-item:last-child {
@@ -562,7 +562,7 @@ h1, h2, h3, h4, h5 {
 .academic-timeline-item::before {
   content: '';
   position: absolute;
-  left: -42px;
+  left: -36px;
   top: 4px;
   width: 14px;
   height: 14px;
@@ -595,11 +595,11 @@ h1, h2, h3, h4, h5 {
 
 .ti-stage {
   font-family: 'DM Sans', monospace;
-  font-size: .82rem;
-  font-weight: 600;
+  font-size: .8rem;
+  font-weight: 700;
   color: var(--gold);
-  margin-bottom: 6px;
   letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .academic-timeline-item:nth-child(2) .ti-stage {
@@ -622,12 +622,23 @@ h1, h2, h3, h4, h5 {
   color: var(--ink-faint);
 }
 
+.ti-dot {
+  color: var(--line);
+  font-size: .85rem;
+}
+
+.ti-institution {
+  font-size: .88rem;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
 .ti-degree {
   font-family: 'DM Sans', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.18rem;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 4px;
+  margin-top: 2px;
   line-height: 1.3;
 }
 
@@ -635,22 +646,16 @@ h1, h2, h3, h4, h5 {
   color: var(--ink);
 }
 
-.ti-institution {
-  font-size: .95rem;
-  color: var(--text-mid);
-  margin-bottom: 10px;
-}
-
 .ti-grade-chip {
   display: inline-flex;
   align-items: center;
   font-family: 'DM Sans', monospace;
-  font-size: .78rem;
-  font-weight: 500;
+  font-size: .76rem;
+  font-weight: 600;
   color: var(--gold);
   background: var(--gold-tint);
   border: 1px solid rgba(47, 111, 237, 0.25);
-  padding: 4px 14px;
+  padding: 3px 12px;
   border-radius: 20px;
   letter-spacing: .02em;
 }
@@ -1014,15 +1019,15 @@ h1, h2, h3, h4, h5 {
 }
 
 .pub-abstract-toggle.open .abstract-arrow {
-  transform: rotate(0deg);
+  transform: rotate(90deg);
 }
 
 .pub-abstract-toggle:not(.open) .abstract-arrow {
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
 }
 
 .pub-abstract-toggle .abstract-body {
-  display: block;
+  display: none;
   margin-top: .5rem;
   font-size: .88rem;
   color: var(--ink-soft);
@@ -1033,14 +1038,14 @@ h1, h2, h3, h4, h5 {
   padding: 1rem 1.25rem;
 }
 
+.pub-abstract-toggle.open .abstract-body {
+  display: block;
+}
+
 [data-theme="dark"] .pub-abstract-toggle .abstract-body {
   background: var(--surface-2);
   border-left-color: #FBBF24;
   color: var(--ink-soft);
-}
-
-.pub-abstract-toggle:not(.open) .abstract-body {
-  display: none;
 }
 
 .pub-links {

@@ -92,8 +92,8 @@
       </div>
       ${
         pub.abstract
-          ? `<div class="pub-abstract-toggle open" onclick="this.classList.toggle('open')">
-        <span class="abstract-label"><i class="bi bi-chevron-down abstract-arrow"></i> Abstract</span>
+          ? `<div class="pub-abstract-toggle" onclick="this.classList.toggle('open')">
+        <span class="abstract-label"><i class="bi bi-chevron-right abstract-arrow"></i> Abstract</span>
         <div class="abstract-body" id="${abstractId}">${escapeHtml(pub.abstract)}</div>
       </div>`
           : ''

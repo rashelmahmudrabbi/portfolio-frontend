@@ -83,13 +83,13 @@
       font-size: .8rem;
     }
     .pub-abstract-toggle.open .abstract-arrow {
-      transform: rotate(0deg);
+      transform: rotate(90deg);
     }
     .pub-abstract-toggle:not(.open) .abstract-arrow {
-      transform: rotate(-90deg);
+      transform: rotate(0deg);
     }
     .pub-abstract-toggle .abstract-body {
-      display: block;
+      display: none;
       margin-top: .5rem;
       font-size: .88rem;
       color: var(--ink-soft);
@@ -99,13 +99,13 @@
       border-radius: 0 8px 8px 0;
       padding: 1rem 1.25rem;
     }
+    .pub-abstract-toggle.open .abstract-body {
+      display: block;
+    }
     [data-theme="dark"] .pub-abstract-toggle .abstract-body {
       background: var(--surface-2);
       border-left-color: #FBBF24;
       color: var(--ink-soft);
-    }
-    .pub-abstract-toggle:not(.open) .abstract-body {
-      display: none;
     }
 
     .pub-links{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:.8rem;}

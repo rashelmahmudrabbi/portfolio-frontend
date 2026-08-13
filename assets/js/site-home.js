@@ -274,10 +274,15 @@
       .map(
         (e) => `
       <div class="academic-timeline-item">
-        <div class="ti-stage">${escapeHtml(getStageLabel(e))}</div>
+        <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-1">
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="ti-stage">${escapeHtml(getStageLabel(e))}</span>
+            <span class="ti-dot text-muted">&bull;</span>
+            <span class="ti-institution">${escapeHtml(getInstitutionName(e))}</span>
+          </div>
+          ${getGradeChip(e) ? `<span class="ti-grade-chip">${escapeHtml(getGradeChip(e))}</span>` : ''}
+        </div>
         <div class="ti-degree">${escapeHtml(getDegreeTitle(e))}</div>
-        <div class="ti-institution">${escapeHtml(getInstitutionName(e))}</div>
-        ${getGradeChip(e) ? `<span class="ti-grade-chip">${escapeHtml(getGradeChip(e))}</span>` : ''}
       </div>`
       )
       .join('');
@@ -321,8 +326,8 @@
         </div>
         ${
           pub.abstract
-            ? `<div class="pub-abstract-toggle open" onclick="this.classList.toggle('open')">
-          <span class="abstract-label"><i class="bi bi-chevron-down abstract-arrow"></i> Abstract</span>
+            ? `<div class="pub-abstract-toggle" onclick="this.classList.toggle('open')">
+          <span class="abstract-label"><i class="bi bi-chevron-right abstract-arrow"></i> Abstract</span>
           <div class="abstract-body">${escapeHtml(pub.abstract)}</div>
         </div>`
             : ''
