@@ -214,29 +214,33 @@
 
   function renderObjective(settings) {
     const p = settings.profile || {};
+    const about = settings.about || {};
 
-    const locEl = document.getElementById('factLocation');
-    if (locEl) locEl.textContent = p.location && p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh';
+    const kickerEl = document.getElementById('aboutKicker');
+    if (kickerEl && about.kicker) kickerEl.textContent = about.kicker;
 
-    const monoEl = document.getElementById('aboutMonogram');
-    if (monoEl && p.name) {
-      const parts = p.name.trim().split(/\s+/);
-      const initials = parts.length > 1 ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() : parts[0].slice(0, 2).toUpperCase();
-      monoEl.textContent = initials;
-    }
+    const headlineEl = document.getElementById('aboutHeadline');
+    if (headlineEl && about.headline) headlineEl.textContent = about.headline;
 
-    const statusEl = document.getElementById('factStatus');
-    if (statusEl) {
-      statusEl.innerHTML = `<span class="status-pulse-dot"></span> Open to research opportunities`;
-    }
+    const locPill = document.getElementById('aboutLocPill');
+    if (locPill) locPill.textContent = p.location && p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh';
+
+    const statusPill = document.getElementById('aboutStatusPill');
+    if (statusPill && about.statusText) statusPill.textContent = about.statusText;
 
     const el = document.getElementById('objectiveText');
     if (el) {
-      el.innerHTML = `
-        <p>I'm a <strong>Computer Science &amp; Engineering graduate</strong> with a strong academic record and a research focus on Artificial Intelligence, Deep Learning, Computer Vision, and Medical Image Analysis.</p>
-        <p>My work explores how modern deep learning models can solve challenging visual problems while remaining <strong>interpretable, reliable, and useful in real-world settings</strong>.</p>
-        <p>I'm particularly interested in <strong>Explainable AI, multimodal learning, trustworthy AI, and resource-constrained healthcare systems</strong>, with the goal of pursuing advanced research and graduate study.</p>
-      `;
+      if (p.objective && p.objective.trim().length > 0) {
+        // If user entered custom text (supports paragraphs or HTML)
+        const paragraphs = p.objective.includes('<p>') ? p.objective : p.objective.split('\n\n').map(par => `<p>${escapeHtml(par.trim())}</p>`).join('');
+        el.innerHTML = paragraphs;
+      } else {
+        el.innerHTML = `
+          <p>I'm a <strong>Computer Science &amp; Engineering graduate</strong> with a strong academic record and a research focus on Artificial Intelligence, Deep Learning, Computer Vision, and Medical Image Analysis.</p>
+          <p>My work explores how modern deep learning models can solve challenging visual problems while remaining <strong>interpretable, reliable, and useful in real-world settings</strong>.</p>
+          <p>I'm particularly interested in <strong>Explainable AI, multimodal learning, trustworthy AI, and resource-constrained healthcare systems</strong>, with the goal of pursuing advanced research and graduate study.</p>
+        `;
+      }
     }
   }
 
