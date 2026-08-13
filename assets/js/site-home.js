@@ -234,21 +234,40 @@
       return inst;
     }
 
+    function formatGpa(g) {
+      if (!g) return '';
+      let clean = g.replace(/^(c?gpa\s*:?\s*)/i, '').trim();
+      if (clean.includes('/')) {
+        const parts = clean.split('/');
+        return `${parts[0].trim()} / ${parts[1].trim()}`;
+      }
+      return clean;
+    }
+
     function getGradeChip(e) {
-      const grade = e.grade || '';
-      const major = e.major && e.major !== '-' ? e.major : '';
+      const grade = (e.grade || '').trim();
+      const major = e.major && e.major !== '-' ? e.major.trim() : '';
       const deg = (e.degree || '').toLowerCase();
 
-      if (deg.includes('b.sc') || deg.includes('bsc')) {
-        return `CGPA ${grade.replace(/cgpa/i, '').trim()} · 1st in Department`;
-      }
-      if (deg.includes('hsc') || deg.includes('ssc')) {
-        return major ? `${major} Group` : (grade ? `GPA ${grade}` : '');
-      }
+      let gpaStr = '';
       if (grade) {
-        return `GPA ${grade}`;
+        const formatted = formatGpa(grade);
+        if (deg.includes('b.sc') || deg.includes('bsc') || deg.includes('bachelor') || deg.includes('undergrad')) {
+          gpaStr = `CGPA ${formatted}`;
+        } else {
+          gpaStr = `GPA ${formatted}`;
+        }
       }
-      return major || '';
+
+      if (deg.includes('b.sc') || deg.includes('bsc') || deg.includes('bachelor') || deg.includes('undergrad')) {
+        return gpaStr ? `${gpaStr} · 1st in Department` : '1st in Department';
+      }
+
+      const extra = major ? (major.toLowerCase().includes('group') ? major : `${major} Group`) : '';
+      if (gpaStr && extra) {
+        return `${gpaStr} · ${extra}`;
+      }
+      return gpaStr || extra || '';
     }
 
     el.innerHTML = education
