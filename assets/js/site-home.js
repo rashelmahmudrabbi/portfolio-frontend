@@ -267,7 +267,7 @@
 
     const el = document.getElementById('objectiveText');
     if (el) {
-      const narrative = (about.text && about.text.trim().length > 0) ? about.text : (p.objective && p.objective.trim().length > 0 ? p.objective : '');
+      const narrative = (about.text && about.text.trim().length > 0) ? about.text.trim() : '';
       if (narrative.length > 0) {
         // If user entered custom text (supports multiple paragraphs separated by blank lines or direct HTML)
         const paragraphs = narrative.includes('<p>')
@@ -278,6 +278,7 @@
               .join('');
         el.innerHTML = paragraphs;
       } else {
+        // Default 3-paragraph executive narrative if about_text is empty
         el.innerHTML = `
           <p>I'm a <strong>Computer Science &amp; Engineering graduate</strong> with a strong academic record and a research focus on Artificial Intelligence, Deep Learning, Computer Vision, and Medical Image Analysis.</p>
           <p>My work explores how modern deep learning models can solve challenging visual problems while remaining <strong>interpretable, reliable, and useful in real-world settings</strong>.</p>
