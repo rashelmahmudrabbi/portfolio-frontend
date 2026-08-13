@@ -535,7 +535,7 @@
 
   // Spotlight Carousel Controller
   let currentSpotlight = 0;
-  const totalSpotlights = 3;
+  let totalSpotlights = 3;
   let spotlightInterval = null;
 
   function switchSpotlight(index) {
@@ -552,19 +552,27 @@
 
   function startSpotlightTimer() {
     if (spotlightInterval) clearInterval(spotlightInterval);
+    if (totalSpotlights <= 1) return;
     spotlightInterval = setInterval(() => {
       currentSpotlight = (currentSpotlight + 1) % totalSpotlights;
       switchSpotlight(currentSpotlight);
     }, 4500);
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  window.initSpotlightCarousel = function(count) {
+    if (count) totalSpotlights = count;
+    currentSpotlight = 0;
+    switchSpotlight(0);
     startSpotlightTimer();
     const box = document.querySelector('.hero-spotlight-box');
     if (box) {
-      box.addEventListener('mouseenter', () => clearInterval(spotlightInterval));
-      box.addEventListener('mouseleave', () => startSpotlightTimer());
+      box.onmouseenter = () => clearInterval(spotlightInterval);
+      box.onmouseleave = () => startSpotlightTimer();
     }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.initSpotlightCarousel(3);
   });
 
   // Active nav

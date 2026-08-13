@@ -22,10 +22,11 @@
   const activities   = d.activities || [];
   const gallery      = d.gallery || [];
   const references   = d.references || [];
+  const spotlights   = d.spotlights || [];
 
   // ── 2. Render every section ────────────────────────────────────────────
   // Each render call is wrapped so one failure doesn't block the others.
-  safeRender('Hero',              () => renderHero(settings));
+  safeRender('Hero',              () => renderHero(settings, spotlights));
   safeRender('Objective',         () => renderObjective(settings));
   safeRender('Research Interests',() => renderResearchInterests(settings));
   safeRender('Experience',        () => renderExperience(experience));
@@ -86,16 +87,61 @@
 
   // ── RENDER FUNCTIONS ───────────────────────────────────────────────────
 
-  function renderHero(settings) {
+  function renderHero(settings, spotlights) {
     const p = settings.profile || {};
     const socials = p.socials || {};
     const stats = p.stats || {};
-    document.title = `${p.name || 'Portfolio'} – Academic Portfolio`;
+
     const brand = document.getElementById('navBrand');
     if (brand && p.name) brand.textContent = p.name;
 
     const cvUrl = settings.cvDownloadUrl || (typeof API_BASE !== 'undefined' ? API_BASE + '/cv/download' : 'cv/index.html');
     window.__cvDownloadUrl = cvUrl;
+
+    const items = (spotlights && spotlights.length > 0) ? spotlights : [
+      {
+        badge: 'Top Publication',
+        badgeType: 'badge-pub',
+        title: 'Cervical Cancer Cell Classification',
+        description: 'Deep Transfer Learning with Attention-guided ResNet & DenseNet models on Pap smear datasets.',
+        tag: 'Journal Paper',
+        linkUrl: 'publications/index.html',
+        linkLabel: 'View Paper'
+      },
+      {
+        badge: 'Latest AI Project',
+        badgeType: 'badge-proj',
+        title: 'Oral Cancer Detection & Grading',
+        description: 'Histopathological image analysis powered by Vision Transformers and Grad-CAM explainability.',
+        tag: 'Medical Image AI',
+        linkUrl: 'projects/index.html',
+        linkLabel: 'Explore'
+      },
+      {
+        badge: 'Research Vision',
+        badgeType: 'badge-xai',
+        title: 'Explainable & Trustworthy AI',
+        description: 'Building interpretable diagnostic models that clinical pathologists and healthcare specialists can trust.',
+        tag: 'XAI & Healthcare',
+        linkUrl: '#research',
+        linkLabel: 'Interests'
+      }
+    ];
+
+    const dotsHtml = items.map((_, i) => `<span class="s-dot ${i === 0 ? 'active' : ''}" onclick="switchSpotlight(${i})"></span>`).join('');
+    const cardsHtml = items.map((item, i) => `
+      <div class="spotlight-card ${i === 0 ? 'active' : ''}" data-slide="${i}">
+        <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
+          <i class="bi bi-stars me-1"></i> ${escapeHtml(item.badge || 'Spotlight')}
+        </div>
+        <h4 class="spotlight-title">${escapeHtml(item.title || '')}</h4>
+        <p class="spotlight-desc">${escapeHtml(item.description || '')}</p>
+        <div class="spotlight-footer">
+          <span class="spotlight-tag">${escapeHtml(item.tag || '')}</span>
+          ${item.linkUrl ? `<a href="${escapeHtml(item.linkUrl)}" class="spotlight-link">${escapeHtml(item.linkLabel || 'Explore')} <i class="bi bi-arrow-right"></i></a>` : ''}
+        </div>
+      </div>
+    `).join('');
 
     document.getElementById('heroContainer').innerHTML = `
       <div class="col-12 col-md-auto text-center text-md-start">
@@ -107,7 +153,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md ps-md-4">
+      <div class="col-12 col-lg ps-lg-4">
         <p class="hero-title">${escapeHtml(p.title || 'Graduate Researcher – Computer Vision & AI')}</p>
         <h1 class="hero-name">${escapeHtml(p.name || '')}</h1>
         
@@ -133,54 +179,24 @@
         </div>
       </div>
 
-      <!-- RIGHT SPOTLIGHT SLIDESHOW (RESEARCH & PROJECT HIGHLIGHTS) -->
       <div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
         <div class="hero-spotlight-box">
           <div class="spotlight-header">
             <span class="spotlight-kicker"><i class="bi bi-stars text-primary me-1"></i> SPOTLIGHT HIGHLIGHTS</span>
             <div class="spotlight-indicators" id="spotlightDots">
-              <span class="s-dot active" onclick="switchSpotlight(0)"></span>
-              <span class="s-dot" onclick="switchSpotlight(1)"></span>
-              <span class="s-dot" onclick="switchSpotlight(2)"></span>
+              ${dotsHtml}
             </div>
           </div>
           
           <div class="spotlight-carousel" id="spotlightCarousel">
-            <!-- Slide 1: Featured Publication -->
-            <div class="spotlight-card active" data-slide="0">
-              <div class="spotlight-badge badge-pub"><i class="bi bi-journal-text me-1"></i> Top Publication</div>
-              <h4 class="spotlight-title">Cervical Cancer Cell Classification</h4>
-              <p class="spotlight-desc">Deep Transfer Learning with Attention-guided ResNet &amp; DenseNet models on Pap smear datasets.</p>
-              <div class="spotlight-footer">
-                <span class="spotlight-tag">Journal Paper</span>
-                <a href="publications/index.html" class="spotlight-link">View Paper <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-
-            <!-- Slide 2: Latest Project -->
-            <div class="spotlight-card" data-slide="1">
-              <div class="spotlight-badge badge-proj"><i class="bi bi-cpu-fill me-1"></i> Latest AI Project</div>
-              <h4 class="spotlight-title">Oral Cancer Detection &amp; Grading</h4>
-              <p class="spotlight-desc">Histopathological image analysis powered by Vision Transformers and Grad-CAM explainability.</p>
-              <div class="spotlight-footer">
-                <span class="spotlight-tag">Medical Image AI</span>
-                <a href="projects/index.html" class="spotlight-link">Explore <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-
-            <!-- Slide 3: Research Focus -->
-            <div class="spotlight-card" data-slide="2">
-              <div class="spotlight-badge badge-xai"><i class="bi bi-lightbulb-fill me-1"></i> Research Vision</div>
-              <h4 class="spotlight-title">Explainable &amp; Trustworthy AI</h4>
-              <p class="spotlight-desc">Building interpretable diagnostic models that clinical pathologists and healthcare specialists can trust.</p>
-              <div class="spotlight-footer">
-                <span class="spotlight-tag">XAI &amp; Healthcare</span>
-                <a href="#research" class="spotlight-link">Interests <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
+            ${cardsHtml}
           </div>
         </div>
       </div>`;
+
+    if (window.initSpotlightCarousel) {
+      window.initSpotlightCarousel(items.length);
+    }
 
     // Fix broken hero avatar
     addImageFallbacks(document.getElementById('heroContainer'), getInitialsPlaceholder(p.name));
