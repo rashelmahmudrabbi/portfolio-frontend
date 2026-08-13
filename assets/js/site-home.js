@@ -132,10 +132,9 @@
 
   function renderObjective(settings) {
     const p = settings.profile || {};
-    const text = p.objective || '';
 
     const locEl = document.getElementById('factLocation');
-    if (locEl && p.location) locEl.textContent = p.location;
+    if (locEl) locEl.textContent = p.location && p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh';
 
     const monoEl = document.getElementById('aboutMonogram');
     if (monoEl && p.name) {
@@ -144,32 +143,18 @@
       monoEl.textContent = initials;
     }
 
-    if (text) {
-      const el = document.getElementById('objectiveText');
-      if (el) {
-        const paras = text.split(/\n\s*\n/).filter(Boolean);
-        if (paras.length > 1) {
-          el.innerHTML = paras.map(para => `<p>${escapeHtml(para)}</p>`).join('');
-        } else {
-          let html = escapeHtml(text);
-          const keywords = [
-            'Computer Science & Engineering graduate',
-            'Computer Science & Engineering',
-            'Artificial Intelligence',
-            'Deep Learning',
-            'Computer Vision',
-            'Medical Image Analysis',
-            'Explainable AI',
-            'interpretable, reliable, and useful in real-world settings',
-            'healthcare'
-          ];
-          keywords.forEach(kw => {
-            const regex = new RegExp('(' + escapeHtml(kw).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
-            html = html.replace(regex, '<strong>$1</strong>');
-          });
-          el.innerHTML = `<p>${html}</p>`;
-        }
-      }
+    const statusEl = document.getElementById('factStatus');
+    if (statusEl) {
+      statusEl.innerHTML = `<span class="status-pulse-dot"></span> Open to research opportunities`;
+    }
+
+    const el = document.getElementById('objectiveText');
+    if (el) {
+      el.innerHTML = `
+        <p>I'm a <strong>Computer Science &amp; Engineering graduate</strong> with a strong academic record and a research focus on Artificial Intelligence, Deep Learning, Computer Vision, and Medical Image Analysis.</p>
+        <p>My work explores how modern deep learning models can solve challenging visual problems while remaining <strong>interpretable, reliable, and useful in real-world settings</strong>.</p>
+        <p>I'm particularly interested in <strong>Explainable AI, multimodal learning, trustworthy AI, and resource-constrained healthcare systems</strong>, with the goal of pursuing advanced research and graduate study.</p>
+      `;
     }
   }
 
