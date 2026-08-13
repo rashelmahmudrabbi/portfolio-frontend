@@ -68,23 +68,37 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto flex-wrap align-items-center" style="gap:0;">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
         <li class="nav-item"><a class="nav-link" href="../index.html#objective">About</a></li>
         <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.html#education">Education</a></li>
-        <li class="nav-item"><a class="nav-link" href="../publications/index.html">Publications <i class="bi bi-box-arrow-up-right"></i></a></li>
-        <li class="nav-item"><a class="nav-link active" href="../projects/index.html">Projects <i class="bi bi-box-arrow-up-right"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.html#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.html#awards">Awards</a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.html#gallery">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="../teaching/index.html">Teaching <i class="bi bi-box-arrow-up-right"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="../blog/index.html">Blog <i class="bi bi-box-arrow-up-right"></i></a></li>
-        <li class="nav-item me-3"><a class="nav-link" href="../cv/index.html">CV <i class="bi bi-box-arrow-up-right"></i></a></li>
-
-        <li class="nav-item d-none d-lg-block me-3">
-          <button id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()"><span class="knob">☀</span></button>
+        <li class="nav-item"><a class="nav-link" href="../publications/index.html">Publications</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../projects/index.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="../teaching/index.html">Teaching</a></li>
+        
+        <!-- MORE DROPDOWN -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreDropdown">
+            <li><a class="dropdown-item" href="../index.html#education"><i class="bi bi-mortarboard"></i> Education</a></li>
+            <li><a class="dropdown-item" href="../index.html#skills"><i class="bi bi-code-slash"></i> Skills</a></li>
+            <li><a class="dropdown-item" href="../index.html#awards"><i class="bi bi-trophy"></i> Awards &amp; Honors</a></li>
+            <li><a class="dropdown-item" href="../index.html#gallery"><i class="bi bi-images"></i> Gallery</a></li>
+            <li><hr class="dropdown-divider" style="opacity:0.1;"></li>
+            <li><a class="dropdown-item" href="../blog/index.html"><i class="bi bi-newspaper"></i> Blog</a></li>
+          </ul>
         </li>
 
+        <!-- CV ACTION BUTTON -->
+        <li class="nav-item ms-lg-2 my-2 my-lg-0">
+          <a class="nav-cv-btn" href="../cv/index.html"><i class="bi bi-file-earmark-person"></i> CV</a>
+        </li>
+        
+        <!-- THEME TOGGLE -->
+        <li class="nav-item ms-lg-2">
+          <button id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()"><span class="knob">☀</span></button>
+        </li>
       </ul>
     </div>
   </div>
