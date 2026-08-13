@@ -217,28 +217,64 @@
     const about = settings.about || {};
 
     const kickerEl = document.getElementById('aboutKicker');
-    if (kickerEl && about.kicker) kickerEl.textContent = about.kicker;
+    if (kickerEl) kickerEl.textContent = about.kicker || 'ABOUT ME';
 
     const headlineEl = document.getElementById('aboutHeadline');
-    if (headlineEl && about.headline) headlineEl.textContent = about.headline;
+    if (headlineEl) headlineEl.textContent = about.headline || 'AI research with a practical mindset.';
 
-    const locPill = document.getElementById('aboutLocPill');
-    if (locPill) locPill.textContent = p.location && p.location.includes('Rajshahi') ? p.location : 'Rajshahi, Bangladesh';
+    // Dynamic Meta Pills
+    const metaRow = document.getElementById('aboutMetaRow');
+    if (metaRow) {
+      const locText = p.location && p.location.includes('Rajshahi') ? p.location : (p.location || 'Rajshahi, Bangladesh');
+      const statusText = about.statusText || 'Open to research opportunities';
+      
+      let pillsHtml = `
+        <span class="badge rounded-pill text-bg-light border px-3 py-2 text-dark" style="font-size:0.83rem;font-weight:500;">
+          <i class="bi bi-geo-alt-fill text-primary me-1"></i> <span>${escapeHtml(locText)}</span>
+        </span>
+      `;
 
-    const pill1El = document.getElementById('aboutPill1');
-    if (pill1El && about.pill1) pill1El.textContent = about.pill1;
+      if (about.pills && about.pills.length > 0) {
+        pillsHtml += about.pills.map(pill => {
+          const icon = pill.icon || 'bi-cpu';
+          const colorClass = pill.colorType ? `text-${pill.colorType}` : 'text-primary';
+          return `
+            <span class="badge rounded-pill text-bg-light border px-3 py-2 text-dark" style="font-size:0.83rem;font-weight:500;">
+              <i class="bi ${escapeHtml(icon)} ${escapeHtml(colorClass)} me-1"></i> <span>${escapeHtml(pill.label || '')}</span>
+            </span>
+          `;
+        }).join('');
+      } else {
+        // Fallback default pills if none added yet
+        pillsHtml += `
+          <span class="badge rounded-pill text-bg-light border px-3 py-2 text-dark" style="font-size:0.83rem;font-weight:500;">
+            <i class="bi bi-cpu text-primary me-1"></i> <span>AI &amp; Computer Vision</span>
+          </span>
+          <span class="badge rounded-pill text-bg-light border px-3 py-2 text-dark" style="font-size:0.83rem;font-weight:500;">
+            <i class="bi bi-heart-pulse-fill text-danger me-1"></i> <span>Medical Image Analysis</span>
+          </span>
+        `;
+      }
 
-    const pill2El = document.getElementById('aboutPill2');
-    if (pill2El && about.pill2) pill2El.textContent = about.pill2;
+      pillsHtml += `
+        <span class="badge rounded-pill text-bg-light border px-3 py-2 text-dark" style="font-size:0.83rem;font-weight:500;">
+          <span class="status-pulse-dot me-1"></span> <span>${escapeHtml(statusText)}</span>
+        </span>
+      `;
 
-    const statusPill = document.getElementById('aboutStatusPill');
-    if (statusPill && about.statusText) statusPill.textContent = about.statusText;
+      metaRow.innerHTML = pillsHtml;
+    }
 
     const el = document.getElementById('objectiveText');
     if (el) {
       if (p.objective && p.objective.trim().length > 0) {
-        // If user entered custom text (supports paragraphs or HTML)
-        const paragraphs = p.objective.includes('<p>') ? p.objective : p.objective.split('\n\n').map(par => `<p>${escapeHtml(par.trim())}</p>`).join('');
+        // If user entered custom text (supports multiple paragraphs separated by blank lines or direct HTML)
+        const paragraphs = p.objective.includes('<p>')
+          ? p.objective
+          : p.objective
+              .split(/\n\s*\n/)
+              .map(par => `<p>${par.trim().replace(/\n/g, '<br/>')}</p>`)
+              .join('');
         el.innerHTML = paragraphs;
       } else {
         el.innerHTML = `
