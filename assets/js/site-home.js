@@ -117,10 +117,7 @@
           ${socials.scholar ? `<a class="btn btn-sm" href="${escapeHtml(socials.scholar)}" target="_blank"><i class="bi bi-mortarboard me-1"></i>Google Scholar</a>` : ''}
           ${socials.orcid ? `<a class="btn btn-sm" href="${escapeHtml(socials.orcid)}" target="_blank"><i class="bi bi-person-badge me-1"></i>ORCID</a>` : ''}
         </div>
-        <div class="d-flex flex-wrap gap-3 mb-3 mt-3">
-          <a class="hero-cta" href="publications/index.html"><i class="bi bi-journal-text"></i> View Publications</a>
-          <a class="hero-cta-secondary" href="cv/index.html"><i class="bi bi-file-earmark-person"></i> Download CV</a>
-        </div>
+
         <div class="hero-stats">
           <div class="hero-stat"><div class="hero-stat-num">${stats.publications ?? 0}</div><div class="hero-stat-label">Publications</div></div>
           <div class="hero-stat"><div class="hero-stat-num">${stats.projects ?? 0}</div><div class="hero-stat-label">Projects</div></div>
