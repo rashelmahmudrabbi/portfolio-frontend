@@ -293,18 +293,20 @@
     el.innerHTML = certifications
       .map(
         (c) => `
-      <div class="col-lg-6">
-        <div class="cert-card">
-          <img src="${escapeHtml(c.image || '')}" class="cert-thumb" alt="${escapeHtml(c.title || '')}"
-               loading="lazy"
-               onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
-               onclick="showImageModal(this.src,'${escapeHtml((c.title || '') + ' – ' + (c.issuer || ''))}')"/>
-          <div>
-            <div class="cert-title">${escapeHtml(c.title || '')}</div>
-            <div class="cert-meta">${escapeHtml(c.issuer || '')} · ${escapeHtml(c.year || '')}</div>
-            <div class="mt-2">
-              ${c.verifyLink ? `<a href="${escapeHtml(c.verifyLink)}" target="_blank" class="cert-link"><i class="bi bi-patch-check me-1"></i>Verify</a>` : ''}
-              ${c.pdfLink ? `<a href="${escapeHtml(c.pdfLink)}" target="_blank" class="cert-link"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
+      <div class="col-lg-4 col-md-6">
+        <div class="cert">
+          <div class="cert-inner">
+            <div class="cert-face cert-front">
+              <div class="badge">★</div>
+              <h3>${escapeHtml(c.title || '')}</h3>
+              <div class="hint">Hover to verify</div>
+            </div>
+            <div class="cert-face cert-back">
+              <div><div class="issuer">${escapeHtml(c.issuer || '')}</div><div class="date">Issued ${escapeHtml(c.year || '')}</div></div>
+              <div>
+                 <div class="id">ID: ${escapeHtml(c.id || 'N/A')}</div>
+                 ${c.verifyLink ? `<a class="verify" href="${escapeHtml(c.verifyLink)}" target="_blank">Verify credential &rarr;</a>` : ''}
+              </div>
             </div>
           </div>
         </div>
@@ -312,7 +314,7 @@
       )
       .join('') || '<div class="col-12 text-muted text-center">No certifications yet.</div>';
 
-    // Fix any broken cert images
+    // Fix any broken cert images (not used in new design, but kept for logic)
     addImageFallbacks(el, getGenericPlaceholder());
   }
 
