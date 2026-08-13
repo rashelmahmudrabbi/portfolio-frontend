@@ -16,6 +16,7 @@
   const socials = p.socials || {};
   const skills = settings.skills || {};
   const langs = settings.spokenLanguages || [];
+  const info = settings.personalInfo || {};
 
   document.title = `Curriculum Vitae – ${p.name || 'Portfolio'}`;
   document.getElementById('cvLastUpdated').textContent = settings.cvLastUpdated || new Date().getFullYear();
@@ -251,6 +252,26 @@
       <div class="cv-section-title"><i class="bi bi-person-check"></i>References</div>
       <div class="two-col">${referencesHtml}</div>
     </div>
+
+    ${info.fatherName || info.motherName || info.dob || info.religion || info.nationality || info.nid || info.bloodGroup || info.maritalStatus || info.address ? `
+    <div class="cv-section">
+      <div class="cv-section-title"><i class="bi bi-card-heading"></i>Personal Information</div>
+      <div class="two-col">
+        <div>
+          ${info.fatherName ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Father's Name</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.fatherName)}</span></div>` : ''}
+          ${info.motherName ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Mother's Name</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.motherName)}</span></div>` : ''}
+          ${info.dob ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Date of Birth</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.dob)}</span></div>` : ''}
+          ${info.religion ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Religion</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.religion)}</span></div>` : ''}
+          ${info.nid ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">NID</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.nid)}</span></div>` : ''}
+        </div>
+        <div>
+          ${info.maritalStatus ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Marital Status</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.maritalStatus)}</span></div>` : ''}
+          ${info.bloodGroup ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Blood Group</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.bloodGroup)}</span></div>` : ''}
+          ${info.nationality ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Nationality</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.nationality)}</span></div>` : ''}
+          ${info.address ? `<div class="info-row" style="display:flex;padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:140px;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--text-mid);letter-spacing:.5px;">Address</span><span style="font-size:.88rem;color:var(--navy);font-weight:500;">${escapeHtml(info.address)}</span></div>` : ''}
+        </div>
+      </div>
+    </div>` : ''}
   `;
 
   document.getElementById('footerYear').textContent = new Date().getFullYear();
