@@ -177,9 +177,32 @@
           </ul>
         </li>
 
-        <!-- CV ACTION BUTTON -->
-        <li class="nav-item ms-lg-2 my-2 my-lg-0">
-          <a class="nav-cv-btn" href="../cv/index.html"><i class="bi bi-file-earmark-person"></i> CV</a>
+        <!-- CV ACTION BUTTON WITH OPTIONS -->
+        <li class="nav-item dropdown ms-lg-2 my-2 my-lg-0">
+          <button class="nav-cv-btn dropdown-toggle" type="button" id="cvMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-file-earmark-person"></i> CV
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end cv-dropdown-menu" aria-labelledby="cvMenuBtn">
+            <li>
+              <a class="cv-dropdown-item" href="../cv/index.html">
+                <i class="bi bi-eye"></i>
+                <div>
+                  <div>Show CV</div>
+                  <small class="text-muted d-block" style="font-size:0.72rem;font-weight:400;">View online CV</small>
+                </div>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" style="opacity:0.1;margin:.3rem 0;"></li>
+            <li>
+              <a class="cv-dropdown-item" href="../assets/data/Rashel_Mahmud_Rabbi_CV.pdf" download="Rashel_Mahmud_Rabbi_CV.pdf" target="_blank">
+                <i class="bi bi-download"></i>
+                <div>
+                  <div>Download CV</div>
+                  <small class="text-muted d-block" style="font-size:0.72rem;font-weight:400;">PDF document</small>
+                </div>
+              </a>
+            </li>
+          </ul>
         </li>
         
         <!-- THEME TOGGLE -->

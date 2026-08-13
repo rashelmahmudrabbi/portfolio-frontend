@@ -74,9 +74,32 @@
           </ul>
         </li>
 
-        <!-- CV ACTION BUTTON -->
-        <li class="nav-item ms-lg-2 my-2 my-lg-0">
-          <a class="nav-cv-btn" href="cv/index.html"><i class="bi bi-file-earmark-person"></i> CV</a>
+        <!-- CV ACTION BUTTON WITH OPTIONS -->
+        <li class="nav-item dropdown ms-lg-2 my-2 my-lg-0">
+          <button class="nav-cv-btn dropdown-toggle" type="button" id="cvMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-file-earmark-person"></i> CV
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end cv-dropdown-menu" aria-labelledby="cvMenuBtn">
+            <li>
+              <a class="cv-dropdown-item" href="javascript:void(0)" onclick="openCvViewer()">
+                <i class="bi bi-eye"></i>
+                <div>
+                  <div>Show CV</div>
+                  <small class="text-muted d-block" style="font-size:0.72rem;font-weight:400;">View in browser popup</small>
+                </div>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" style="opacity:0.1;margin:.3rem 0;"></li>
+            <li>
+              <a class="cv-dropdown-item" id="navCvDownloadLink" href="assets/data/Rashel_Mahmud_Rabbi_CV.pdf" download="Rashel_Mahmud_Rabbi_CV.pdf" target="_blank">
+                <i class="bi bi-download"></i>
+                <div>
+                  <div>Download CV</div>
+                  <small class="text-muted d-block" style="font-size:0.72rem;font-weight:400;">PDF document</small>
+                </div>
+              </a>
+            </li>
+          </ul>
         </li>
         
         <!-- THEME TOGGLE -->
@@ -391,6 +414,26 @@
 <!-- Scroll-to-top -->
 <button id="scrollTop" aria-label="Scroll to top"><i class="bi bi-arrow-up"></i></button>
 
+<!-- CV VIEWER MODAL -->
+<div class="modal fade cv-modal" id="cvViewerModal" tabindex="-1" aria-labelledby="cvModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="cv-modal-header">
+        <h5 id="cvModalTitle"><i class="bi bi-file-earmark-person-fill text-primary"></i> Curriculum Vitae &ndash; Rashel Mahmud Rabbi</h5>
+        <div class="d-flex align-items-center gap-2">
+          <a id="modalCvDownloadBtn" href="assets/data/Rashel_Mahmud_Rabbi_CV.pdf" download="Rashel_Mahmud_Rabbi_CV.pdf" class="btn btn-sm btn-primary rounded-pill px-3">
+            <i class="bi bi-download me-1"></i> Download PDF
+          </a>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="cv-modal-body">
+        <iframe id="cvIframe" class="cv-iframe" src="cv/index.html" title="Curriculum Vitae Preview"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modals & Scripts -->
 <div class="modal fade" id="imageModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -407,6 +450,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/theme.js"></script>
 <script>
+  // CV Viewer Modal Opener
+  function openCvViewer() {
+    const modalEl = document.getElementById('cvViewerModal');
+    if (modalEl) {
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+  }
+
   // Active nav
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
