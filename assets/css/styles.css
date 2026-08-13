@@ -569,6 +569,158 @@ h1, h2, h3, h4, h5 {
   color: var(--gold);
 }
 
+/* HERO SPOTLIGHT SLIDESHOW */
+.hero-spotlight-box {
+  background: rgba(11, 31, 58, 0.65);
+  border: 1px solid rgba(47, 111, 237, 0.35);
+  border-radius: 16px;
+  padding: 1.25rem 1.4rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .hero-spotlight-box {
+  background: rgba(27, 37, 52, 0.75);
+  border-color: rgba(120, 169, 255, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero-spotlight-box:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.spotlight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spotlight-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  display: flex;
+  align-items: center;
+}
+
+.spotlight-indicators {
+  display: flex;
+  gap: 5px;
+}
+
+.s-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.s-dot.active {
+  width: 18px;
+  border-radius: 10px;
+  background: var(--gold);
+}
+
+.spotlight-carousel {
+  position: relative;
+  min-height: 140px;
+}
+
+.spotlight-card {
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.spotlight-card.active {
+  display: block;
+}
+
+.spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+}
+
+.badge-pub { background: rgba(47, 111, 237, 0.2); color: #78A9FF; border: 1px solid rgba(47, 111, 237, 0.4); }
+.badge-proj { background: rgba(16, 185, 129, 0.2); color: #6EE7B7; border: 1px solid rgba(16, 185, 129, 0.4); }
+.badge-xai { background: rgba(234, 179, 8, 0.2); color: #FDE047; border: 1px solid rgba(234, 179, 8, 0.4); }
+
+.spotlight-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .spotlight-title {
+  color: var(--ink);
+}
+
+.spotlight-desc {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .spotlight-desc {
+  color: var(--ink-soft);
+}
+
+.spotlight-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.4rem;
+}
+
+.spotlight-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-soft);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.spotlight-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.spotlight-link:hover {
+  color: var(--gold);
+  transform: translateX(2px);
+}
+
 /* ============ PAGE HERO (SOLID COLOR BANNER) ============ */
 .page-hero {
   background: var(--navy-deep);

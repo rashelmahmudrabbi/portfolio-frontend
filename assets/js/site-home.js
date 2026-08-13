@@ -126,10 +126,59 @@
         </div>
 
         <div class="hero-stats">
-          <div class="hero-stat"><div class="hero-stat-num">${stats.publications ?? 0}</div><div class="hero-stat-label">Publications</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">${stats.projects ?? 0}</div><div class="hero-stat-label">Projects</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">${stats.awards ?? 0}</div><div class="hero-stat-label">Awards</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">${stats.certifications ?? 0}</div><div class="hero-stat-label">Certifications</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">${stats.publications ?? 3}</div><div class="hero-stat-label">Publications</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">${stats.projects ?? 7}</div><div class="hero-stat-label">Projects</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">${stats.awards ?? 2}</div><div class="hero-stat-label">Awards</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">${stats.certifications ?? 2}</div><div class="hero-stat-label">Certifications</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT SPOTLIGHT SLIDESHOW (RESEARCH & PROJECT HIGHLIGHTS) -->
+      <div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
+        <div class="hero-spotlight-box">
+          <div class="spotlight-header">
+            <span class="spotlight-kicker"><i class="bi bi-stars text-primary me-1"></i> SPOTLIGHT HIGHLIGHTS</span>
+            <div class="spotlight-indicators" id="spotlightDots">
+              <span class="s-dot active" onclick="switchSpotlight(0)"></span>
+              <span class="s-dot" onclick="switchSpotlight(1)"></span>
+              <span class="s-dot" onclick="switchSpotlight(2)"></span>
+            </div>
+          </div>
+          
+          <div class="spotlight-carousel" id="spotlightCarousel">
+            <!-- Slide 1: Featured Publication -->
+            <div class="spotlight-card active" data-slide="0">
+              <div class="spotlight-badge badge-pub"><i class="bi bi-journal-text me-1"></i> Top Publication</div>
+              <h4 class="spotlight-title">Cervical Cancer Cell Classification</h4>
+              <p class="spotlight-desc">Deep Transfer Learning with Attention-guided ResNet &amp; DenseNet models on Pap smear datasets.</p>
+              <div class="spotlight-footer">
+                <span class="spotlight-tag">Journal Paper</span>
+                <a href="publications/index.html" class="spotlight-link">View Paper <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <!-- Slide 2: Latest Project -->
+            <div class="spotlight-card" data-slide="1">
+              <div class="spotlight-badge badge-proj"><i class="bi bi-cpu-fill me-1"></i> Latest AI Project</div>
+              <h4 class="spotlight-title">Oral Cancer Detection &amp; Grading</h4>
+              <p class="spotlight-desc">Histopathological image analysis powered by Vision Transformers and Grad-CAM explainability.</p>
+              <div class="spotlight-footer">
+                <span class="spotlight-tag">Medical Image AI</span>
+                <a href="projects/index.html" class="spotlight-link">Explore <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <!-- Slide 3: Research Focus -->
+            <div class="spotlight-card" data-slide="2">
+              <div class="spotlight-badge badge-xai"><i class="bi bi-lightbulb-fill me-1"></i> Research Vision</div>
+              <h4 class="spotlight-title">Explainable &amp; Trustworthy AI</h4>
+              <p class="spotlight-desc">Building interpretable diagnostic models that clinical pathologists and healthcare specialists can trust.</p>
+              <div class="spotlight-footer">
+                <span class="spotlight-tag">XAI &amp; Healthcare</span>
+                <a href="#research" class="spotlight-link">Interests <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>`;
 
