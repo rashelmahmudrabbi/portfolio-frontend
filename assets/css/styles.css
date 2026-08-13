@@ -409,26 +409,193 @@ h1, h2, h3, h4, h5 {
   border-radius: 2px;
 }
 
-/* OBJECTIVE / CAREER SUMMARY */
-.objective-card {
-  background: var(--navy-deep);
-  border-left: 4px solid var(--gold);
-  color: #e8e8f0;
-  padding: 2rem 2.2rem;
-  border-radius: 10px;
-  font-size: 1.02rem;
-  line-height: 1.8;
-  text-align: justify;
-  text-justify: inter-word;
-  box-shadow: 0 4px 20px rgba(11, 30, 61, .12);
-}
-
-[data-theme="dark"] .objective-card {
+/* ============ ABOUT / RESEARCH SNAPSHOT SECTION ============ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 3.5rem;
+  align-items: center;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--gold);
-  color: var(--ink-soft);
+  border-radius: 16px;
+  padding: 3rem 3.5rem;
+  box-shadow: 0 4px 24px rgba(11, 31, 58, 0.03);
+  transition: all .3s var(--ease);
+}
+
+[data-theme="dark"] .about-grid {
+  background: var(--surface);
+  border-color: var(--line);
   box-shadow: var(--shadow);
+}
+
+.about-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid var(--line-soft);
+  padding-right: 2.5rem;
+}
+
+.about-avatar-wrap {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 6px;
+  border: 2px dashed rgba(47, 111, 237, 0.35);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 4px 16px rgba(47, 111, 237, 0.06);
+}
+
+[data-theme="dark"] .about-avatar-wrap {
+  border-color: rgba(120, 169, 255, 0.35);
+  background: var(--surface-2);
+}
+
+.about-monogram {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--gold-tint);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+[data-theme="dark"] .about-monogram {
+  background: rgba(120, 169, 255, 0.12);
+  color: #78A9FF;
+}
+
+.about-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about-facts-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-fact-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.about-fact-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.fact-label {
+  font-family: 'DM Sans', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.fact-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.status-badge-inline {
+  color: #03543F;
+  background: #DEF7EC;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .status-badge-inline {
+  color: #31C48D;
+  background: rgba(3, 84, 63, 0.3);
+}
+
+.about-content-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-kicker {
+  font-family: 'DM Sans', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage);
+  margin-bottom: 0.6rem;
+}
+
+.about-headline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--navy-deep);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+
+[data-theme="dark"] .about-headline {
+  color: var(--ink);
+}
+
+.about-bio-text {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.about-bio-text p {
+  margin-bottom: 1rem;
+}
+
+.about-bio-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-bio-text strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    padding: 2.2rem 1.8rem;
+  }
+  .about-card-left {
+    border-right: none;
+    border-bottom: 1px solid var(--line-soft);
+    padding-right: 0;
+    padding-bottom: 1.8rem;
+  }
 }
 
 /* RESEARCH INTERESTS */

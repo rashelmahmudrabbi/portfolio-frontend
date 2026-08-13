@@ -131,9 +131,45 @@
   }
 
   function renderObjective(settings) {
-    const text = (settings.profile && settings.profile.objective) || '';
+    const p = settings.profile || {};
+    const text = p.objective || '';
+
+    const locEl = document.getElementById('factLocation');
+    if (locEl && p.location) locEl.textContent = p.location;
+
+    const monoEl = document.getElementById('aboutMonogram');
+    if (monoEl && p.name) {
+      const parts = p.name.trim().split(/\s+/);
+      const initials = parts.length > 1 ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() : parts[0].slice(0, 2).toUpperCase();
+      monoEl.textContent = initials;
+    }
+
     if (text) {
-      document.getElementById('objectiveText').textContent = text;
+      const el = document.getElementById('objectiveText');
+      if (el) {
+        const paras = text.split(/\n\s*\n/).filter(Boolean);
+        if (paras.length > 1) {
+          el.innerHTML = paras.map(para => `<p>${escapeHtml(para)}</p>`).join('');
+        } else {
+          let html = escapeHtml(text);
+          const keywords = [
+            'Computer Science & Engineering graduate',
+            'Computer Science & Engineering',
+            'Artificial Intelligence',
+            'Deep Learning',
+            'Computer Vision',
+            'Medical Image Analysis',
+            'Explainable AI',
+            'interpretable, reliable, and useful in real-world settings',
+            'healthcare'
+          ];
+          keywords.forEach(kw => {
+            const regex = new RegExp('(' + escapeHtml(kw).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
+            html = html.replace(regex, '<strong>$1</strong>');
+          });
+          el.innerHTML = `<p>${html}</p>`;
+        }
+      }
     }
   }
 
