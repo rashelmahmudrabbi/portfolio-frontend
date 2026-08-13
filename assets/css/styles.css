@@ -1014,23 +1014,32 @@ h1, h2, h3, h4, h5 {
 
 /* ABSTRACT TOGGLE */
 .pub-abstract-toggle {
-  margin: .8rem 0 1rem;
+  margin: .6rem 0 .8rem;
   cursor: pointer;
   user-select: none;
 }
 
 .abstract-label {
-  font-size: .9rem;
+  font-size: .88rem;
   font-weight: 600;
-  color: #C8952A;
+  color: #2F6FED;
   display: inline-flex;
   align-items: center;
   gap: .35rem;
-  letter-spacing: .3px;
+  letter-spacing: .2px;
+  transition: color .2s;
+}
+
+.abstract-label:hover {
+  color: var(--navy-deep);
 }
 
 [data-theme="dark"] .abstract-label {
-  color: #FBBF24;
+  color: #78A9FF;
+}
+
+[data-theme="dark"] .abstract-label:hover {
+  color: #ffffff;
 }
 
 .abstract-arrow {
@@ -1051,11 +1060,11 @@ h1, h2, h3, h4, h5 {
   margin-top: .5rem;
   font-size: .88rem;
   color: var(--ink-soft);
-  line-height: 1.68;
-  border-left: 3.5px solid #D97706;
-  background: rgba(254, 243, 199, 0.25);
+  line-height: 1.7;
+  border-left: 3px solid #2F6FED;
+  background: rgba(47, 111, 237, 0.04);
   border-radius: 0 8px 8px 0;
-  padding: 1rem 1.25rem;
+  padding: .95rem 1.25rem;
 }
 
 .pub-abstract-toggle.open .abstract-body {
@@ -1063,8 +1072,8 @@ h1, h2, h3, h4, h5 {
 }
 
 [data-theme="dark"] .pub-abstract-toggle .abstract-body {
-  background: var(--surface-2);
-  border-left-color: #FBBF24;
+  background: rgba(120, 169, 255, 0.06);
+  border-left-color: #78A9FF;
   color: var(--ink-soft);
 }
 
@@ -1078,7 +1087,7 @@ h1, h2, h3, h4, h5 {
 
 .pub-link {
   font-size: .82rem;
-  color: #C8952A;
+  color: #2F6FED;
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
@@ -1092,7 +1101,7 @@ h1, h2, h3, h4, h5 {
 }
 
 [data-theme="dark"] .pub-link {
-  color: #FBBF24;
+  color: #78A9FF;
 }
 
 [data-theme="dark"] .pub-link:hover {
@@ -1100,24 +1109,24 @@ h1, h2, h3, h4, h5 {
 }
 
 .pub-link.btn-outline {
-  border: 1.5px solid #C8952A;
+  border: 1.5px solid #2F6FED;
   padding: .3rem .95rem;
   border-radius: 20px;
-  color: #C8952A;
+  color: #2F6FED;
 }
 
 [data-theme="dark"] .pub-link.btn-outline {
-  border-color: #FBBF24;
-  color: #FBBF24;
+  border-color: #78A9FF;
+  color: #78A9FF;
 }
 
 .pub-link.btn-outline:hover {
-  background: #C8952A;
+  background: #2F6FED;
   color: #ffffff;
 }
 
 [data-theme="dark"] .pub-link.btn-outline:hover {
-  background: #FBBF24;
+  background: #78A9FF;
   color: #0B1F3A;
 }
 
