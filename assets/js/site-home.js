@@ -250,19 +250,22 @@
   }
 
   function projectCardHtml(p) {
+    const desc = p.description || '';
+    const isLong = desc.length > 110;
     return `
       <div class="col-md-6 col-lg-4">
         <div class="project-card">
           <div class="project-img"><i class="bi bi-cpu"></i></div>
           <div class="project-body">
             <div class="project-title">${escapeHtml(p.title || '')}</div>
-            <div class="project-desc">${escapeHtml(p.description || '')}</div>
+            <div class="project-desc${isLong ? ' collapsed' : ''}">${escapeHtml(desc)}</div>
+            ${isLong ? `<button type="button" class="btn-learn-more" onclick="toggleProjectDesc(this)">Learn More <i class="bi bi-chevron-down ms-1"></i></button>` : ''}
             <div class="mb-2">${(p.tech || []).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}</div>
             <div class="project-links">
               ${p.githubLink ? `<a href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
               ${p.paperLink ? `<a href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-journal-text me-1"></i>Paper</a>` : ''}
             </div>
-            <small class="text-muted">${escapeHtml(p.year || '')}</small>
+            <small class="text-muted mt-2 d-block">${escapeHtml(p.year || '')}</small>
           </div>
         </div>
       </div>`;

@@ -45,3 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 });
+
+// Toggle project description expand/collapse
+function toggleProjectDesc(btn) {
+  const desc = btn.previousElementSibling;
+  if (!desc) return;
+  const isCollapsed = desc.classList.contains('collapsed');
+  if (isCollapsed) {
+    desc.classList.remove('collapsed');
+    btn.innerHTML = `Show Less <i class="bi bi-chevron-up ms-1"></i>`;
+  } else {
+    desc.classList.add('collapsed');
+    btn.innerHTML = `Learn More <i class="bi bi-chevron-down ms-1"></i>`;
+  }
+}
+

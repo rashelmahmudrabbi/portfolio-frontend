@@ -68,6 +68,8 @@
   }
 
   function projectCardHtml(p, badgeClass, badgeLabel, iconClass) {
+    const desc = p.description || '';
+    const isLong = desc.length > 110;
     return `
     <div class="col-md-6 col-lg-4 filterable" data-year="${escapeHtml(p.year || '')}" data-type="${escapeHtml(p.category || '')}">
       <div class="project-card">
@@ -78,7 +80,8 @@
         </div>
         <div class="project-body">
           <div class="project-title">${escapeHtml(p.title || '')}</div>
-          <div class="project-desc">${escapeHtml(p.description || '')}</div>
+          <div class="project-desc${isLong ? ' collapsed' : ''}">${escapeHtml(desc)}</div>
+          ${isLong ? `<button type="button" class="btn-learn-more" onclick="toggleProjectDesc(this)">Learn More <i class="bi bi-chevron-down ms-1"></i></button>` : ''}
           <div class="tech-chips">${techChips(p.tech, 'tech-chip')}</div>
           <div class="project-links">
             ${p.githubLink ? `<a class="project-link" href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github"></i> GitHub</a>` : ''}
