@@ -36,7 +36,7 @@
   safeRender('Skills',            () => renderSkills(settings));
   safeRender('Awards',            () => renderAwardsAndActivities(awards, activities));
   safeRender('Gallery',           () => renderGallery(gallery));
-  safeRender('Personal Info',     () => renderPersonalInfo(settings));
+  safeRender('Contact Info',     () => renderContactInfo(settings));
   safeRender('References',        () => renderReferences(references));
   safeRender('Footer',            () => renderFooter(settings));
 
@@ -116,6 +116,10 @@
           ${socials.researchgate ? `<a class="btn btn-sm" href="${escapeHtml(socials.researchgate)}" target="_blank"><i class="bi bi-journal-text me-1"></i>ResearchGate</a>` : ''}
           ${socials.scholar ? `<a class="btn btn-sm" href="${escapeHtml(socials.scholar)}" target="_blank"><i class="bi bi-mortarboard me-1"></i>Google Scholar</a>` : ''}
           ${socials.orcid ? `<a class="btn btn-sm" href="${escapeHtml(socials.orcid)}" target="_blank"><i class="bi bi-person-badge me-1"></i>ORCID</a>` : ''}
+        </div>
+        <div class="d-flex flex-wrap gap-3 mb-3 mt-3">
+          <a class="hero-cta" href="publications/index.html"><i class="bi bi-journal-text"></i> View Publications</a>
+          <a class="hero-cta-secondary" href="cv/index.html"><i class="bi bi-file-earmark-person"></i> Download CV</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><div class="hero-stat-num">${stats.publications ?? 0}</div><div class="hero-stat-label">Publications</div></div>
@@ -197,7 +201,7 @@
   }
 
   function pubBadgeClass(type) {
-    return { conference: 'badge-conference', journal: 'badge-conference', thesis: 'badge-conference' }[type] || 'badge-conference';
+    return { conference: 'badge-conference', journal: 'badge-journal', thesis: 'badge-thesis' }[type] || 'badge-conference';
   }
 
   // Helper to bold the owner's name in the authors list
@@ -396,19 +400,26 @@
     addImageFallbacks(el, getGenericPlaceholder());
   }
 
-  function renderPersonalInfo(settings) {
-    const p = settings.personalInfo || {};
-    document.getElementById('personalInfoLeft').innerHTML = `
-      <div class="info-row"><span class="info-label">Father's Name</span><span class="info-value">${escapeHtml(p.fatherName || '')}</span></div>
-      <div class="info-row"><span class="info-label">Mother's Name</span><span class="info-value">${escapeHtml(p.motherName || '')}</span></div>
-      <div class="info-row"><span class="info-label">Date of Birth</span><span class="info-value">${escapeHtml(p.dob || '')}</span></div>
-      <div class="info-row"><span class="info-label">Religion</span><span class="info-value">${escapeHtml(p.religion || '')}</span></div>
-      <div class="info-row"><span class="info-label">NID</span><span class="info-value">${escapeHtml(p.nid || '')}</span></div>`;
-    document.getElementById('personalInfoRight').innerHTML = `
-      <div class="info-row"><span class="info-label">Marital Status</span><span class="info-value">${escapeHtml(p.maritalStatus || '')}</span></div>
-      <div class="info-row"><span class="info-label">Blood Group</span><span class="info-value">${escapeHtml(p.bloodGroup || '')}</span></div>
-      <div class="info-row"><span class="info-label">Nationality</span><span class="info-value">${escapeHtml(p.nationality || '')}</span></div>
-      <div class="info-row"><span class="info-label">Address</span><span class="info-value">${escapeHtml(p.address || '')}</span></div>`;
+  function renderContactInfo(settings) {
+    const p = settings.profile || {};
+    const info = settings.personalInfo || {};
+    const leftEl = document.getElementById('contactInfoLeft');
+    const rightEl = document.getElementById('contactInfoRight');
+    if (leftEl) {
+      leftEl.innerHTML = `
+        ${p.email ? `<div class="info-row"><span class="info-label"><i class="bi bi-envelope me-2"></i>Email</span><span class="info-value"><a href="mailto:${escapeHtml(p.email)}" style="color:var(--gold);text-decoration:none;">${escapeHtml(p.email)}</a></span></div>` : ''}
+        ${p.phone ? `<div class="info-row"><span class="info-label"><i class="bi bi-telephone me-2"></i>Phone</span><span class="info-value"><a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ''))}" style="color:var(--text-dark);text-decoration:none;">${escapeHtml(p.phone)}</a></span></div>` : ''}
+        ${p.location ? `<div class="info-row"><span class="info-label"><i class="bi bi-geo-alt me-2"></i>Location</span><span class="info-value">${escapeHtml(p.location)}</span></div>` : ''}
+        ${info.nationality ? `<div class="info-row"><span class="info-label"><i class="bi bi-flag me-2"></i>Nationality</span><span class="info-value">${escapeHtml(info.nationality)}</span></div>` : ''}`;
+    }
+    if (rightEl) {
+      const socials = p.socials || {};
+      rightEl.innerHTML = `
+        ${socials.github ? `<div class="info-row"><span class="info-label"><i class="bi bi-github me-2"></i>GitHub</span><span class="info-value"><a href="${escapeHtml(socials.github)}" target="_blank" style="color:var(--gold);text-decoration:none;">rashelmahmudrabbi</a></span></div>` : ''}
+        ${socials.linkedin ? `<div class="info-row"><span class="info-label"><i class="bi bi-linkedin me-2"></i>LinkedIn</span><span class="info-value"><a href="${escapeHtml(socials.linkedin)}" target="_blank" style="color:var(--gold);text-decoration:none;">rashelmahmudrabbi</a></span></div>` : ''}
+        ${socials.scholar ? `<div class="info-row"><span class="info-label"><i class="bi bi-mortarboard me-2"></i>Google Scholar</span><span class="info-value"><a href="${escapeHtml(socials.scholar)}" target="_blank" style="color:var(--gold);text-decoration:none;">View Profile</a></span></div>` : ''}
+        ${socials.orcid ? `<div class="info-row"><span class="info-label"><i class="bi bi-person-badge me-2"></i>ORCID</span><span class="info-value"><a href="${escapeHtml(socials.orcid)}" target="_blank" style="color:var(--gold);text-decoration:none;">0009-0004-6070-4496</a></span></div>` : ''}`;
+    }
   }
 
   function renderReferences(references) {
