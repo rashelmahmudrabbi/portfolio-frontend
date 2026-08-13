@@ -814,105 +814,286 @@ h1, h2, h3, h4, h5 {
 }
 
 .pub-card {
-  background: var(--section-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.4rem 1.6rem;
-  margin-bottom: 1rem;
-  transition: box-shadow .2s;
-  display: flex;
-  gap: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.4rem;
+  transition: all .25s var(--ease);
+  box-shadow: 0 4px 20px rgba(11, 31, 58, 0.03);
+  display: block;
 }
 
 .pub-card:hover {
-  box-shadow: var(--shadow);
-  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(11, 31, 58, 0.08);
   border-color: var(--gold-soft);
+  transform: translateY(-2px);
 }
 
-.pub-thumb {
-  width: 90px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
-  background: var(--cream);
+[data-theme="dark"] .pub-card {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
+.pub-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--text-mid);
-  font-size: 1.5rem;
-  overflow: hidden;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-bottom: .6rem;
 }
 
-.pub-type-badge {
+.pub-number {
+  font-family: 'DM Sans', monospace;
+  font-size: .95rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pub-badges {
+  display: flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+
+.badge-type {
   font-size: .72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .5px;
-  padding: .2rem .6rem;
+  padding: .25rem .75rem;
   border-radius: 20px;
-  margin-right: .4rem;
 }
 
 .badge-conference {
-  background: var(--slate-lt);
-  color: var(--slate);
+  background: #D8E7FF;
+  color: #2F6FED;
 }
 
 .badge-journal {
-  background: var(--slate-lt);
-  color: var(--slate);
+  background: #D8E7FF;
+  color: #2F6FED;
+}
+
+.badge-preprint {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.badge-book_chapter {
+  background: #FCE7F3;
+  color: #BE185D;
 }
 
 .badge-thesis {
-  background: var(--slate-lt);
-  color: var(--slate);
+  background: #EDE9FE;
+  color: #6D28D9;
 }
 
-.pub-status {
+.badge-status {
   font-size: .72rem;
-  font-weight: 600;
+  font-weight: 700;
+  padding: .25rem .75rem;
+  border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: .3px;
 }
 
 .status-published {
-  color: #155724;
+  background: #DEF7EC;
+  color: #03543F;
+}
+
+.status-under-review {
+  background: #FEF08A;
+  color: #854D0E;
+}
+
+.status-accepted {
+  background: #E1EFFE;
+  color: #1E429F;
+}
+
+.status-preprint {
+  background: #EDEBFE;
+  color: #5521B5;
+}
+
+.status-completed {
+  background: #DEF7EC;
+  color: #03543F;
+}
+
+[data-theme="dark"] .status-published {
+  background: rgba(3, 84, 63, .3);
+  color: #31C48D;
+}
+
+[data-theme="dark"] .status-under-review {
+  background: rgba(133, 77, 14, .3);
+  color: #FACC15;
 }
 
 .pub-title {
   font-family: 'Crimson Pro', serif;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: var(--navy);
-  margin-bottom: .3rem;
+  color: var(--navy-deep);
+  margin-bottom: .45rem;
   line-height: 1.35;
 }
 
+[data-theme="dark"] .pub-title {
+  color: var(--ink);
+}
+
 .pub-authors {
-  font-size: .85rem;
-  color: var(--text-mid);
-  margin-bottom: .25rem;
+  font-size: .92rem;
+  color: var(--ink-soft);
+  margin-bottom: .35rem;
+  line-height: 1.5;
+}
+
+.pub-authors strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.pub-venue-row {
+  font-size: .92rem;
+  margin-bottom: .6rem;
 }
 
 .pub-venue {
-  font-size: .85rem;
-  color: var(--text-dark);
+  font-size: .92rem;
+  color: var(--ink-soft);
   font-style: italic;
-  margin-bottom: .5rem;
 }
 
-.pub-links a {
+.pub-dot {
+  color: var(--ink-faint);
+  margin: 0 .25rem;
+}
+
+.pub-year {
+  color: #D97706;
+  font-weight: 700;
+  font-style: normal;
+}
+
+[data-theme="dark"] .pub-year {
+  color: #FBBF24;
+}
+
+/* ABSTRACT TOGGLE */
+.pub-abstract-toggle {
+  margin: .8rem 0 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.abstract-label {
+  font-size: .9rem;
+  font-weight: 600;
+  color: #C8952A;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  letter-spacing: .3px;
+}
+
+[data-theme="dark"] .abstract-label {
+  color: #FBBF24;
+}
+
+.abstract-arrow {
+  transition: transform .2s ease;
   font-size: .8rem;
-  color: var(--gold);
-  text-decoration: none;
-  margin-right: .8rem;
-  font-weight: 500;
 }
 
-.pub-links a:hover {
-  color: var(--navy);
+.pub-abstract-toggle.open .abstract-arrow {
+  transform: rotate(0deg);
+}
+
+.pub-abstract-toggle:not(.open) .abstract-arrow {
+  transform: rotate(-90deg);
+}
+
+.pub-abstract-toggle .abstract-body {
+  display: block;
+  margin-top: .5rem;
+  font-size: .88rem;
+  color: var(--ink-soft);
+  line-height: 1.68;
+  border-left: 3.5px solid #D97706;
+  background: rgba(254, 243, 199, 0.25);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+}
+
+[data-theme="dark"] .pub-abstract-toggle .abstract-body {
+  background: var(--surface-2);
+  border-left-color: #FBBF24;
+  color: var(--ink-soft);
+}
+
+.pub-abstract-toggle:not(.open) .abstract-body {
+  display: none;
+}
+
+.pub-links {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: .8rem;
+}
+
+.pub-link {
+  font-size: .82rem;
+  color: #C8952A;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  transition: all .2s;
+}
+
+.pub-link:hover {
+  color: var(--navy-deep);
+}
+
+[data-theme="dark"] .pub-link {
+  color: #FBBF24;
+}
+
+[data-theme="dark"] .pub-link:hover {
+  color: #ffffff;
+}
+
+.pub-link.btn-outline {
+  border: 1.5px solid #C8952A;
+  padding: .3rem .95rem;
+  border-radius: 20px;
+  color: #C8952A;
+}
+
+[data-theme="dark"] .pub-link.btn-outline {
+  border-color: #FBBF24;
+  color: #FBBF24;
+}
+
+.pub-link.btn-outline:hover {
+  background: #C8952A;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .pub-link.btn-outline:hover {
+  background: #FBBF24;
+  color: #0B1F3A;
 }
 
 /* PROJECTS */

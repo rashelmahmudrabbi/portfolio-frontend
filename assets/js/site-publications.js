@@ -77,30 +77,30 @@
     const abstractId = 'abstract-' + number;
     return `
     <div class="pub-card ${escapeHtml(pub.type || '')}" data-type="${escapeHtml(pub.type || '')}" data-status="${escapeHtml(pub.status || '')}">
-      <div class="pub-top">
-        <div class="pub-number">[${number}]</div>
-        <div class="pub-badges">
+      <div class="pub-top d-flex align-items-center gap-2 mb-2">
+        <span class="pub-number">[${number}]</span>
+        <div class="pub-badges d-flex gap-2">
           <span class="badge-type ${tBadge}">${escapeHtml(tLabel)}</span>
           <span class="badge-status ${sBadge}">${escapeHtml(sLabel)}</span>
         </div>
       </div>
-      <div class="pub-ieee">
-        <span class="pub-authors">${formatAuthors(pub.authors, ownerName)},</span>
-        <span class="pub-title">"${escapeHtml(pub.title || '')},"</span>
-        <span class="pub-venue">${escapeHtml(pub.venue || '')},</span>
-        <span class="pub-year">${escapeHtml(pub.year || '--')}</span>.
+      <h3 class="pub-title">${escapeHtml(pub.title || '')}</h3>
+      <div class="pub-authors mb-1">${formatAuthors(pub.authors, ownerName)}</div>
+      <div class="pub-venue-row mb-2">
+        <span class="pub-venue">${escapeHtml(pub.venue || '')}</span>
+        ${pub.year ? ` <span class="pub-dot">&middot;</span> <span class="pub-year">${escapeHtml(pub.year)}</span>` : ''}
       </div>
       ${
         pub.abstract
-          ? `<div class="pub-abstract-toggle" onclick="this.classList.toggle('open')">
-        <span class="abstract-label"><i class="bi bi-chevron-right abstract-arrow"></i> Abstract</span>
+          ? `<div class="pub-abstract-toggle open" onclick="this.classList.toggle('open')">
+        <span class="abstract-label"><i class="bi bi-chevron-down abstract-arrow"></i> Abstract</span>
         <div class="abstract-body" id="${abstractId}">${escapeHtml(pub.abstract)}</div>
       </div>`
           : ''
       }
       <div class="pub-links">
-        ${pub.pdfLink ? `<a class="pub-link" href="${escapeHtml(pub.pdfLink)}" target="_blank"><i class="bi bi-file-pdf"></i> PDF</a>` : ''}
-        ${pub.doiLink ? `<a class="pub-link btn-outline" href="${escapeHtml(pub.doiLink)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> DOI / Link</a>` : ''}
+        ${pub.pdfLink ? `<a class="pub-link" href="${escapeHtml(pub.pdfLink)}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> PDF</a>` : ''}
+        ${pub.doiLink ? `<a class="pub-link btn-outline" href="${escapeHtml(pub.doiLink)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> DOI / IEEE</a>` : ''}
       </div>
     </div>`;
   }
