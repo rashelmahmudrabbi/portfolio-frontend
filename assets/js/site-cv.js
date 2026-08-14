@@ -1,6 +1,6 @@
 (async function () {
   'use strict';
-  const result = await getPortfolio();
+  const result = await getPortfolio(true);
   const d = result.data || {};
   const settings = d.settings || {};
   const education = d.education || [];
@@ -18,12 +18,13 @@
   const langs = settings.spokenLanguages || [];
   const info = settings.personalInfo || {};
 
-  document.title = `Curriculum Vitae – ${p.name || 'Portfolio'}`;
-  document.getElementById('cvLastUpdated').textContent = settings.cvLastUpdated || new Date().getFullYear();
+  document.title = `Curriculum Vitae – ${p.name || 'RASHEL MAHMUD RABBI'}`;
+  const cvUpdatedEl = document.getElementById('cvLastUpdated');
+  if (cvUpdatedEl) cvUpdatedEl.textContent = settings.cvLastUpdated || new Date().getFullYear();
 
   const downloadBtn = document.getElementById('cvDownloadBtn');
   if (downloadBtn) {
-    downloadBtn.href = API_BASE + '/cv/download';
+    downloadBtn.href = settings.cvDownloadUrl || (typeof getCvDownloadUrl === 'function' ? getCvDownloadUrl() : (API_BASE + '/cv/download'));
   }
 
   function skillGroup(label, items) {
@@ -129,7 +130,7 @@
       <div style="font-size:.82rem;color:var(--gold);">${escapeHtml(c.issuer || '')} &nbsp;·&nbsp; ${escapeHtml(c.year || '')}</div>
       <div style="font-size:.8rem;margin-top:.4rem;display:flex;gap:.8rem;flex-wrap:wrap;">
         ${c.verifyLink ? `<a href="${escapeHtml(c.verifyLink)}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-patch-check me-1"></i>Verify</a>` : ''}
-        ${c.pdfLink ? `<a href="${escapeHtml(c.pdfLink)}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
+        ${c.pdfLink ? `<a href="${escapeHtml(resolveAssetUrl(c.pdfLink, true))}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
       </div>
     </div>`
       )
@@ -161,14 +162,16 @@
       )
       .join('') || '<p class="text-muted">No references added yet.</p>';
 
+  const avatarUrl = resolveAssetUrl(p.avatar, true) || getInitialsPlaceholder(p.name);
+
   document.getElementById('cvWrapper').innerHTML = `
     <div class="pdf-note">
       <i class="bi bi-info-circle"></i>
-      To save as PDF: click <strong>Print / Save PDF</strong> above and choose "Save as PDF" in your browser print dialog.
+      To save as PDF: click <strong>Print Page</strong> above and choose "Save as PDF" in your browser print dialog.
     </div>
 
     <div class="cv-profile-card">
-      <img src="${p.avatar ? ('../' + p.avatar) : ''}" class="cv-avatar" alt="${escapeHtml(p.name || '')}"/>
+      <img src="${avatarUrl}" class="cv-avatar" alt="${escapeHtml(p.name || '')}" onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
       <div>
         <div class="cv-name">${escapeHtml(p.name || '')}</div>
         <div class="cv-title-text">${escapeHtml(p.title || '')}</div>
@@ -279,7 +282,9 @@
   if (p.title) document.getElementById('footerTitle').textContent = p.title;
   if (p.email) {
     const el = document.getElementById('footerEmail');
-    el.textContent = p.email;
-    el.href = 'mailto:' + p.email;
+    if (el) {
+      el.textContent = p.email;
+      el.href = 'mailto:' + p.email;
+    }
   }
 })();

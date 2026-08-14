@@ -18,6 +18,25 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+// ─── Asset path resolver (handles data:, https://, media/ across root & subpages) ───
+function resolveAssetUrl(url, isSubpage = false) {
+  if (!url) return '';
+  const str = String(url).trim();
+  if (!str) return '';
+  if (str.startsWith('data:') || str.startsWith('http://') || str.startsWith('https://') || str.startsWith('//')) {
+    return str;
+  }
+  if (str.startsWith('/')) {
+    return str;
+  }
+  if (isSubpage) {
+    if (str.startsWith('../')) return str;
+    return '../' + str;
+  } else {
+    return str.replace(/^\.\.\//, '');
+  }
+}
+
 // ─── Fetch with timeout ──────────────────────────────────────────────────
 // Wraps fetch() in an AbortController with a configurable timeout.
 // Returns the Response or throws on timeout/network error.
@@ -52,12 +71,6 @@ async function fetchJSON(path, fallback) {
   }
 }
 
-// ─── Legacy-compatible fetchJSON wrapper ─────────────────────────────────
-// Old call sites use `await fetchJSON('/path', fallback)` and expect the
-// raw data back. The new version returns { data, error }. This shim
-// preserves backward compat for sub-page scripts that haven't been updated.
-// site-home.js uses the new { data, error } shape directly.
-
 // ─── Portfolio combined endpoint (stale-while-revalidate) ────────────────
 // Fetches all homepage data in one request from /api/portfolio.
 // Uses sessionStorage for instant repeat-visit rendering.
@@ -67,7 +80,6 @@ function getCachedPortfolio() {
     if (!raw) return null;
     const cached = JSON.parse(raw);
     if (!cached || !cached.timestamp) return null;
-    // Return cached data regardless of age — caller handles revalidation
     return cached;
   } catch (e) {
     return null;
@@ -91,7 +103,7 @@ function isCacheFresh(cached) {
 
 // Fetches the combined portfolio endpoint.
 // Returns { data: {...}, error: null|Error, fromCache: bool }
-async function getPortfolio() {
+async function getPortfolio(isSubpage = false) {
   const cached = getCachedPortfolio();
 
   // If cache exists and is fresh, return it immediately
@@ -100,7 +112,6 @@ async function getPortfolio() {
   }
 
   // If cache exists but stale, return it but also revalidate
-  // (the caller gets stale data instantly; fresh data comes via callback)
   try {
     const res = await fetchWithTimeout(API_BASE + '/portfolio');
     if (!res.ok) throw new Error('Request failed: ' + res.status);
@@ -109,11 +120,22 @@ async function getPortfolio() {
     return { data: fresh, error: null, fromCache: false };
   } catch (err) {
     console.warn('Could not load /portfolio from backend:', err.message);
-    // Fall back to cached data if available (even if stale)
+    // Fall back to cached data if available
     if (cached) {
       return { data: cached.data, error: err, fromCache: true };
     }
-    // No cache, no network — return empty structure
+    // Static fallback to local data.json for resilience (e.g. cold starts, offline preview)
+    try {
+      const fallbackUrl = isSubpage ? '../assets/data/data.json' : 'assets/data/data.json';
+      const localRes = await fetch(fallbackUrl);
+      if (localRes.ok) {
+        const localData = await localRes.json();
+        return { data: localData, error: null, fromCache: false, isOfflineFallback: true };
+      }
+    } catch (localErr) {
+      console.warn('Local data.json fallback failed:', localErr.message);
+    }
+    // No cache, no network, no local data — return empty structure
     return {
       data: {
         settings: {}, education: [], experience: [], publications: [],
@@ -136,8 +158,8 @@ function getInitialsPlaceholder(name) {
     .join('');
   return `data:image/svg+xml,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
-      <rect width="150" height="150" fill="#1a3a6e"/>
-      <text x="75" y="82" text-anchor="middle" font-family="sans-serif" font-size="48" font-weight="700" fill="#e8b84b">${initials}</text>
+      <rect width="150" height="150" fill="#0b1e3d"/>
+      <text x="75" y="82" text-anchor="middle" font-family="sans-serif" font-size="48" font-weight="700" fill="#78A9FF">${initials}</text>
     </svg>`
   )}`;
 }
@@ -151,8 +173,6 @@ function getGenericPlaceholder() {
   )}`;
 }
 
-// Attach an onerror handler to an <img> element string isn't possible,
-// so we provide a helper to add fallback handlers after DOM insertion.
 function addImageFallbacks(container, fallbackSrc) {
   if (!container) return;
   const imgs = container.querySelectorAll('img');
@@ -164,7 +184,6 @@ function addImageFallbacks(container, fallbackSrc) {
           this.src = fallbackSrc || getGenericPlaceholder();
         }
       });
-      // Fix empty src (triggers error immediately)
       if (!img.src || img.src === window.location.href || img.getAttribute('src') === '') {
         img.src = fallbackSrc || getGenericPlaceholder();
       }
@@ -183,3 +202,17 @@ function errorStateHtml(sectionName, retryFnName) {
     </button>
   </div>`;
 }
+
+// ─── Dynamic backend link synchronization ────────────────────────────────
+function syncBackendLinks() {
+  const adminUrl = typeof getAdminUrl === 'function' ? getAdminUrl() : (API_BASE.replace(/\/api\/?$/, '') + '/admin');
+  const cvUrl = typeof getCvDownloadUrl === 'function' ? getCvDownloadUrl() : (API_BASE + '/cv/download');
+  
+  document.querySelectorAll('a[title="Admin Dashboard"], a.footer-admin-link').forEach(link => {
+    link.href = adminUrl;
+  });
+  document.querySelectorAll('a.nav-cv-download-link, #modalCvDownloadBtn').forEach(link => {
+    link.href = cvUrl;
+  });
+}
+document.addEventListener('DOMContentLoaded', syncBackendLinks);

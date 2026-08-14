@@ -587,15 +587,6 @@
     });
   });
 
-  // Publication filter
-  function filterPubs(type, el) {
-    document.querySelectorAll('.pub-tabs .nav-link').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('#pubList .pub-card').forEach(card => {
-      card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
-    });
-  }
-
   // Image modal
   function showImageModal(src, caption) {
     document.getElementById('modalImage').src = src;

@@ -1,6 +1,6 @@
 (async function () {
   'use strict';
-  const result = await getPortfolio();
+  const result = await getPortfolio(true);
   const d = result.data || {};
   const settings = d.settings || {};
   const courses = d.courses || [];
@@ -94,7 +94,9 @@
   if (p.title) document.getElementById('footerTitle').textContent = p.title;
   if (p.email) {
     const el = document.getElementById('footerEmail');
-    el.textContent = p.email;
-    el.href = 'mailto:' + p.email;
+    if (el) {
+      el.textContent = p.email;
+      el.href = 'mailto:' + p.email;
+    }
   }
 })();

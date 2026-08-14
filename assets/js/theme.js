@@ -1,11 +1,37 @@
-// Theme toggle
+// Theme initialization & toggle with localStorage persistence
+(function() {
+  try {
+    const saved = localStorage.getItem('portfolio_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDark = saved === 'dark' || (!saved && prefersDark);
+    if (initialDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+
+function updateThemeKnob(isDark) {
+  const knob = document.querySelector('#themeToggle .knob');
+  if (knob) knob.textContent = isDark ? '☾' : '☀';
+}
+
 function toggleTheme() {
   const root = document.documentElement;
   const isDark = root.getAttribute('data-theme') === 'dark';
-  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  const knob = document.querySelector('#themeToggle .knob');
-  if (knob) knob.textContent = isDark ? '☀' : '☾';
+  const newTheme = isDark ? 'light' : 'dark';
+  root.setAttribute('data-theme', newTheme);
+  try {
+    localStorage.setItem('portfolio_theme', newTheme);
+  } catch(e) {}
+  updateThemeKnob(!isDark);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  updateThemeKnob(isDark);
+});
 
 // Scroll top button
 window.addEventListener('scroll', () => {
@@ -38,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const hiddenElements = document.querySelectorAll('.section-wrapper, .content-section, .blog-section, .pub-section, .projects-section, .cv-wrapper');
   hiddenElements.forEach((el) => {
-    // Add default hidden styles directly to avoid FOUC if JS is disabled
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.6s ease-out';
@@ -59,4 +84,3 @@ function toggleProjectDesc(btn) {
     btn.innerHTML = `Learn More <i class="bi bi-chevron-down ms-1"></i>`;
   }
 }
-

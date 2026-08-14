@@ -1,7 +1,7 @@
 (async function () {
   'use strict';
   
-  const result = await getPortfolio();
+  const result = await getPortfolio(true);
   const d = result.data || {};
   const publications = d.publications || [];
   const settings = d.settings || {};
@@ -62,7 +62,6 @@
   function formatAuthors(authorsStr, nameToBold) {
     let escAuth = escapeHtml(authorsStr || '');
     if (nameToBold) {
-      // Create a case-insensitive regex for the owner's name
       const regex = new RegExp('(' + escapeHtml(nameToBold).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
       escAuth = escAuth.replace(regex, '<strong>$1</strong>');
     }
@@ -99,7 +98,7 @@
           : ''
       }
       <div class="pub-links">
-        ${pub.pdfLink ? `<a class="pub-link" href="${escapeHtml(pub.pdfLink)}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> PDF</a>` : ''}
+        ${pub.pdfLink ? `<a class="pub-link" href="${escapeHtml(resolveAssetUrl(pub.pdfLink, true))}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> PDF</a>` : ''}
         ${pub.doiLink ? `<a class="pub-link btn-outline" href="${escapeHtml(pub.doiLink)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> DOI / IEEE</a>` : ''}
       </div>
     </div>`;
@@ -116,7 +115,6 @@
       return;
     }
 
-    // Group by year (descending), publications with no year go under "Ongoing"
     const sorted = [...publications].sort((a, b) => (b.year || '0').localeCompare(a.year || '0'));
     let html = '';
     let currentYear = null;
@@ -143,8 +141,10 @@
     if (p.title) document.getElementById('footerTitle').textContent = p.title;
     if (p.email) {
       const el = document.getElementById('footerEmail');
-      el.textContent = p.email;
-      el.href = 'mailto:' + p.email;
+      if (el) {
+        el.textContent = p.email;
+        el.href = 'mailto:' + p.email;
+      }
     }
   }
 })();

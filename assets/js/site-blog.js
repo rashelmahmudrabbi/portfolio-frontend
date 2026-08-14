@@ -1,10 +1,12 @@
 (async function () {
   'use strict';
-  const result = await getPortfolio();
+  const result = await getPortfolio(true);
   const d = result.data || {};
   const settings = d.settings || {};
   const posts = d.blog || [];
   const p = settings.profile || {};
+
+  let activeCategory = 'all';
 
   const iconMap = {
     'Explainable AI': 'bi-bandaid',
@@ -15,15 +17,15 @@
   };
   const iconFor = (cat) => iconMap[cat] || 'bi-pencil-square';
 
-  renderPosts();
+  renderPosts(activeCategory);
   renderTags();
   renderRecent();
   renderConnect();
   renderAuthorAndFooter();
 
-  function postCardHtml(post) {
+  function postCardHtml(post, idx) {
     return `
-    <div class="col-md-6">
+    <div class="col-md-6" id="post-${idx}">
       <div class="post-card">
         <div class="post-img" style="height:160px;">
           <i class="bi ${iconFor(post.category)}"></i>
@@ -41,7 +43,7 @@
     </div>`;
   }
 
-  function renderPosts() {
+  function renderPosts(filterCat = 'all') {
     const el = document.getElementById('blogPostsContainer');
     if (!posts.length) {
       el.innerHTML = `
@@ -52,11 +54,23 @@
         </div>`;
       return;
     }
-    const featured = posts.find((p) => p.featured) || posts[0];
-    const rest = posts.filter((p) => p !== featured);
+
+    const filtered = filterCat === 'all' ? posts : posts.filter((p) => p.category === filterCat);
+    if (!filtered.length) {
+      el.innerHTML = `
+        <div class="coming-soon">
+          <i class="bi bi-search"></i>
+          <h4>No posts found for "${escapeHtml(filterCat)}"</h4>
+          <p><a href="javascript:void(0)" onclick="filterBlog('all')" style="color:var(--gold);font-weight:600;">Show all posts</a></p>
+        </div>`;
+      return;
+    }
+
+    const featured = filtered.find((p) => p.featured) || filtered[0];
+    const rest = filtered.filter((p) => p !== featured);
 
     let html = `
-      <div class="featured-post">
+      <div class="featured-post" id="post-featured">
         <div class="post-img"><i class="bi ${iconFor(featured.category)}"></i></div>
         <div class="post-body">
           <span class="featured-badge">⭐ Featured Post</span>
@@ -69,7 +83,7 @@
           <div class="post-excerpt">${escapeHtml(featured.excerpt || '')}</div>
         </div>
       </div>
-      <div class="row g-3">${rest.map(postCardHtml).join('')}</div>
+      <div class="row g-3">${rest.map((p, i) => postCardHtml(p, i)).join('')}</div>
       <div class="coming-soon mt-4">
         <i class="bi bi-pencil-square"></i>
         <h4>More posts coming soon</h4>
@@ -78,20 +92,35 @@
     el.innerHTML = html;
   }
 
+  window.filterBlog = function (cat) {
+    activeCategory = cat;
+    renderPosts(cat);
+    document.querySelectorAll('#tagCloud .tag').forEach((t) => {
+      t.classList.toggle('active', t.dataset.cat === cat);
+    });
+  };
+
   function renderTags() {
     const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))];
-    document.getElementById('tagCloud').innerHTML = cats.map((c) => `<a class="tag" href="#">${escapeHtml(c)}</a>`).join('');
+    const tagEl = document.getElementById('tagCloud');
+    if (!tagEl) return;
+    tagEl.innerHTML = `
+      <a class="tag ${activeCategory === 'all' ? 'active' : ''}" data-cat="all" href="javascript:void(0)" onclick="filterBlog('all')">All</a>
+      ${cats.map((c) => `<a class="tag ${activeCategory === c ? 'active' : ''}" data-cat="${escapeHtml(c)}" href="javascript:void(0)" onclick="filterBlog('${escapeHtml(c)}')">${escapeHtml(c)}</a>`).join('')}
+    `;
   }
 
   function renderRecent() {
     const recent = posts.slice(0, 4);
-    document.getElementById('recentPostsList').innerHTML = recent
+    const recentEl = document.getElementById('recentPostsList');
+    if (!recentEl) return;
+    recentEl.innerHTML = recent
       .map(
-        (post) => `
-      <div class="recent-post">
+        (post, idx) => `
+      <div class="recent-post" onclick="filterBlog('${escapeHtml(post.category || 'all')}'); window.scrollTo({top: 250, behavior: 'smooth'});">
         <div class="recent-icon"><i class="bi ${iconFor(post.category)}"></i></div>
         <div>
-          <div class="recent-title"><a href="#">${escapeHtml(post.title || '')}</a></div>
+          <div class="recent-title"><a href="javascript:void(0)">${escapeHtml(post.title || '')}</a></div>
           <div class="recent-date">${escapeHtml(post.date || '')}</div>
         </div>
       </div>`
@@ -107,7 +136,9 @@
       s.researchgate && { icon: 'bi-journal-bookmark', label: 'ResearchGate', url: s.researchgate },
       p.email && { icon: 'bi-envelope', label: 'Email', url: 'mailto:' + p.email },
     ].filter(Boolean);
-    document.getElementById('connectLinks').innerHTML = links
+    const connEl = document.getElementById('connectLinks');
+    if (!connEl) return;
+    connEl.innerHTML = links
       .map(
         (l) => `<a href="${escapeHtml(l.url)}" target="_blank" style="font-size:.85rem;color:var(--text-mid);text-decoration:none;display:flex;align-items:center;gap:.6rem;"><i class="bi ${l.icon}" style="color:var(--gold)"></i>${l.label}</a>`
       )
@@ -116,16 +147,25 @@
 
   function renderAuthorAndFooter() {
     if (p.name) {
-      document.getElementById('authorName').textContent = p.name;
-      document.getElementById('footerName').textContent = p.name;
+      const aName = document.getElementById('authorName');
+      if (aName) aName.textContent = p.name;
+      const fName = document.getElementById('footerName');
+      if (fName) fName.textContent = p.name;
     }
-    if (p.title) document.getElementById('footerTitle').textContent = p.title;
-    if (p.objective) document.getElementById('authorBio').textContent = p.title || document.getElementById('authorBio').textContent;
-    document.getElementById('footerYear').textContent = new Date().getFullYear();
+    if (p.title) {
+      const fTitle = document.getElementById('footerTitle');
+      if (fTitle) fTitle.textContent = p.title;
+      const aBio = document.getElementById('authorBio');
+      if (aBio) aBio.textContent = p.title;
+    }
+    const fYear = document.getElementById('footerYear');
+    if (fYear) fYear.textContent = new Date().getFullYear();
     if (p.email) {
       const el = document.getElementById('footerEmail');
-      el.textContent = p.email;
-      el.href = 'mailto:' + p.email;
+      if (el) {
+        el.textContent = p.email;
+        el.href = 'mailto:' + p.email;
+      }
     }
   }
 })();
