@@ -919,6 +919,50 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 4px 16px rgba(47, 111, 237, 0.35);
 }
 
+/* SKELETON LOADING STATE FOR HERO SPOTLIGHT */
+.spotlight-skeleton .spotlight-badge {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+  width: 140px;
+  height: 24px;
+  animation: pulseSpotlightSkeleton 1.6s infinite ease-in-out;
+}
+
+.spotlight-skeleton .spotlight-icon-box {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: transparent !important;
+  box-shadow: none !important;
+  animation: pulseSpotlightSkeleton 1.6s infinite ease-in-out;
+}
+
+.spotlight-skeleton .spotlight-title {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: transparent !important;
+  border-radius: 6px;
+  width: 85%;
+  height: 20px;
+  margin-bottom: 8px;
+  animation: pulseSpotlightSkeleton 1.6s infinite ease-in-out;
+}
+
+.spotlight-skeleton .spotlight-desc {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: transparent !important;
+  border-radius: 6px;
+  width: 95%;
+  height: 32px;
+  animation: pulseSpotlightSkeleton 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseSpotlightSkeleton {
+  0% { opacity: 0.7; }
+  50% { opacity: 0.25; }
+  100% { opacity: 0.7; }
+}
+
 /* ============ PAGE HERO (SOLID COLOR BANNER) ============ */
 .page-hero {
   background: var(--navy-deep);
