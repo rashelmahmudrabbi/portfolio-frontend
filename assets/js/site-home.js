@@ -133,9 +133,9 @@
       <div class="spotlight-card ${i === 0 ? 'active' : ''}" data-slide="${i}">
         <div class="spotlight-top-row">
           <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
-            <i class="bi bi-stars me-1"></i> ${escapeHtml(item.badge || 'Spotlight Highlight')}
+            <i class="bi bi-stars"></i> ${escapeHtml(item.badge || 'Spotlight Highlight')}
           </div>
-          ${item.tag ? `<span class="spotlight-tag">${escapeHtml(item.tag)}</span>` : ''}
+          ${item.tag ? `<span class="spotlight-tag"><i class="bi bi-hash"></i>${escapeHtml(item.tag)}</span>` : ''}
         </div>
         
         <div class="spotlight-body">
@@ -147,7 +147,10 @@
         </div>
 
         <div class="spotlight-footer">
-          <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);"><i class="bi bi-clock-history me-1"></i> Featured</span>
+          <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:4px;">
+            <i class="bi bi-lightning-charge-fill" style="font-size:0.7rem;color:rgba(120,169,255,0.7);"></i>
+            <span>${i + 1} / ${items.length}</span>
+          </span>
           ${item.linkUrl ? `<a href="${escapeHtml(item.linkUrl)}" class="spotlight-link">${escapeHtml(item.linkLabel || 'Explore')} <i class="bi bi-arrow-right"></i></a>` : ''}
         </div>
       </div>
