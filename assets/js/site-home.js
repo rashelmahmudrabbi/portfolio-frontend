@@ -328,14 +328,7 @@
     if (el) {
       const narrative = (about.text && about.text.trim().length > 0) ? about.text.trim() : '';
       if (narrative.length > 0) {
-        // If user entered custom text (supports multiple paragraphs separated by blank lines or direct HTML)
-        const paragraphs = narrative.includes('<p>')
-          ? narrative
-          : narrative
-              .split(/\n\s*\n/)
-              .map(par => `<p>${par.trim().replace(/\n/g, '<br/>')}</p>`)
-              .join('');
-        el.innerHTML = paragraphs;
+        el.innerHTML = formatRichText(narrative);
       } else {
         // Default 3-paragraph executive narrative if about_text is empty
         el.innerHTML = `
@@ -545,7 +538,7 @@
           pub.abstract
             ? `<div class="pub-abstract-toggle" onclick="this.classList.toggle('open')">
           <span class="abstract-label"><i class="bi bi-chevron-right abstract-arrow"></i> Abstract</span>
-          <div class="abstract-body">${escapeHtml(pub.abstract)}</div>
+          <div class="abstract-body">${formatRichText(pub.abstract)}</div>
         </div>`
             : ''
         }
@@ -567,7 +560,7 @@
           <div class="project-img"><i class="bi bi-cpu"></i></div>
           <div class="project-body">
             <div class="project-title">${escapeHtml(p.title || '')}</div>
-            <div class="project-desc${isLong ? ' collapsed' : ''}">${escapeHtml(desc)}</div>
+            <div class="project-desc${isLong ? ' collapsed' : ''}">${formatRichText(desc)}</div>
             ${isLong ? `<button type="button" class="btn-learn-more" onclick="toggleProjectDesc(this)">Learn More <i class="bi bi-chevron-down ms-1"></i></button>` : ''}
             <div class="mb-2">${(p.tech || []).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}</div>
             <div class="project-links">
@@ -590,7 +583,7 @@
       <div class="thesis-card">
         <div class="thesis-label"><i class="bi bi-mortarboard-fill me-1"></i>Final Year Thesis &middot; ${escapeHtml(thesis.year || '')}</div>
         <div class="thesis-title">${escapeHtml(thesis.title || '')}</div>
-        <p class="thesis-desc">${escapeHtml(thesis.description || '')}</p>
+        <div class="thesis-desc">${formatRichText(thesis.description || '')}</div>
         <div class="mb-3">${(thesis.tech || []).map((t) => `<span class="thesis-chip">${escapeHtml(t)}</span>`).join('')}</div>
         <div class="d-flex gap-2 flex-wrap">
           ${thesis.githubLink ? `<a class="thesis-link" href="${escapeHtml(thesis.githubLink)}" target="_blank"><i class="bi bi-github"></i> GitHub</a>` : ''}

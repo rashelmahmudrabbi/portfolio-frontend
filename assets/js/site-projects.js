@@ -42,7 +42,7 @@
             <span class="accuracy-badge"><i class="bi bi-calendar me-1"></i>${escapeHtml(p.year || '')}</span>
           </div>
           <div class="featured-title">${escapeHtml(p.title || '')}</div>
-          <p class="featured-desc">${escapeHtml(p.description || '')}</p>
+          <div class="featured-desc">${formatRichText(p.description || '')}</div>
           <div class="mb-3">${techChips(p.tech, 'tech-chip')}</div>
           <div class="d-flex gap-2 flex-wrap">
             ${p.githubLink ? `<a class="project-link" href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github"></i> GitHub</a>` : ''}
@@ -58,7 +58,7 @@
     <div class="thesis-card filterable" data-year="${escapeHtml(p.year || '')}" data-type="research">
       <div class="thesis-label"><i class="bi bi-mortarboard-fill me-1"></i>Final Year Thesis &middot; ${escapeHtml(p.year || '')}</div>
       <div class="thesis-title">${escapeHtml(p.title || '')}</div>
-      <p class="thesis-desc">${escapeHtml(p.description || '')}</p>
+      <div class="thesis-desc">${formatRichText(p.description || '')}</div>
       <div class="mb-3">${techChips(p.tech, 'thesis-chip')}</div>
       <div class="d-flex gap-2 flex-wrap">
         ${p.githubLink ? `<a class="thesis-link" href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github"></i> GitHub</a>` : ''}
@@ -80,7 +80,7 @@
         </div>
         <div class="project-body">
           <div class="project-title">${escapeHtml(p.title || '')}</div>
-          <div class="project-desc${isLong ? ' collapsed' : ''}">${escapeHtml(desc)}</div>
+          <div class="project-desc${isLong ? ' collapsed' : ''}">${formatRichText(desc)}</div>
           ${isLong ? `<button type="button" class="btn-learn-more" onclick="toggleProjectDesc(this)">Learn More <i class="bi bi-chevron-down ms-1"></i></button>` : ''}
           <div class="tech-chips">${techChips(p.tech, 'tech-chip')}</div>
           <div class="project-links">

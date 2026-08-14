@@ -69,7 +69,7 @@
   document.getElementById('teachingContent').innerHTML = `
     <div class="philosophy-card">
       <h4><i class="bi bi-lightbulb me-2"></i>Teaching Philosophy</h4>
-      ${escapeHtml(t.philosophy || '')}
+      ${formatRichText(t.philosophy || '')}
     </div>
 
     <div class="section-title">Teaching Roles</div>
@@ -84,9 +84,9 @@
     <div class="mentor-note">
       <i class="bi bi-chat-heart"></i>
       <h5>Open to Mentoring &amp; Collaboration</h5>
-      <p>${escapeHtml(t.mentoringText || '')} ${
+      <div>${formatRichText(t.mentoringText || '')} ${
     p.email ? `Feel free to reach out at <a href="mailto:${escapeHtml(p.email)}">${escapeHtml(p.email)}</a>` : ''
-  }</p>
+  }</div>
     </div>`;
 
   document.getElementById('footerYear').textContent = new Date().getFullYear();

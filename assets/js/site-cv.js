@@ -92,7 +92,7 @@
         <div style="font-weight:700;color:var(--navy);">${escapeHtml(pr.title || '')}</div>
         <span style="font-size:.75rem;color:var(--gold);font-weight:600;">${escapeHtml(pr.year || '')}</span>
       </div>
-      <div style="font-size:.83rem;color:var(--text-mid);margin-top:.3rem;line-height:1.6;">${escapeHtml(pr.description || '')}</div>
+      <div style="font-size:.83rem;color:var(--text-mid);margin-top:.3rem;line-height:1.6;">${formatRichText(pr.description || '')}</div>
       <div style="margin-top:.4rem;">${(pr.tech || []).map((t) => `<span class="skill-tag" style="font-size:.72rem;">${escapeHtml(t)}</span>`).join('')}</div>
     </div>`
     )
@@ -103,7 +103,7 @@
     <div class="cv-item-card">
       <div style="font-weight:700;color:var(--navy);">${escapeHtml(pr.title || '')}</div>
       <div style="font-size:.8rem;color:var(--gold);">${(pr.tech || []).join(' · ')} &nbsp;·&nbsp; ${escapeHtml(pr.year || '')}</div>
-      <div style="font-size:.82rem;color:var(--text-mid);margin-top:.3rem;">${escapeHtml(pr.description || '')}</div>
+      <div style="font-size:.82rem;color:var(--text-mid);margin-top:.3rem;">${formatRichText(pr.description || '')}</div>
     </div>`
     )
     .join('');

@@ -1972,6 +1972,75 @@ h1, h2, h3, h4, h5 {
   color: var(--ink-soft);
 }
 
+/* ── Rich Text Typography & Alignment Styles ── */
+.abstract-body p,
+.project-desc p,
+.thesis-desc p,
+.featured-desc p,
+.post-excerpt p,
+.philosophy-card p,
+#objectiveText p {
+  margin-bottom: 0.75rem;
+}
+
+.abstract-body p:last-child,
+.project-desc p:last-child,
+.thesis-desc p:last-child,
+.featured-desc p:last-child,
+.post-excerpt p:last-child,
+.philosophy-card p:last-child,
+#objectiveText p:last-child {
+  margin-bottom: 0;
+}
+
+.abstract-body ul, .abstract-body ol,
+.project-desc ul, .project-desc ol,
+.thesis-desc ul, .thesis-desc ol,
+.philosophy-card ul, .philosophy-card ol,
+#objectiveText ul, #objectiveText ol {
+  margin: 0.4rem 0 0.8rem 1.4rem;
+  padding-left: 0.5rem;
+}
+
+.abstract-body li,
+.project-desc li,
+.thesis-desc li,
+.philosophy-card li,
+#objectiveText li {
+  margin-bottom: 0.3rem;
+  line-height: 1.6;
+}
+
+.abstract-body strong, .abstract-body b,
+.project-desc strong, .project-desc b,
+.thesis-desc strong, .thesis-desc b,
+.post-excerpt strong, .post-excerpt b,
+.philosophy-card strong, .philosophy-card b,
+#objectiveText strong, #objectiveText b {
+  font-weight: 700;
+  color: var(--navy-deep);
+}
+
+[data-theme="dark"] .abstract-body strong, [data-theme="dark"] .abstract-body b,
+[data-theme="dark"] .project-desc strong, [data-theme="dark"] .project-desc b,
+[data-theme="dark"] .thesis-desc strong, [data-theme="dark"] .thesis-desc b,
+[data-theme="dark"] .post-excerpt strong, [data-theme="dark"] .post-excerpt b,
+[data-theme="dark"] .philosophy-card strong, [data-theme="dark"] .philosophy-card b,
+[data-theme="dark"] #objectiveText strong, [data-theme="dark"] #objectiveText b {
+  color: #F1F5F9;
+}
+
+.abstract-body u, .project-desc u, .philosophy-card u, #objectiveText u {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+
+.text-justify {
+  text-align: justify !important;
+  text-justify: inter-word;
+}
+
 .pub-links {
   display: flex;
   gap: .8rem;

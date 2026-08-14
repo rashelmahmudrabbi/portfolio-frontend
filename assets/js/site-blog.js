@@ -37,7 +37,7 @@
             ${post.readTime ? `<span><i class="bi bi-clock"></i>${escapeHtml(post.readTime)}</span>` : ''}
           </div>
           <div class="post-title" style="font-size:1.1rem;">${escapeHtml(post.title || '')}</div>
-          <div class="post-excerpt">${escapeHtml(post.excerpt || '')}</div>
+          <div class="post-excerpt">${formatRichText(post.excerpt || '')}</div>
         </div>
       </div>
     </div>`;
@@ -80,7 +80,7 @@
             ${featured.category ? `<span><i class="bi bi-tag"></i>${escapeHtml(featured.category)}</span>` : ''}
           </div>
           <div class="post-title">${escapeHtml(featured.title || '')}</div>
-          <div class="post-excerpt">${escapeHtml(featured.excerpt || '')}</div>
+          <div class="post-excerpt">${formatRichText(featured.excerpt || '')}</div>
         </div>
       </div>
       <div class="row g-3">${rest.map((p, i) => postCardHtml(p, i)).join('')}</div>

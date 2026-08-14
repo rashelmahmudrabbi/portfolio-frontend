@@ -18,6 +18,29 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+// ─── Rich Text & Safe HTML Formatter ───────────────────────────────────────
+// Renders bold, italic, underline, lists, alignment, links, and paragraphs.
+// Converts legacy plain-text newlines into paragraphs automatically.
+function formatRichText(str, fallback = '') {
+  if (str === null || str === undefined) return fallback;
+  const raw = String(str).trim();
+  if (!raw) return fallback;
+
+  const hasHtml = /<[a-z][\s\S]*>/i.test(raw);
+  if (!hasHtml) {
+    return raw
+      .split(/\n\s*\n/)
+      .map((p) => `<p>${escapeHtml(p.trim()).replace(/\n/g, '<br/>')}</p>`)
+      .join('');
+  }
+
+  // Strip dangerous elements/attributes while preserving rich formatting tags
+  return raw
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/\son\w+\s*=\s*(?:'[^']*'|"[^"]*"|[^\s>]+)/gi, '')
+    .replace(/javascript:/gi, '');
+}
+
 // ─── Asset path resolver (handles data:, https://, media/ across root & subpages) ───
 function resolveAssetUrl(url, isSubpage = false) {
   if (!url) return '';
