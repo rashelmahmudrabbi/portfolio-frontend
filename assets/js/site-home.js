@@ -104,57 +104,102 @@
         badgeType: 'badge-pub',
         title: 'Cervical Cancer Cell Classification',
         description: 'Deep Transfer Learning with Attention-guided ResNet & DenseNet models on Pap smear datasets.',
-        tag: 'Journal Paper',
+        tag: 'Journal Paper · 2025',
         linkUrl: 'publications/index.html',
         linkLabel: 'View Paper'
       },
       {
-        badge: 'Latest AI Project',
+        badge: 'Flagship AI Project',
         badgeType: 'badge-proj',
         title: 'Oral Cancer Detection & Grading',
-        description: 'Histopathological image analysis powered by Vision Transformers and Grad-CAM explainability.',
-        tag: 'Medical Image AI',
+        description: 'Histopathological image analysis powered by Vision Transformers and Grad-CAM interpretability.',
+        tag: 'Medical AI · PyTorch',
         linkUrl: 'projects/index.html',
-        linkLabel: 'Explore'
+        linkLabel: 'Explore Code'
       },
       {
         badge: 'Research Vision',
         badgeType: 'badge-xai',
         title: 'Explainable & Trustworthy AI',
-        description: 'Building interpretable diagnostic models that clinical pathologists and healthcare specialists can trust.',
+        description: 'Building transparent diagnostic pipelines that clinical pathologists and doctors can inspect and trust.',
         tag: 'XAI & Healthcare',
         linkUrl: '#research',
-        linkLabel: 'Interests'
+        linkLabel: 'Research Areas'
       }
     ];
 
-    const dotsHtml = items.map((_, i) => `<span class="s-dot ${i === 0 ? 'active' : ''}" onclick="switchSpotlight(${i})"></span>`).join('');
-    const cardsHtml = items.map((item, i) => `
+    function getSpotlightIcon(item) {
+      const bType = (item.badgeType || '').toLowerCase();
+      const title = (item.title || '').toLowerCase();
+      const badge = (item.badge || '').toLowerCase();
+      if (bType.includes('pub') || title.includes('paper') || title.includes('classification') || badge.includes('pub')) {
+        return 'bi-journal-text';
+      }
+      if (bType.includes('proj') || title.includes('detection') || title.includes('project') || badge.includes('proj') || title.includes('model')) {
+        return 'bi-cpu-fill';
+      }
+      if (bType.includes('xai') || title.includes('explain') || title.includes('vision') || badge.includes('vision') || title.includes('trust')) {
+        return 'bi-lightbulb-fill';
+      }
+      if (title.includes('cancer') || title.includes('medical') || title.includes('health') || title.includes('diag')) {
+        return 'bi-heart-pulse-fill';
+      }
+      return 'bi-stars';
+    }
+
+    const dotsHtml = items.map((_, i) => `<span class="s-dot ${i === 0 ? 'active' : ''}" onclick="switchSpotlight(${i})" title="Slide ${i+1}"></span>`).join('');
+    const cardsHtml = items.map((item, i) => {
+      const iconClass = getSpotlightIcon(item);
+      let targetUrl = item.linkUrl || '';
+      let targetLabel = item.linkLabel || '';
+      if (!targetUrl) {
+        const bType = (item.badgeType || '').toLowerCase();
+        if (bType.includes('pub')) {
+          targetUrl = 'publications/index.html';
+          targetLabel = targetLabel || 'View Paper';
+        } else if (bType.includes('proj')) {
+          targetUrl = 'projects/index.html';
+          targetLabel = targetLabel || 'Explore Project';
+        } else {
+          targetUrl = '#research';
+          targetLabel = targetLabel || 'Learn More';
+        }
+      }
+      if (!targetLabel) targetLabel = 'Explore';
+
+      const thumbHtml = item.image
+        ? `<img src="${escapeHtml(resolveAssetUrl(item.image, false))}" class="spotlight-thumb" alt="${escapeHtml(item.title || '')}" onerror="this.outerHTML='<div class=\\'spotlight-icon-box ${escapeHtml(item.badgeType || 'badge-pub')}\\'><i class=\\'bi ${iconClass}\\'></i></div>'"/>`
+        : `<div class="spotlight-icon-box ${escapeHtml(item.badgeType || 'badge-pub')}"><i class="bi ${iconClass}"></i></div>`;
+
+      return `
       <div class="spotlight-card ${i === 0 ? 'active' : ''}" data-slide="${i}">
         <div class="spotlight-top-row">
           <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
-            <i class="bi bi-stars"></i> ${escapeHtml(item.badge || 'Spotlight Highlight')}
+            <i class="bi ${iconClass}"></i> ${escapeHtml(item.badge || 'Featured Highlight')}
           </div>
-          ${item.tag ? `<span class="spotlight-tag"><i class="bi bi-hash"></i>${escapeHtml(item.tag)}</span>` : ''}
+          ${item.tag ? `<span class="spotlight-tag"><i class="bi bi-tag-fill me-1" style="font-size:0.65rem;"></i>${escapeHtml(item.tag)}</span>` : ''}
         </div>
         
         <div class="spotlight-body">
-          ${item.image ? `<img src="${escapeHtml(item.image)}" class="spotlight-thumb" alt="${escapeHtml(item.title || '')}" onerror="this.style.display='none'"/>` : ''}
+          ${thumbHtml}
           <div class="spotlight-content">
-            <h4 class="spotlight-title" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Featured Highlight')}</h4>
-            <p class="spotlight-desc">${escapeHtml(item.description || 'Explore the research breakthroughs, methodologies, and open-source models.')}</p>
+            <h4 class="spotlight-title" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Research Highlight')}</h4>
+            <p class="spotlight-desc">${escapeHtml(item.description || 'Pioneering intelligent machine learning methodologies and reproducible research.')}</p>
           </div>
         </div>
 
         <div class="spotlight-footer">
-          <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:4px;">
-            <i class="bi bi-lightning-charge-fill" style="font-size:0.7rem;color:rgba(120,169,255,0.7);"></i>
-            <span>${i + 1} / ${items.length}</span>
+          <span class="spotlight-counter">
+            <i class="bi bi-lightning-charge-fill text-warning"></i>
+            <span>${i + 1} of ${items.length}</span>
           </span>
-          ${item.linkUrl ? `<a href="${escapeHtml(item.linkUrl)}" class="spotlight-link">${escapeHtml(item.linkLabel || 'Explore')} <i class="bi bi-arrow-right"></i></a>` : ''}
+          <a href="${escapeHtml(targetUrl)}" class="spotlight-link">
+            <span>${escapeHtml(targetLabel)}</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </div>
-      </div>
-    `).join('');
+      </div>`;
+    }).join('');
 
     document.getElementById('heroContainer').innerHTML = `
       <div class="col-12 col-md-auto text-center text-md-start">
@@ -196,8 +241,14 @@
         <div class="hero-spotlight-box">
           <div class="spotlight-header">
             <span class="spotlight-kicker"><i class="bi bi-stars text-primary me-1"></i> SPOTLIGHT HIGHLIGHTS</span>
-            <div class="spotlight-indicators" id="spotlightDots">
-              ${dotsHtml}
+            <div class="spotlight-header-actions">
+              <div class="spotlight-indicators" id="spotlightDots">
+                ${dotsHtml}
+              </div>
+              <div class="spotlight-nav-arrows">
+                <button class="s-nav-arrow" onclick="prevSpotlight()" aria-label="Previous highlight" title="Previous"><i class="bi bi-chevron-left"></i></button>
+                <button class="s-nav-arrow" onclick="nextSpotlight()" aria-label="Next highlight" title="Next"><i class="bi bi-chevron-right"></i></button>
+              </div>
             </div>
           </div>
           

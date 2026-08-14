@@ -550,6 +550,20 @@
     });
   }
 
+  function prevSpotlight() {
+    if (totalSpotlights <= 1) return;
+    currentSpotlight = (currentSpotlight - 1 + totalSpotlights) % totalSpotlights;
+    switchSpotlight(currentSpotlight);
+    startSpotlightTimer();
+  }
+
+  function nextSpotlight() {
+    if (totalSpotlights <= 1) return;
+    currentSpotlight = (currentSpotlight + 1) % totalSpotlights;
+    switchSpotlight(currentSpotlight);
+    startSpotlightTimer();
+  }
+
   function startSpotlightTimer() {
     if (spotlightInterval) clearInterval(spotlightInterval);
     if (totalSpotlights <= 1) return;

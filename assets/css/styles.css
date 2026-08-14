@@ -635,6 +635,52 @@ h1, h2, h3, h4, h5 {
   gap: 2px;
 }
 
+.spotlight-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spotlight-nav-arrows {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.s-nav-arrow {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.s-nav-arrow:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .s-nav-arrow {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+
+[data-theme="dark"] .s-nav-arrow:hover {
+  background: var(--gold);
+  color: #0B1F3A;
+}
+
 .spotlight-indicators {
   display: flex;
   gap: 6px;
@@ -701,7 +747,7 @@ h1, h2, h3, h4, h5 {
   letter-spacing: 0.4px;
   text-transform: uppercase;
   backdrop-filter: blur(4px);
-  gap: 4px;
+  gap: 5px;
 }
 
 .badge-pub {
@@ -734,7 +780,7 @@ h1, h2, h3, h4, h5 {
   width: 72px;
   height: 72px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
@@ -743,6 +789,40 @@ h1, h2, h3, h4, h5 {
 
 .spotlight-card:hover .spotlight-thumb {
   transform: scale(1.04);
+}
+
+.spotlight-icon-box {
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(47, 111, 237, 0.3);
+  background: linear-gradient(135deg, rgba(47, 111, 237, 0.2), rgba(15, 36, 68, 0.6));
+  color: #78A9FF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.spotlight-card:hover .spotlight-icon-box {
+  transform: scale(1.05) rotate(2deg);
+  border-color: var(--gold);
+  box-shadow: 0 8px 28px rgba(47, 111, 237, 0.35);
+}
+
+.spotlight-icon-box.badge-proj {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(8, 38, 28, 0.6));
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #6EE7B7;
+}
+
+.spotlight-icon-box.badge-xai {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(48, 36, 8, 0.6));
+  border-color: rgba(234, 179, 8, 0.35);
+  color: #FDE047;
 }
 
 .spotlight-content {
@@ -787,8 +867,21 @@ h1, h2, h3, h4, h5 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.6rem;
+  padding-top: 0.65rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.spotlight-counter {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.45);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .spotlight-counter {
+  color: rgba(241, 245, 249, 0.45);
 }
 
 .spotlight-tag {
@@ -812,7 +905,7 @@ h1, h2, h3, h4, h5 {
   gap: 5px;
   background: linear-gradient(135deg, rgba(47, 111, 237, 0.4), rgba(47, 111, 237, 0.25));
   border: 1px solid rgba(47, 111, 237, 0.5);
-  padding: 0.28rem 0.75rem;
+  padding: 0.28rem 0.8rem;
   border-radius: 8px;
   transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   letter-spacing: 0.2px;
@@ -823,7 +916,7 @@ h1, h2, h3, h4, h5 {
   border-color: #2F6FED;
   color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(47, 111, 237, 0.3);
+  box-shadow: 0 4px 16px rgba(47, 111, 237, 0.35);
 }
 
 /* ============ PAGE HERO (SOLID COLOR BANNER) ============ */

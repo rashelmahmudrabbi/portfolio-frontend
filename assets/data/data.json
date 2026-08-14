@@ -427,5 +427,37 @@
       "phone": "+8801738-663624",
       "email": "saifur.naim30@gmail.com"
     }
+  ],
+  "spotlights": [
+    {
+      "badge": "Top Publication",
+      "badge_type": "badge-pub",
+      "title": "HYBSWINEFF: Hybrid CNN-Transformer Fusion",
+      "description": "Binary & multi-stage blood cell cancer classification with Swin Transformer, EfficientNetV2, and LIME clinical interpretability.",
+      "tag": "Thesis & Publication",
+      "link_url": "publications/index.html",
+      "link_label": "View Paper",
+      "image": ""
+    },
+    {
+      "badge": "Flagship AI Project",
+      "badge_type": "badge-proj",
+      "title": "MRCL-ELM Satellite Image Classifier",
+      "description": "Novel hybrid deep learning system achieving 98.33% accuracy on EuroSAT with real-time LIME & SHAP explainability.",
+      "tag": "PyTorch · Remote Sensing",
+      "link_url": "projects/index.html",
+      "link_label": "Explore Code",
+      "image": ""
+    },
+    {
+      "badge": "Research Vision",
+      "badge_type": "badge-xai",
+      "title": "Explainable & Trustworthy AI (XAI)",
+      "description": "Building transparent diagnostic deep learning pipelines that clinical pathologists and healthcare specialists can inspect and trust.",
+      "tag": "XAI & Medical AI",
+      "link_url": "#research",
+      "link_label": "Research Areas",
+      "image": ""
+    }
   ]
 }
