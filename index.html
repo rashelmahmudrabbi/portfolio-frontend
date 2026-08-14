@@ -43,6 +43,77 @@
 </head>
 <body>
 
+<!-- FULLSCREEN CIRCULAR COUNTDOWN PRELOADER -->
+<div id="pagePreloader" class="page-preloader" aria-hidden="false">
+  <div class="preloader-content">
+    <div class="preloader-ring-wrap">
+      <svg class="preloader-svg" viewBox="0 0 120 120" width="120" height="120">
+        <defs>
+          <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2F6FED" />
+            <stop offset="50%" stop-color="#78A9FF" />
+            <stop offset="100%" stop-color="#F3C34F" />
+          </linearGradient>
+        </defs>
+        <circle class="preloader-track" cx="60" cy="60" r="52" fill="none" stroke-width="6"/>
+        <circle class="preloader-progress" id="preloaderProgressCircle" cx="60" cy="60" r="52" fill="none" stroke-width="6" stroke="url(#preloaderGradient)" stroke-dasharray="326.72" stroke-dashoffset="326.72"/>
+      </svg>
+      <div class="preloader-center">
+        <span class="preloader-percent" id="preloaderPercent">0%</span>
+      </div>
+    </div>
+    <div class="preloader-meta">
+      <div class="preloader-brand">RASHEL MAHMUD RABBI</div>
+      <div class="preloader-sub"><span class="preloader-pulse-dot"></span> Loading Research &amp; AI Portfolio...</div>
+    </div>
+  </div>
+</div>
+<script>
+  // Instant preloader countdown initialization
+  (function() {
+    var p = 0;
+    var circle = document.getElementById('preloaderProgressCircle');
+    var text = document.getElementById('preloaderPercent');
+    var preloader = document.getElementById('pagePreloader');
+    if (!circle || !text || !preloader) return;
+
+    var circ = 2 * Math.PI * 52; // 326.72
+    circle.style.strokeDasharray = circ + 'px';
+    circle.style.strokeDashoffset = circ + 'px';
+
+    function setP(val) {
+      p = Math.min(Math.max(val, 0), 100);
+      var offset = circ - (p / 100) * circ;
+      circle.style.strokeDashoffset = offset + 'px';
+      text.textContent = Math.round(p) + '%';
+    }
+
+    var timer = setInterval(function() {
+      if (p < 88) {
+        setP(p + Math.random() * 6 + 2);
+      }
+    }, 40);
+
+    window.dismissPreloader = function() {
+      clearInterval(timer);
+      setP(100);
+      setTimeout(function() {
+        if (preloader) {
+          preloader.classList.add('preloader-hidden');
+          setTimeout(function() {
+            preloader.style.display = 'none';
+          }, 450);
+        }
+      }, 200);
+    };
+
+    // Failsafe timer (3s max)
+    setTimeout(function() {
+      if (window.dismissPreloader) window.dismissPreloader();
+    }, 3000);
+  })();
+</script>
+
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="#hero" id="navBrand">

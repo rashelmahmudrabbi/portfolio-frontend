@@ -41,6 +41,11 @@
   safeRender('References',        () => renderReferences(references));
   safeRender('Footer',            () => renderFooter(settings));
 
+  // Dismiss preloader smoothly as all content is ready
+  if (window.dismissPreloader) {
+    window.dismissPreloader();
+  }
+
   // If the initial load had an error and returned empty data, show
   // error states in sections that got no content:
   if (loadError) {
