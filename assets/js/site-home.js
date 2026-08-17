@@ -1,4 +1,4 @@
-﻿// ─── Homepage renderer ───────────────────────────────────────────────────
+// ─── Homepage renderer ───────────────────────────────────────────────────
 // Uses the combined /api/portfolio endpoint (via api.js getPortfolio) for a
 // single round-trip, with stale-while-revalidate caching. Each section has
 // an individual retry mechanism so one failed section doesn't blank out the
@@ -209,7 +209,7 @@
     document.getElementById('heroContainer').innerHTML = `
       <div class="col-12 col-md-auto text-center text-md-start">
         <div class="hero-avatar-wrap">
-          <img src="${p.avatar || getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
+          <img src="${p.avatar ? escapeHtml(resolveAssetUrl(p.avatar, false)) : getInitialsPlaceholder(p.name)}" class="hero-avatar" alt="${escapeHtml(p.name || '')}"
                onerror="this.onerror=null;this.src='${getInitialsPlaceholder(p.name)}'"/>
           <div class="hero-status-pill">
             <span class="status-pulse-dot"></span> ${escapeHtml(p.heroStatusText || 'Open to research')}
@@ -668,7 +668,7 @@
           (a) => `
       <div class="award-item">
         <div class="award-icon"><i class="bi bi-trophy-fill"></i></div>
-        ${a.image ? `<img src="${escapeHtml(a.image)}" class="award-thumb" alt="${escapeHtml(a.title || '')}" loading="lazy"
+        ${a.image ? `<img src="${escapeHtml(resolveAssetUrl(a.image, false))}" class="award-thumb" alt="${escapeHtml(a.title || '')}" loading="lazy"
              onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
              onclick="showImageModal(this.src,'${escapeHtml(a.title || '')}')"/>` : ''}
         <div>
@@ -694,7 +694,7 @@
       .map(
         (ev, idx) => `
       <div class="gallery-item" onclick="openLightbox(${idx})">
-        <img src="${escapeHtml((ev.photos && ev.photos[0] && ev.photos[0].src) || '')}" alt="${escapeHtml(ev.title || '')}" loading="lazy"
+        <img src="${escapeHtml(resolveAssetUrl((ev.photos && ev.photos[0] && ev.photos[0].src) || '', false))}" alt="${escapeHtml(ev.title || '')}" loading="lazy"
              onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"/>
         <span class="gallery-photo-badge"><i class="bi bi-images"></i> ${(ev.photos || []).length}</span>
         <div class="gallery-overlay">
@@ -770,4 +770,5 @@
     if (p.title) document.getElementById('footerTitle').textContent = p.title;
   }
 })();
+
 

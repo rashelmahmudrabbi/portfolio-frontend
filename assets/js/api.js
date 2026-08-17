@@ -50,6 +50,9 @@ function resolveAssetUrl(url, isSubpage = false) {
   if (str.startsWith('data:') || str.startsWith('http://') || str.startsWith('https://') || str.startsWith('//')) {
     return str;
   }
+  if (str.startsWith('/api/')) {
+    return API_BASE.replace(/\/api\/?$/, '') + str;
+  }
   if (str.startsWith('/')) {
     return str;
   }

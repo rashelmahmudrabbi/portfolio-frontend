@@ -699,7 +699,7 @@
 
   function lbRender() {
     const p = lbPhotos[lbIndex];
-    document.getElementById('lbImage').src = p.src;
+    document.getElementById('lbImage').src = resolveAssetUrl(p.src, false);
     document.getElementById('lbCaption').textContent = p.caption || '';
     document.getElementById('lbTitle').textContent = lbEventTitle;
     document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbPhotos.length;
@@ -709,7 +709,7 @@
     strip.innerHTML = '';
     lbPhotos.forEach((ph, i) => {
       const img = document.createElement('img');
-      img.src = ph.src;
+      img.src = resolveAssetUrl(ph.src, false);
       img.style.cssText = `height:54px;width:72px;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid ${i===lbIndex?'var(--gold)':'transparent'};opacity:${i===lbIndex?'1':'0.55'};transition:all .2s;flex-shrink:0;`;
       img.onclick = () => { lbIndex = i; lbRender(); };
       strip.appendChild(img);
