@@ -607,7 +607,10 @@
         <div class="cert">
           <div class="cert-inner">
             <div class="cert-face cert-front">
-              <div class="badge">★</div>
+              ${c.image 
+                ? `<div class="badge badge-img"><img src="${escapeHtml(resolveAssetUrl(c.image, false))}" alt="${escapeHtml(c.title || '')}" loading="lazy"/></div>`
+                : `<div class="badge text-badge">★</div>`
+              }
               <h3>${escapeHtml(c.title || '')}</h3>
               <div class="hint">Hover to verify</div>
             </div>
