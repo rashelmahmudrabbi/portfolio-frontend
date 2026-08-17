@@ -2261,46 +2261,77 @@ h1, h2, h3, h4, h5 {
 }
 
 /* SKILLS */
+@keyframes skillFadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .skill-group {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(11, 31, 58, 0.02);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  animation: skillFadeUp 0.6s var(--ease) both;
+}
+
+.skill-group:nth-child(1) { animation-delay: 0.05s; }
+.skill-group:nth-child(2) { animation-delay: 0.15s; }
+
+.skill-group:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(11, 31, 58, 0.06);
 }
 
 .skill-group-label {
-  font-size: .78rem;
-  font-weight: 600;
+  font-size: .85rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-mid);
-  margin-bottom: .8rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: .6rem;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skill-group-label i {
+  -webkit-text-fill-color: var(--navy);
+  font-size: 1.1rem;
 }
 
 .skill-group-label::after {
   content: '';
   flex: 1;
-  height: 1px;
-  background: var(--border);
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-tint), transparent);
+  margin-left: 0.5rem;
 }
 
 .skill-tag {
   display: inline-block;
-  background: var(--slate-lt);
+  background: var(--bg-alt);
   color: var(--navy);
-  font-size: .82rem;
-  padding: .35rem .85rem;
+  font-size: .85rem;
+  padding: .4rem 1rem;
   border-radius: 25px;
-  margin: .25rem .3rem .25rem 0;
-  font-weight: 500;
-  transition: all .2s;
+  margin: .3rem .4rem .3rem 0;
+  font-weight: 600;
+  transition: all 0.25s var(--ease);
   border: 1px solid var(--border);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .skill-tag:hover {
   background: var(--navy);
   color: #fff;
   border-color: var(--navy);
+  transform: scale(1.06) translateY(-3px);
+  box-shadow: 0 6px 12px rgba(23, 59, 103, 0.18);
 }
 
 /* AWARDS */
