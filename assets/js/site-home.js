@@ -1,4 +1,4 @@
-// ─── Homepage renderer ───────────────────────────────────────────────────
+﻿// ─── Homepage renderer ───────────────────────────────────────────────────
 // Uses the combined /api/portfolio endpoint (via api.js getPortfolio) for a
 // single round-trip, with stale-while-revalidate caching. Each section has
 // an individual retry mechanism so one failed section doesn't blank out the
@@ -373,9 +373,9 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <h5>${escapeHtml(exp.title || '')}</h5>
-          <div class="org">${escapeHtml(exp.org || '')}</div>
-          <div class="period">${escapeHtml(exp.period || '')}</div>
+          <h5>${escapeHtml(exp.title || exp.role || '')}</h5>
+          <div class="org">${escapeHtml(exp.org || exp.company || '')}</div>
+          <div class="period">${escapeHtml(exp.period || exp.date_range || '')}</div>
           <ul>${(exp.bullets || []).map((b) => `<li>${escapeHtml(b)}</li>`).join('')}</ul>
         </div>
       </div>`
@@ -543,8 +543,8 @@
             : ''
         }
         <div class="pub-links">
-          ${pub.pdfLink ? `<a class="pub-link" href="${escapeHtml(pub.pdfLink)}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> PDF</a>` : ''}
-          ${pub.doiLink ? `<a class="pub-link btn-outline" href="${escapeHtml(pub.doiLink)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> DOI / IEEE</a>` : ''}
+          ${pub.pdfLink || pub.pdf_link ? `<a class="pub-link" href="${escapeHtml(pub.pdfLink || pub.pdf_link)}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> PDF</a>` : ''}
+          ${pub.doiLink || pub.doi_link ? `<a class="pub-link btn-outline" href="${escapeHtml(pub.doiLink || pub.doi_link)}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> DOI / IEEE</a>` : ''}
         </div>
       </div>`
       )
@@ -564,8 +564,8 @@
             ${isLong ? `<button type="button" class="btn-learn-more" onclick="toggleProjectDesc(this)">Learn More <i class="bi bi-chevron-down ms-1"></i></button>` : ''}
             <div class="mb-2">${(p.tech || []).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}</div>
             <div class="project-links">
-              ${p.githubLink ? `<a href="${escapeHtml(p.githubLink)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
-              ${p.paperLink ? `<a href="${escapeHtml(p.paperLink)}" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>Live Project</a>` : ''}
+              ${p.githubLink || p.github_link ? `<a href="${escapeHtml(p.githubLink || p.github_link)}" target="_blank"><i class="bi bi-github me-1"></i>GitHub</a>` : ''}
+              ${p.paperLink || p.paper_link ? `<a href="${escapeHtml(p.paperLink || p.paper_link)}" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>Live Project</a>` : ''}
             </div>
             <small class="text-muted mt-2 d-block">${escapeHtml(p.year || '')}</small>
           </div>
@@ -770,3 +770,4 @@
     if (p.title) document.getElementById('footerTitle').textContent = p.title;
   }
 })();
+
