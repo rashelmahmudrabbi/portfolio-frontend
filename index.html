@@ -96,21 +96,26 @@
 
     window.dismissPreloader = function() {
       clearInterval(timer);
-      setP(100);
-      setTimeout(function() {
-        if (preloader) {
-          preloader.classList.add('preloader-hidden');
+      // smoothly finish to 100%
+      var finishTimer = setInterval(function() {
+        if (p < 100) {
+          setP(p + (100 - p) * 0.2 + 1); // smooth ease to 100
+        } else {
+          clearInterval(finishTimer);
+          setP(100);
           setTimeout(function() {
-            preloader.style.display = 'none';
-          }, 450);
+            if (preloader) {
+              preloader.classList.add('preloader-hidden');
+              setTimeout(function() {
+                preloader.style.display = 'none';
+              }, 450);
+            }
+          }, 300);
         }
-      }, 200);
+      }, 20);
     };
 
-    // Failsafe timer (3s max)
-    setTimeout(function() {
-      if (window.dismissPreloader) window.dismissPreloader();
-    }, 3000);
+    // Failsafe timer removed so it waits for actual backend load
   })();
 </script>
 
