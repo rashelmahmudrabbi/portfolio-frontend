@@ -4,9 +4,10 @@
 // this whole script.
 
 // ─── Constants ───────────────────────────────────────────────────────────
-const FETCH_TIMEOUT_MS = 20000;
+// Fallback strategy: Network -> LocalStorage Cache -> Static Data.json -> Empty
 const CACHE_KEY = 'portfolio_cache';
-const CACHE_TTL_MS = 0; // Cache disabled to show updates immediately
+const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours (was 15 mins)
+const FETCH_TIMEOUT_MS = 20000; // 20s network timeout before fallback
 
 // ─── HTML escaping helper ─────────────────────────────────────────────────
 function escapeHtml(str) {
@@ -99,7 +100,7 @@ async function fetchJSON(path, fallback) {
 // Uses sessionStorage for instant repeat-visit rendering.
 function getCachedPortfolio() {
   try {
-    const raw = sessionStorage.getItem(CACHE_KEY);
+    const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const cached = JSON.parse(raw);
     if (!cached || !cached.timestamp) return null;
@@ -111,7 +112,7 @@ function getCachedPortfolio() {
 
 function setCachedPortfolio(data) {
   try {
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
       timestamp: Date.now(),
       data: data,
     }));
