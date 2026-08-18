@@ -1519,19 +1519,30 @@ h1, h2, h3, h4, h5 {
   top: 12px;
   bottom: 12px;
   width: 2px;
-  background: var(--line);
+  background: linear-gradient(to bottom, #2F6FED, var(--line));
+}
+
+[data-theme="dark"] .academic-timeline::before {
+  background: linear-gradient(to bottom, #78A9FF, var(--line));
 }
 
 .academic-timeline-item {
   position: relative;
-  padding: 8px 12px 18px 10px;
-  border-radius: 10px;
-  transition: all .2s var(--ease);
+  padding: 12px 14px 18px 14px;
+  border-radius: 12px;
+  transition: all .3s var(--ease);
+  border: 1px solid transparent;
 }
 
 .academic-timeline-item:hover {
   background: var(--surface-2);
-  transform: translateX(4px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--line-soft);
+}
+
+[data-theme="dark"] .academic-timeline-item:hover {
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .academic-timeline-item:last-child {
@@ -1552,17 +1563,29 @@ h1, h2, h3, h4, h5 {
   z-index: 2;
 }
 
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(47, 111, 237, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(47, 111, 237, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 111, 237, 0); }
+}
+
+@keyframes pulseRingDark {
+  0% { box-shadow: 0 0 0 0 rgba(120, 169, 255, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(120, 169, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(120, 169, 255, 0); }
+}
+
 /* Highlight the latest / highest completed degree */
 .academic-timeline-item:first-child::before {
   border-color: #2F6FED;
   background: #2F6FED;
-  box-shadow: 0 0 0 4px rgba(47, 111, 237, 0.2);
+  animation: pulseRing 2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
 [data-theme="dark"] .academic-timeline-item:first-child::before {
   border-color: #78A9FF;
   background: #78A9FF;
-  box-shadow: 0 0 0 4px rgba(120, 169, 255, 0.2);
+  animation: pulseRingDark 2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
 .ti-degree {
@@ -1572,10 +1595,19 @@ h1, h2, h3, h4, h5 {
   color: var(--navy-deep);
   line-height: 1.35;
   letter-spacing: -0.01em;
+  transition: color .2s ease;
+}
+
+.academic-timeline-item:hover .ti-degree {
+  color: var(--navy);
 }
 
 [data-theme="dark"] .ti-degree {
   color: var(--ink);
+}
+
+[data-theme="dark"] .academic-timeline-item:hover .ti-degree {
+  color: var(--gold);
 }
 
 .ti-meta {
