@@ -490,8 +490,6 @@
           ${getGradeChip(e) ? `<span class="ti-grade-chip">${escapeHtml(getGradeChip(e))}</span>` : ''}
         </div>
         <div class="ti-meta d-flex align-items-center gap-2 flex-wrap">
-          <span class="ti-stage-badge">${escapeHtml(getStageLabel(e))}</span>
-          <span class="ti-dot">&bull;</span>
           <span class="ti-institution">${escapeHtml(getInstitutionName(e))}</span>
           ${e.year ? `<span class="ti-dot">&bull;</span><span class="ti-year">${escapeHtml(e.year)}</span>` : ''}
         </div>
