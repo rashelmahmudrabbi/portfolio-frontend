@@ -3113,9 +3113,18 @@ footer a {
 }
 
 [data-theme="dark"] .cert-back {
-  background: var(--surface-2);
-  border-color: var(--line);
-  color: var(--ink);
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .cert-back h4 {
+  color: #000000 !important;
+}
+
+[data-theme="dark"] .cert-back .cert-link {
+  color: #2F6FED !important;
 }
 
 .cert-back .issuer {
