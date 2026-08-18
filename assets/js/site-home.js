@@ -355,17 +355,13 @@
       .map(
         (ri) => `
       <div class="col-lg-4 col-md-6 mb-3">
-        <div class="cert">
-          <div class="cert-inner">
-            <div class="cert-face cert-front">
-              <div class="badge" style="font-size: 1.8rem;"><i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i></div>
-              <h3>${escapeHtml(ri.topic || '')}</h3>
-              <div class="hint">Hover to learn more</div>
-            </div>
-            <div class="cert-face cert-back" style="padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-              <h4 style="color:var(--gold-soft); font-family:'DM Sans', sans-serif; font-size:1.1rem; margin-bottom:10px;">${escapeHtml(ri.topic || '')}</h4>
-              <div style="font-size:0.85rem; line-height:1.4; opacity:0.9; font-weight:400;">${escapeHtml(ri.desc || '')}</div>
-            </div>
+        <div class="cert-card" style="padding: 1rem; align-items: center; gap: 0.8rem; height: 100%;">
+          <div class="cert-icon" style="font-size: 1.5rem; background: rgba(47,111,237,0.1); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+            <i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i>
+          </div>
+          <div style="flex:1;">
+            <h3 class="cert-title" style="margin-bottom: 0.2rem; font-size: 0.95rem;">${escapeHtml(ri.topic || '')}</h3>
+            <div class="cert-meta" style="font-size: 0.8rem; line-height: 1.3;">${escapeHtml(ri.desc || '')}</div>
           </div>
         </div>
       </div>`
@@ -611,19 +607,25 @@
     el.innerHTML = certifications
       .map(
         (c) => `
-      <div class="col-lg-6">
-        <div class="cert-card">
-          ${c.image 
-            ? `<img src="${escapeHtml(resolveAssetUrl(c.image, false))}" alt="${escapeHtml(c.title || '')}" class="cert-thumb" loading="lazy" onclick="if(typeof showImageModal === 'function') showImageModal(this.src, '${escapeHtml(c.title || '')}')" />`
-            : `<i class="bi bi-award-fill cert-icon"></i>`
-          }
-          <div style="flex:1;">
-            <h3 class="cert-title">${escapeHtml(c.title || '')}</h3>
-            <div class="cert-meta mb-2">${escapeHtml(c.issuer || '')} &nbsp;&bull;&nbsp; Issued ${escapeHtml(c.year || '')}</div>
-            <div>
-              ${(c.pdf_link || c.pdfLink) ? `<a href="${escapeHtml(resolveAssetUrl(c.pdf_link || c.pdfLink, false))}" class="cert-link" target="_blank" title="View Certificate"><i class="bi bi-file-earmark-pdf"></i> View</a>` : ''}
-              ${(c.verify_link || c.verifyLink) ? `<a href="${escapeHtml(c.verify_link || c.verifyLink)}" class="cert-link" target="_blank" title="Verify Certificate"><i class="bi bi-shield-check"></i> Verify</a>` : ''}
-              <span class="cert-meta" style="font-size:0.75rem; margin-left: 0.5rem;">ID: ${escapeHtml(c.id || 'N/A')}</span>
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="cert">
+          <div class="cert-inner">
+            <div class="cert-face cert-front">
+              ${c.image 
+                ? `<div class="badge badge-img"><img src="${escapeHtml(resolveAssetUrl(c.image, false))}" alt="${escapeHtml(c.title || '')}" loading="lazy"/></div>`
+                : `<div class="badge text-badge">★</div>`
+              }
+              <h3>${escapeHtml(c.title || '')}</h3>
+              <div class="hint">Hover to verify</div>
+            </div>
+            <div class="cert-face cert-back" style="padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+              <h4 style="color:var(--gold-soft); font-family:'DM Sans', sans-serif; font-size:1.05rem; margin-bottom:5px;">${escapeHtml(c.issuer || '')}</h4>
+              <div style="font-size:0.85rem; margin-bottom:8px;">Issued ${escapeHtml(c.year || '')}</div>
+              <div style="font-size:0.75rem; margin-bottom:15px; opacity:0.8;">ID: ${escapeHtml(c.id || 'N/A')}</div>
+              <div style="display:flex; justify-content:center; gap: 15px;">
+                ${(c.pdf_link || c.pdfLink) ? `<a href="${escapeHtml(resolveAssetUrl(c.pdf_link || c.pdfLink, false))}" class="cert-link" target="_blank" title="View Certificate"><i class="bi bi-file-earmark-pdf"></i> View</a>` : ''}
+                ${(c.verify_link || c.verifyLink) ? `<a href="${escapeHtml(c.verify_link || c.verifyLink)}" class="cert-link" target="_blank" title="Verify Certificate"><i class="bi bi-shield-check"></i> Verify</a>` : ''}
+              </div>
             </div>
           </div>
         </div>
