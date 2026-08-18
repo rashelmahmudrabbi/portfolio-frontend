@@ -354,7 +354,7 @@
     el.innerHTML = list
       .map(
         (ri) => `
-      <div class="col-lg-4 col-md-6 mb-3">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="research-card">
           <div class="research-card-icon">
             <i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i>
@@ -605,7 +605,7 @@
     el.innerHTML = certifications
       .map(
         (c) => `
-      <div class="col-lg-4 col-md-6 mb-3">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="cert">
           <div class="cert-inner">
             <div class="cert-face cert-front">
@@ -616,11 +616,11 @@
               <h3>${escapeHtml(c.title || '')}</h3>
               <div class="hint">Hover to verify</div>
             </div>
-            <div class="cert-face cert-back" style="padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-              <h4 style="color:var(--gold-soft); font-family:'DM Sans', sans-serif; font-size:1.05rem; margin-bottom:5px;">${escapeHtml(c.issuer || '')}</h4>
-              <div style="font-size:0.85rem; margin-bottom:8px;">Issued ${escapeHtml(c.year || '')}</div>
-              <div style="font-size:0.75rem; margin-bottom:15px; opacity:0.8;">ID: ${escapeHtml(c.id || 'N/A')}</div>
-              <div style="display:flex; justify-content:center; gap: 15px;">
+            <div class="cert-face cert-back" style="padding:15px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+              <h4 style="color:var(--gold-soft); font-family:'DM Sans', sans-serif; font-size:1rem; margin-bottom:5px;">${escapeHtml(c.issuer || '')}</h4>
+              <div style="font-size:0.8rem; margin-bottom:6px;">Issued ${escapeHtml(c.year || '')}</div>
+              <div style="font-size:0.7rem; margin-bottom:12px; opacity:0.8;">ID: ${escapeHtml(c.id || 'N/A')}</div>
+              <div style="display:flex; justify-content:center; gap: 8px; flex-wrap:wrap;">
                 ${(c.pdf_link || c.pdfLink) ? `<a href="${escapeHtml(resolveAssetUrl(c.pdf_link || c.pdfLink, false))}" class="cert-link" target="_blank" title="View Certificate"><i class="bi bi-file-earmark-pdf"></i> View</a>` : ''}
                 ${(c.verify_link || c.verifyLink) ? `<a href="${escapeHtml(c.verify_link || c.verifyLink)}" class="cert-link" target="_blank" title="Verify Certificate"><i class="bi bi-shield-check"></i> Verify</a>` : ''}
               </div>
