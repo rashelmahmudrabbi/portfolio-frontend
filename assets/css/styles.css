@@ -21,6 +21,26 @@
   --radius-m: 12px;
   --radius-l: 18px;
   --ease: cubic-bezier(.22, 1, .36, 1);
+
+  /* Badge semantic tokens */
+  --badge-conference-bg: #D8E7FF;
+  --badge-conference-text: #2F6FED;
+  --badge-thesis-bg: #EDE9FE;
+  --badge-thesis-text: #6D28D9;
+  --badge-preprint-bg: #FEF3C7;
+  --badge-preprint-text: #D97706;
+  --badge-book-bg: #FCE7F3;
+  --badge-book-text: #BE185D;
+  --badge-published-bg: #DEF7EC;
+  --badge-published-text: #03543F;
+  --badge-accepted-bg: #E1EFFE;
+  --badge-accepted-text: #1E429F;
+  --badge-completed-bg: #DEF7EC;
+  --badge-completed-text: #03543F;
+  --badge-review-bg: #FEF08A;
+  --badge-review-text: #854D0E;
+  --badge-preprint-status-bg: #EDEBFE;
+  --badge-preprint-status-text: #5521B5;
   
   /* Legacy variables for backwards compatibility */
   --navy-mid: var(--navy);
@@ -43,7 +63,7 @@
   --surface-2: #263449;
   --ink: #F1F5F9;
   --ink-soft: #C0CBD8;
-  --ink-faint: #91A0B3;
+  --ink-faint: #A0B1C5;
   --navy: #9FC5FF;
   --navy-deep: #10243D;
   --gold: #78A9FF;
@@ -53,6 +73,26 @@
   --line: rgba(241, 245, 249, 0.17);
   --line-soft: rgba(241, 245, 249, 0.10);
   --shadow: 0 24px 70px -30px rgba(0, 0, 0, 0.48);
+
+  /* Dark badge overrides */
+  --badge-conference-bg: rgba(47, 111, 237, 0.18);
+  --badge-conference-text: #93B8FF;
+  --badge-thesis-bg: rgba(109, 40, 217, 0.2);
+  --badge-thesis-text: #B794F6;
+  --badge-preprint-bg: rgba(217, 119, 6, 0.2);
+  --badge-preprint-text: #FCD34D;
+  --badge-book-bg: rgba(190, 24, 93, 0.2);
+  --badge-book-text: #F9A8D4;
+  --badge-published-bg: rgba(3, 84, 63, 0.25);
+  --badge-published-text: #31C48D;
+  --badge-accepted-bg: rgba(30, 66, 159, 0.2);
+  --badge-accepted-text: #93B8FF;
+  --badge-completed-bg: rgba(3, 84, 63, 0.25);
+  --badge-completed-text: #31C48D;
+  --badge-review-bg: rgba(133, 77, 14, 0.25);
+  --badge-review-text: #FACC15;
+  --badge-preprint-status-bg: rgba(109, 40, 217, 0.18);
+  --badge-preprint-status-text: #B794F6;
 }
 
 html {
@@ -1839,28 +1879,28 @@ h1, h2, h3, h4, h5 {
 }
 
 .badge-conference {
-  background: #D8E7FF;
-  color: #2F6FED;
+  background: var(--badge-conference-bg);
+  color: var(--badge-conference-text);
 }
 
 .badge-journal {
-  background: #D8E7FF;
-  color: #2F6FED;
+  background: var(--badge-conference-bg);
+  color: var(--badge-conference-text);
 }
 
 .badge-preprint {
-  background: #FEF3C7;
-  color: #D97706;
+  background: var(--badge-preprint-bg);
+  color: var(--badge-preprint-text);
 }
 
 .badge-book_chapter {
-  background: #FCE7F3;
-  color: #BE185D;
+  background: var(--badge-book-bg);
+  color: var(--badge-book-text);
 }
 
 .badge-thesis {
-  background: #EDE9FE;
-  color: #6D28D9;
+  background: var(--badge-thesis-bg);
+  color: var(--badge-thesis-text);
 }
 
 .badge-status {
@@ -1873,38 +1913,28 @@ h1, h2, h3, h4, h5 {
 }
 
 .status-published {
-  background: #DEF7EC;
-  color: #03543F;
+  background: var(--badge-published-bg);
+  color: var(--badge-published-text);
 }
 
 .status-under-review {
-  background: #FEF08A;
-  color: #854D0E;
+  background: var(--badge-review-bg);
+  color: var(--badge-review-text);
 }
 
 .status-accepted {
-  background: #E1EFFE;
-  color: #1E429F;
+  background: var(--badge-accepted-bg);
+  color: var(--badge-accepted-text);
 }
 
 .status-preprint {
-  background: #EDEBFE;
-  color: #5521B5;
+  background: var(--badge-preprint-status-bg);
+  color: var(--badge-preprint-status-text);
 }
 
 .status-completed {
-  background: #DEF7EC;
-  color: #03543F;
-}
-
-[data-theme="dark"] .status-published {
-  background: rgba(3, 84, 63, .3);
-  color: #31C48D;
-}
-
-[data-theme="dark"] .status-under-review {
-  background: rgba(133, 77, 14, .3);
-  color: #FACC15;
+  background: var(--badge-completed-bg);
+  color: var(--badge-completed-text);
 }
 
 .pub-title {
@@ -2240,6 +2270,12 @@ h1, h2, h3, h4, h5 {
   font-weight: 500;
 }
 
+[data-theme="dark"] .tech-chip {
+  background: rgba(159, 197, 255, 0.1);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+
 .project-links a {
   font-size: .82rem;
   color: var(--gold);
@@ -2450,6 +2486,17 @@ h1, h2, h3, h4, h5 {
   height: 2px;
   background: linear-gradient(90deg, var(--gold-tint), transparent);
   margin-left: 0.5rem;
+}
+
+[data-theme="dark"] .skill-group-label {
+  background: linear-gradient(90deg, #C8DFFF, #63C7C4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .skill-group-label i {
+  -webkit-text-fill-color: #C8DFFF;
 }
 
 .skill-tag {
