@@ -2260,6 +2260,18 @@ h1, h2, h3, h4, h5 {
   gap: 1rem;
   align-items: flex-start;
   margin-bottom: .8rem;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(11, 31, 58, 0.1);
+  border-color: rgba(47, 111, 237, 0.3);
+}
+
+[data-theme="dark"] .cert-card:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(120, 169, 255, 0.3);
 }
 
 .cert-thumb {
