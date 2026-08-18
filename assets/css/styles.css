@@ -2434,6 +2434,7 @@ h1, h2, h3, h4, h5 {
   gap: .6rem;
   background: linear-gradient(90deg, var(--navy), var(--gold));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
