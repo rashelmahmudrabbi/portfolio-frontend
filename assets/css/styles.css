@@ -2303,7 +2303,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .research-card:hover .research-card-desc {
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
 }
 
 .research-card:hover .research-card-icon {
@@ -2560,7 +2560,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .lang-card:hover .lang-level {
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
 }
 
 /* Hover State - Dark Theme (default to light/white) */
