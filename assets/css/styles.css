@@ -2474,49 +2474,88 @@ h1, h2, h3, h4, h5 {
 /* AWARDS */
 .award-item {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem 1.2rem;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
   background: var(--section-bg);
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  margin-bottom: .85rem;
-  transition: all .2s;
-}
-
-.award-item:hover {
-  box-shadow: var(--shadow);
-  transform: translateY(-6px);
-  border-color: var(--gold-soft);
+  margin-bottom: 1rem;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .award-icon {
   color: var(--gold);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   flex-shrink: 0;
-  margin-top: .1rem;
+  transition: all 0.3s ease;
 }
 
 .award-thumb {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
   flex-shrink: 0;
   cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .award-title {
-  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
   color: var(--navy);
-  font-size: .97rem;
-  margin: 0;
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+  transition: color 0.3s ease;
 }
 
 .award-meta {
-  font-size: .8rem;
+  font-size: 0.85rem;
   color: var(--text-mid);
-  margin-top: .2rem;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Hover State - Light Theme (default to black) */
+.award-item:hover {
+  background: #000000;
+  border-color: #000000;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.award-item:hover .award-title {
+  color: #ffffff;
+}
+
+.award-item:hover .award-meta {
+  color: #ffffff;
+}
+
+.award-item:hover .award-icon {
+  transform: scale(1.1);
+}
+
+.award-item:hover .award-thumb {
+  border-color: var(--gold);
+  transform: scale(1.05);
+}
+
+/* Hover State - Dark Theme (default to light/white) */
+[data-theme="dark"] .award-item:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .award-item:hover .award-title {
+  color: #000000;
+}
+
+[data-theme="dark"] .award-item:hover .award-meta {
+  color: #000000;
 }
 
 /* LANGUAGES */
