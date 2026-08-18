@@ -355,14 +355,12 @@
       .map(
         (ri) => `
       <div class="col-lg-4 col-md-6 mb-3">
-        <div class="cert-card" style="padding: 1rem; align-items: center; gap: 0.8rem; height: 100%;">
-          <div class="cert-icon" style="font-size: 1.5rem; background: rgba(47,111,237,0.1); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+        <div class="research-card">
+          <div class="research-card-icon">
             <i class="bi ${escapeHtml(ri.icon || 'bi-star')}"></i>
           </div>
-          <div style="flex:1;">
-            <h3 class="cert-title" style="margin-bottom: 0.2rem; font-size: 0.95rem;">${escapeHtml(ri.topic || '')}</h3>
-            <div class="cert-meta" style="font-size: 0.8rem; line-height: 1.3;">${escapeHtml(ri.desc || '')}</div>
-          </div>
+          <h3 class="research-card-title">${escapeHtml(ri.topic || '')}</h3>
+          <div class="research-card-desc">${escapeHtml(ri.desc || '')}</div>
         </div>
       </div>`
       )

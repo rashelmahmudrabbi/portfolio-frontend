@@ -2250,6 +2250,90 @@ h1, h2, h3, h4, h5 {
   color: var(--navy);
 }
 
+/* RESEARCH INTERESTS */
+.research-card {
+  background: var(--section-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  color: var(--navy);
+  cursor: default;
+}
+
+.research-card-icon {
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.research-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--navy);
+  transition: color 0.3s ease;
+}
+
+.research-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-mid);
+  transition: color 0.3s ease;
+}
+
+/* Hover State - Light Theme (default to black) */
+.research-card:hover {
+  background: #000000;
+  border-color: #000000;
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.research-card:hover .research-card-title {
+  color: #ffffff;
+}
+
+.research-card:hover .research-card-desc {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.research-card:hover .research-card-icon {
+  transform: scale(1.1);
+}
+
+/* Hover State - Dark Theme (default to light/white) */
+[data-theme="dark"] .research-card {
+  color: #F1F5F9;
+}
+
+[data-theme="dark"] .research-card .research-card-title {
+  color: #F1F5F9;
+}
+
+[data-theme="dark"] .research-card:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .research-card:hover .research-card-title {
+  color: #000000;
+}
+
+[data-theme="dark"] .research-card:hover .research-card-desc {
+  color: rgba(0, 0, 0, 0.7);
+}
+
 /* CERTIFICATIONS */
 .cert-card {
   background: var(--section-bg);
