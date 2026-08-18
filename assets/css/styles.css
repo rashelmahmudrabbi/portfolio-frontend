@@ -8,6 +8,7 @@
   --ink-soft: #475569;
   --ink-faint: #7C8A9A;
   --navy: #173B67;
+  --navy-light: #23528A;
   --navy-deep: #0B1F3A;
   --gold: #2F6FED;
   --gold-soft: #6B9AF5;
@@ -2293,8 +2294,8 @@ h1, h2, h3, h4, h5 {
 
 /* Hover State - Light Theme */
 .research-card:hover {
-  background: var(--navy);
-  border-color: var(--navy);
+  background: var(--navy-light);
+  border-color: var(--navy-light);
   transform: translateY(-5px);
   box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
@@ -2526,8 +2527,8 @@ h1, h2, h3, h4, h5 {
 
 /* Hover State - Light Theme */
 .award-item:hover {
-  background: var(--navy);
-  border-color: var(--navy);
+  background: var(--navy-light);
+  border-color: var(--navy-light);
   transform: translateY(-6px);
   box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
@@ -2594,8 +2595,8 @@ h1, h2, h3, h4, h5 {
 
 /* Hover State - Light Theme */
 .lang-card:hover {
-  background: var(--navy);
-  border-color: var(--navy);
+  background: var(--navy-light);
+  border-color: var(--navy-light);
   transform: translateY(-6px);
   box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
@@ -3179,7 +3180,8 @@ footer a {
 
 .cert-back {
   transform: rotateY(180deg);
-  background: var(--navy);
+  background: var(--navy-light);
+  border-color: var(--navy-light);
   color: #fff;
   justify-content: space-between;
   padding: 28px 24px;
