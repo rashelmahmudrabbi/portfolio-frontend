@@ -814,6 +814,7 @@ h1, h2, h3, h4, h5 {
   letter-spacing: -0.01em;
   background: linear-gradient(90deg, #F87171, #38BDF8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
@@ -2474,13 +2475,17 @@ h1, h2, h3, h4, h5 {
 /* AWARDS */
 .award-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: center;
+  text-align: center;
+  gap: 0.8rem;
   padding: 1.2rem 1.4rem;
   background: var(--section-bg);
   border-radius: 12px;
   border: 1px solid var(--border);
   margin-bottom: 1rem;
+  aspect-ratio: 1 / 1;
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 

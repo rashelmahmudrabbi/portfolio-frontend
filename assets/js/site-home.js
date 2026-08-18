@@ -673,14 +673,16 @@
       awards
         .map(
           (a) => `
-      <div class="award-item">
-        <div class="award-icon"><i class="bi bi-trophy-fill"></i></div>
-        ${a.image ? `<img src="${escapeHtml(resolveAssetUrl(a.image, false))}" class="award-thumb" alt="${escapeHtml(a.title || '')}" loading="lazy"
-             onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
-             onclick="showImageModal(this.src,'${escapeHtml(a.title || '')}')"/>` : ''}
-        <div>
-          <div class="award-title">${escapeHtml(a.title || '')}</div>
-          <div class="award-meta">${escapeHtml(a.org || '')} · ${escapeHtml(a.year || '')}</div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <div class="award-item">
+          <div class="award-icon"><i class="bi bi-trophy-fill"></i></div>
+          ${a.image ? `<img src="${escapeHtml(resolveAssetUrl(a.image, false))}" class="award-thumb" alt="${escapeHtml(a.title || '')}" loading="lazy"
+               onerror="this.onerror=null;this.src='${getGenericPlaceholder()}'"
+               onclick="showImageModal(this.src,'${escapeHtml(a.title || '')}')"/>` : ''}
+          <div>
+            <div class="award-title">${escapeHtml(a.title || '')}</div>
+            <div class="award-meta">${escapeHtml(a.org || '')} · ${escapeHtml(a.year || '')}</div>
+          </div>
         </div>
       </div>`
         )
