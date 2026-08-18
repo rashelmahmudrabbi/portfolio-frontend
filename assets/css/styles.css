@@ -769,6 +769,55 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 0 12px rgba(234, 179, 8, 0.1);
 }
 
+.spotlight-body-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.spotlight-image-wrap {
+  width: 100%;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.spotlight-card:hover .spotlight-image-wrap {
+  transform: scale(1.02);
+  border-color: rgba(47, 111, 237, 0.3);
+}
+
+.spotlight-large-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spotlight-title-gradient {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #F87171, #38BDF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 .spotlight-body {
   display: flex;
   gap: 14px;

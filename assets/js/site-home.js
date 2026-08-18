@@ -173,27 +173,35 @@
       if (!targetLabel) targetLabel = 'Explore';
 
       const thumbHtml = item.image
-        ? `<img src="${escapeHtml(resolveAssetUrl(item.image, false))}" class="spotlight-thumb" alt="${escapeHtml(item.title || '')}" onerror="this.outerHTML='<div class=\\'spotlight-icon-box ${escapeHtml(item.badgeType || 'badge-pub')}\\'><i class=\\'bi ${iconClass}\\'></i></div>'"/>`
-        : `<div class="spotlight-icon-box ${escapeHtml(item.badgeType || 'badge-pub')}"><i class="bi ${iconClass}"></i></div>`;
+        ? `<div class="spotlight-body-large">
+             <div class="spotlight-image-wrap" onclick="if(typeof showImageModal === 'function') showImageModal('${escapeHtml(resolveAssetUrl(item.image, false))}', '${escapeHtml(item.title || '')}')">
+               <img src="${escapeHtml(resolveAssetUrl(item.image, false))}" class="spotlight-large-image" alt="${escapeHtml(item.title || '')}" />
+             </div>
+             <div class="spotlight-content text-center mt-3 mb-2">
+               <h4 class="spotlight-title-gradient" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Research Highlight')}</h4>
+               <p class="spotlight-desc mx-auto" style="max-width:90%;">${escapeHtml(item.description || 'Pioneering intelligent machine learning methodologies and reproducible research.')}</p>
+             </div>
+           </div>`
+        : `<div class="spotlight-body">
+             <div class="spotlight-icon-box ${escapeHtml(item.badgeType || 'badge-pub')}"><i class="bi ${iconClass}"></i></div>
+             <div class="spotlight-content">
+               <h4 class="spotlight-title" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Research Highlight')}</h4>
+               <p class="spotlight-desc">${escapeHtml(item.description || 'Pioneering intelligent machine learning methodologies and reproducible research.')}</p>
+             </div>
+           </div>`;
 
       return `
       <div class="spotlight-card ${i === 0 ? 'active' : ''}" data-slide="${i}">
-        <div class="spotlight-top-row">
+        <div class="spotlight-top-row" ${item.image ? 'style="margin-bottom:0.75rem;"' : ''}>
           <div class="spotlight-badge ${escapeHtml(item.badgeType || 'badge-pub')}">
             <i class="bi ${iconClass}"></i> ${escapeHtml(item.badge || 'Featured Highlight')}
           </div>
           ${item.tag ? `<span class="spotlight-tag"><i class="bi bi-tag-fill me-1" style="font-size:0.65rem;"></i>${escapeHtml(item.tag)}</span>` : ''}
         </div>
         
-        <div class="spotlight-body">
-          ${thumbHtml}
-          <div class="spotlight-content">
-            <h4 class="spotlight-title" title="${escapeHtml(item.title || '')}">${escapeHtml(item.title || 'Research Highlight')}</h4>
-            <p class="spotlight-desc">${escapeHtml(item.description || 'Pioneering intelligent machine learning methodologies and reproducible research.')}</p>
-          </div>
-        </div>
+        ${thumbHtml}
 
-        <div class="spotlight-footer">
+        <div class="spotlight-footer" ${item.image ? 'style="margin-top:0.5rem;"' : ''}>
           <span class="spotlight-counter">
             <i class="bi bi-lightning-charge-fill text-warning"></i>
             <span>${i + 1} of ${items.length}</span>
@@ -603,23 +611,19 @@
     el.innerHTML = certifications
       .map(
         (c) => `
-      <div class="col-lg-4 col-md-6">
-        <div class="cert">
-          <div class="cert-inner">
-            <div class="cert-face cert-front">
-              ${c.image 
-                ? `<div class="badge badge-img"><img src="${escapeHtml(resolveAssetUrl(c.image, false))}" alt="${escapeHtml(c.title || '')}" loading="lazy"/></div>`
-                : `<div class="badge text-badge">★</div>`
-              }
-              <h3>${escapeHtml(c.title || '')}</h3>
-              <div class="hint">Hover to verify</div>
-            </div>
-            <div class="cert-face cert-back">
-              <div><div class="issuer">${escapeHtml(c.issuer || '')}</div><div class="date">Issued ${escapeHtml(c.year || '')}</div></div>
-              <div>
-                 <div class="id">ID: ${escapeHtml(c.id || 'N/A')}</div>
-                 ${c.verifyLink ? `<a class="verify" href="${escapeHtml(c.verifyLink)}" target="_blank">Verify credential &rarr;</a>` : ''}
-              </div>
+      <div class="col-lg-6">
+        <div class="cert-card">
+          ${c.image 
+            ? `<img src="${escapeHtml(resolveAssetUrl(c.image, false))}" alt="${escapeHtml(c.title || '')}" class="cert-thumb" loading="lazy" onclick="if(typeof showImageModal === 'function') showImageModal(this.src, '${escapeHtml(c.title || '')}')" />`
+            : `<i class="bi bi-award-fill cert-icon"></i>`
+          }
+          <div style="flex:1;">
+            <h3 class="cert-title">${escapeHtml(c.title || '')}</h3>
+            <div class="cert-meta mb-2">${escapeHtml(c.issuer || '')} &nbsp;&bull;&nbsp; Issued ${escapeHtml(c.year || '')}</div>
+            <div>
+              ${(c.pdf_link || c.pdfLink) ? `<a href="${escapeHtml(resolveAssetUrl(c.pdf_link || c.pdfLink, false))}" class="cert-link" target="_blank" title="View Certificate"><i class="bi bi-file-earmark-pdf"></i> View</a>` : ''}
+              ${(c.verify_link || c.verifyLink) ? `<a href="${escapeHtml(c.verify_link || c.verifyLink)}" class="cert-link" target="_blank" title="Verify Certificate"><i class="bi bi-shield-check"></i> Verify</a>` : ''}
+              <span class="cert-meta" style="font-size:0.75rem; margin-left: 0.5rem;">ID: ${escapeHtml(c.id || 'N/A')}</span>
             </div>
           </div>
         </div>
@@ -627,7 +631,7 @@
       )
       .join('') || '<div class="col-12 text-muted text-center">No certifications yet.</div>';
 
-    // Fix any broken cert images (not used in new design, but kept for logic)
+    // Fix any broken cert images
     addImageFallbacks(el, getGenericPlaceholder());
   }
 

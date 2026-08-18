@@ -129,8 +129,8 @@
       <div style="font-weight:600;color:var(--navy);">${escapeHtml(c.title || '')}</div>
       <div style="font-size:.82rem;color:var(--gold);">${escapeHtml(c.issuer || '')} &nbsp;·&nbsp; ${escapeHtml(c.year || '')}</div>
       <div style="font-size:.8rem;margin-top:.4rem;display:flex;gap:.8rem;flex-wrap:wrap;">
-        ${c.verifyLink ? `<a href="${escapeHtml(c.verifyLink)}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-patch-check me-1"></i>Verify</a>` : ''}
-        ${c.pdfLink ? `<a href="${escapeHtml(resolveAssetUrl(c.pdfLink, true))}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
+        ${(c.verify_link || c.verifyLink) ? `<a href="${escapeHtml(c.verify_link || c.verifyLink)}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-patch-check me-1"></i>Verify</a>` : ''}
+        ${(c.pdf_link || c.pdfLink) ? `<a href="${escapeHtml(resolveAssetUrl(c.pdf_link || c.pdfLink, true))}" target="_blank" style="color:var(--gold);text-decoration:none;"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : ''}
       </div>
     </div>`
       )
