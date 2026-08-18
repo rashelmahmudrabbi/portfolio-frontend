@@ -2259,14 +2259,7 @@ h1, h2, h3, h4, h5 {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  transition: box-shadow .2s;
   margin-bottom: .8rem;
-}
-
-.cert-card:hover {
-  box-shadow: var(--shadow);
-  transform: translateY(-6px);
-  border-color: var(--gold-soft);
 }
 
 .cert-thumb {
