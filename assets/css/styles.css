@@ -2261,8 +2261,7 @@ h1, h2, h3, h4, h5 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 100%;
-  aspect-ratio: 1 / 1;
+  height: 180px;
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   color: var(--navy);
   cursor: default;
@@ -3019,7 +3018,7 @@ footer a {
 /* ============ CERTIFICATES ============ */
 .cert {
   perspective: 1200px;
-  height: 220px;
+  height: 180px;
   margin-bottom: 1rem;
 }
 
