@@ -2291,12 +2291,12 @@ h1, h2, h3, h4, h5 {
   transition: color 0.3s ease;
 }
 
-/* Hover State - Light Theme (default to black) */
+/* Hover State - Light Theme */
 .research-card:hover {
-  background: #000000;
-  border-color: #000000;
+  background: var(--navy);
+  border-color: var(--navy);
   transform: translateY(-5px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
 
 .research-card:hover .research-card-title {
@@ -2311,27 +2311,27 @@ h1, h2, h3, h4, h5 {
   transform: scale(1.1);
 }
 
-/* Hover State - Dark Theme (default to light/white) */
+/* Hover State - Dark Theme */
 [data-theme="dark"] .research-card {
-  color: #F1F5F9;
+  color: var(--ink);
 }
 
 [data-theme="dark"] .research-card .research-card-title {
-  color: #F1F5F9;
+  color: var(--ink);
 }
 
 [data-theme="dark"] .research-card:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: 0 16px 32px rgba(159, 197, 255, 0.15);
 }
 
 [data-theme="dark"] .research-card:hover .research-card-title {
-  color: #000000;
+  color: var(--bg);
 }
 
 [data-theme="dark"] .research-card:hover .research-card-desc {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--navy-deep);
 }
 
 /* CERTIFICATIONS */
@@ -2524,12 +2524,12 @@ h1, h2, h3, h4, h5 {
   transition: color 0.3s ease;
 }
 
-/* Hover State - Light Theme (default to black) */
+/* Hover State - Light Theme */
 .award-item:hover {
-  background: #000000;
-  border-color: #000000;
+  background: var(--navy);
+  border-color: var(--navy);
   transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
 
 .award-item:hover .award-title {
@@ -2545,23 +2545,23 @@ h1, h2, h3, h4, h5 {
 }
 
 .award-item:hover .award-thumb {
-  border-color: var(--gold);
+  border-color: var(--gold-soft);
   transform: scale(1.05);
 }
 
-/* Hover State - Dark Theme (default to light/white) */
+/* Hover State - Dark Theme */
 [data-theme="dark"] .award-item:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: 0 16px 32px rgba(159, 197, 255, 0.15);
 }
 
 [data-theme="dark"] .award-item:hover .award-title {
-  color: #000000;
+  color: var(--bg);
 }
 
 [data-theme="dark"] .award-item:hover .award-meta {
-  color: #000000;
+  color: var(--navy-deep);
 }
 
 /* LANGUAGES */
@@ -2592,12 +2592,12 @@ h1, h2, h3, h4, h5 {
   transition: color 0.3s ease;
 }
 
-/* Hover State - Light Theme (default to black) */
+/* Hover State - Light Theme */
 .lang-card:hover {
-  background: #000000;
-  border-color: #000000;
+  background: var(--navy);
+  border-color: var(--navy);
   transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 32px rgba(23, 59, 103, 0.25);
 }
 
 .lang-card:hover .lang-name {
@@ -2608,19 +2608,19 @@ h1, h2, h3, h4, h5 {
   color: #ffffff;
 }
 
-/* Hover State - Dark Theme (default to light/white) */
+/* Hover State - Dark Theme */
 [data-theme="dark"] .lang-card:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: 0 16px 32px rgba(159, 197, 255, 0.15);
 }
 
 [data-theme="dark"] .lang-card:hover .lang-name {
-  color: #000000;
+  color: var(--bg);
 }
 
 [data-theme="dark"] .lang-card:hover .lang-level {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--navy-deep);
 }
 
 /* ACTIVITIES */
@@ -3179,25 +3179,25 @@ footer a {
 
 .cert-back {
   transform: rotateY(180deg);
-  background: var(--navy-deep);
+  background: var(--navy);
   color: #fff;
   justify-content: space-between;
   padding: 28px 24px;
 }
 
 [data-theme="dark"] .cert-back {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #000000;
-  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.15);
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--bg);
+  box-shadow: 0 16px 32px rgba(159, 197, 255, 0.15);
 }
 
 [data-theme="dark"] .cert-back h4 {
-  color: #000000 !important;
+  color: var(--bg) !important;
 }
 
 [data-theme="dark"] .cert-back .cert-link {
-  color: #2F6FED !important;
+  color: var(--navy-deep) !important;
 }
 
 .cert-back .issuer {
