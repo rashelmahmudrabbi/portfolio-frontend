@@ -46,6 +46,7 @@
   </script>
 </head>
 <body>
+<a class="skip-to-content" href="#main-content">Skip to main content</a>
 
 <!-- FULLSCREEN CIRCULAR COUNTDOWN PRELOADER -->
 <div id="pagePreloader" class="page-preloader" aria-hidden="false">
@@ -92,6 +93,11 @@
       text.textContent = Math.round(p) + '%';
     }
 
+    // Failsafe: dismiss preloader after 15s regardless
+    var failsafe = setTimeout(function() {
+      if (window.dismissPreloader) window.dismissPreloader();
+    }, 15000);
+
     var timer = setInterval(function() {
       if (p < 88) {
         setP(p + Math.random() * 6 + 2);
@@ -99,6 +105,7 @@
     }, 40);
 
     window.dismissPreloader = function() {
+      clearTimeout(failsafe);
       clearInterval(timer);
       // smoothly finish to 100%
       var finishTimer = setInterval(function() {
@@ -191,6 +198,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <section id="hero">
   <div class="container">
@@ -269,7 +277,7 @@
 </section>
 
 <!-- ABOUT / RESEARCH SNAPSHOT -->
-<section id="objective" class="section-wrapper">
+<section id="objective" class="section-wrapper reveal">
   <div class="container">
     <div class="about-card-unified" id="aboutSectionContainer">
       <div class="about-kicker" id="aboutKicker">ABOUT ME</div>
@@ -301,7 +309,7 @@
 </section>
 
 <!-- RESEARCH INTERESTS -->
-<section id="research" class="section-wrapper alt-bg">
+<section id="research" class="section-wrapper alt-bg reveal">
   <div class="container">
     <h2 class="section-title">Research Interests</h2>
     <div class="row g-3" id="researchInterestsList">
@@ -314,7 +322,7 @@
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience" class="section-wrapper">
+<section id="experience" class="section-wrapper reveal">
   <div class="container">
     <h2 class="section-title">Work Experience</h2>
     <div class="timeline" id="experienceTimeline">
@@ -325,7 +333,7 @@
 </section>
 
 <!-- EDUCATION -->
-<section id="education" class="section-wrapper alt-bg">
+<section id="education" class="section-wrapper alt-bg reveal">
   <div class="container">
     <div class="mb-4">
       <span class="text-uppercase" style="font-family:'DM Sans', monospace; font-size:.78rem; letter-spacing:.14em; color:var(--gold); font-weight:600; display:block; margin-bottom:8px;">Academic Record</span>
@@ -356,7 +364,7 @@
 </section>
 
 <!-- PUBLICATIONS -->
-<section id="publications" class="section-wrapper">
+<section id="publications" class="section-wrapper reveal">
   <div class="container">
     <h2 class="section-title">Publications</h2>
     <div id="pubList">
@@ -371,7 +379,7 @@
 </section>
 
 <!-- RESEARCH PROJECTS -->
-<section id="projects" class="section-wrapper alt-bg">
+<section id="projects" class="section-wrapper alt-bg reveal">
   <div class="container">
     <h2 class="section-title">Projects</h2>
 
@@ -410,7 +418,7 @@
 </section>
 
 <!-- CERTIFICATIONS -->
-<section id="certifications" class="section-wrapper">
+<section id="certifications" class="section-wrapper reveal">
   <div class="container">
     <h2 class="section-title">Certifications</h2>
     <div class="row g-3" id="certificationsList">
@@ -423,7 +431,7 @@
 </section>
 
 <!-- SKILLS -->
-<section id="skills" class="section-wrapper alt-bg">
+<section id="skills" class="section-wrapper alt-bg reveal">
   <div class="container">
     <h2 class="section-title">Skills</h2>
     <div class="row g-4" id="skillsGroups">
@@ -442,7 +450,7 @@
 </section>
 
 <!-- AWARDS -->
-<section id="awards" class="section-wrapper">
+<section id="awards" class="section-wrapper reveal">
   <div class="container">
     <h2 class="section-title">Awards &amp; Achievements</h2>
     <div class="row g-3" id="awardsList">
@@ -459,7 +467,7 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery" class="section-wrapper alt-bg">
+<section id="gallery" class="section-wrapper alt-bg reveal">
   <div class="container">
     <h2 class="section-title">Achievement Gallery</h2>
     <div class="gallery-grid" id="galleryGrid">
@@ -488,7 +496,7 @@
 </div>
 
 <!-- CONTACT & PERSONAL INFORMATION -->
-<section id="contact" class="section-wrapper">
+<section id="contact" class="section-wrapper reveal">
   <div class="container">
     <h2 class="section-title">Contact &amp; Personal Information</h2>
     <div class="row g-4">
@@ -503,7 +511,7 @@
 </section>
 
 <!-- REFERENCES -->
-<section id="references" class="section-wrapper alt-bg">
+<section id="references" class="section-wrapper alt-bg reveal">
   <div class="container">
     <h2 class="section-title">References</h2>
     <div class="row g-4" id="referencesList">
@@ -513,13 +521,14 @@
   </div>
 </section>
 
+</main>
 <!-- FOOTER -->
 <footer>
   <div class="container">
     <p class="mb-1" id="footerText" style="font-size:.75rem;opacity:.7;">I certify that all information in this portfolio is accurate and true.</p>
     <p class="mb-0">
       © <span id="footerYear">2026</span> <strong style="color:#fff;" id="footerName">RASHEL MAHMUD RABBI</strong> &nbsp;|&nbsp; <span id="footerTitle">Graduate Researcher · Computer Vision &amp; AI</span>
-      <a href="https://portfolio-backend-u.vercel.app/admin" target="_blank" title="Admin Dashboard" style="color: #5c6b82; opacity: 0.5; transition: all 0.2s; margin-left: 10px; text-decoration: none;" onmouseover="this.style.opacity='1'; this.style.color='#b8862a';" onmouseout="this.style.opacity='0.5'; this.style.color='#5c6b82';"><i class="bi bi-gear-fill"></i></a>
+      <a href="https://portfolio-backend-u.vercel.app/admin" target="_blank" title="Admin Dashboard" class="footer-admin-link"><i class="bi bi-gear-fill"></i></a>
     </p>
   </div>
 </footer>
@@ -652,11 +661,63 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     // Carousel dynamically starts once API data loads in site-home.js
+
+    // ── Scroll Reveal Animation ──
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length && 'IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('revealed'));
+    }
+
+    // ── Stats Counter Animation ──
+    function animateCounter(el, target) {
+      const duration = 1500;
+      const start = performance.now();
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        el.textContent = Math.round(easeOut(progress) * target);
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const statNums = document.querySelectorAll('.hero-stat-num');
+    if (statNums.length && 'IntersectionObserver' in window) {
+      let statsAnimated = false;
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            statNums.forEach(el => {
+              const target = parseInt(el.textContent, 10) || 0;
+              if (target > 0) animateCounter(el, target);
+            });
+            statsObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+      const statsContainer = document.querySelector('.hero-stats');
+      if (statsContainer) statsObserver.observe(statsContainer);
+    }
   });
 
-  // Active nav
+  // Active nav + Navbar scroll effect + Back-to-top
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
+  const navbar = document.querySelector('.navbar');
+  const scrollTopBtn = document.getElementById('scrollTop');
+
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
@@ -664,7 +725,24 @@
       a.classList.remove('active');
       if (a.getAttribute('href') === '#' + current) a.classList.add('active');
     });
+
+    // Navbar glass effect on scroll
+    if (navbar) {
+      navbar.classList.toggle('navbar-scrolled', window.scrollY > 60);
+    }
+
+    // Back-to-top button visibility
+    if (scrollTopBtn) {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    }
   });
+
+  // Back-to-top click handler
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   // Image modal
   function showImageModal(src, caption) {

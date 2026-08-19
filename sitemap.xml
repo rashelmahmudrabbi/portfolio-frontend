@@ -6,27 +6,27 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://rashelmahmudrabbi.github.io/publications/index.html</loc>
+    <loc>https://rashelmahmudrabbi.github.io/publications/</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://rashelmahmudrabbi.github.io/projects/index.html</loc>
+    <loc>https://rashelmahmudrabbi.github.io/projects/</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://rashelmahmudrabbi.github.io/teaching/index.html</loc>
+    <loc>https://rashelmahmudrabbi.github.io/teaching/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://rashelmahmudrabbi.github.io/blog/index.html</loc>
+    <loc>https://rashelmahmudrabbi.github.io/blog/</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://rashelmahmudrabbi.github.io/cv/index.html</loc>
+    <loc>https://rashelmahmudrabbi.github.io/cv/</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
